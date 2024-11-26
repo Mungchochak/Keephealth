@@ -11,6 +11,8 @@ import java.io.IOException;
 public class LoginController {
     @FXML
     private Button LoginButton;
+    @FXML
+    private Button SignupButton;
 
     @FXML
     private void handleLoginButtonClick() {
@@ -24,6 +26,19 @@ public class LoginController {
             stage.setScene(scene);
             stage.setTitle("Keephealth");
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleSighupButtonClick() {
+        try{
+            Stage stage = (Stage) SignupButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/keephealth/Register-view.fxml"));
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setTitle("Keephealth");
+        }catch (IOException e){
             e.printStackTrace();
         }
     }
