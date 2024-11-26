@@ -1,14 +1,32 @@
 package com.example.keephealth;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
-public class HelloController {
+import java.io.IOException;
+
+public class LoginController {
     @FXML
-    private Label welcomeText;
+    private Button LoginButton;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private void handleLoginButtonClick() {
+        System.out.println("Login button clicked!");
+        try {
+            Stage stage = (Stage) LoginButton.getScene().getWindow();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/keephealth/Home-view.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            stage.setScene(scene);
+            stage.setTitle("Keephealth");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
 }

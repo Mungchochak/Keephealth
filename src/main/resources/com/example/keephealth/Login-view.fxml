@@ -1,16 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.keephealth.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="740.0" style="-fx-background-color: #38B6FF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.LoginController">
+   <children>
+      <ImageView fitHeight="490.0" fitWidth="428.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../Image/Loginimage.jpg" />
+         </image></ImageView>
+      <VBox prefHeight="490.0" prefWidth="318.0">
+         <children>
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 20;">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="134.0" style="-fx-background-color: ffffff;" text="Keephealth">
+                     <font>
+                        <Font name="Apple SD Gothic Neo Bold" size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="312.0" style="-fx-background-radius: 20;">
+               <children>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="39.0" prefWidth="104.0" text="Account Name" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField style="-fx-background-radius: 20;">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="312.0" style="-fx-background-radius: 20;">
+               <children>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="39.0" prefWidth="104.0" text="Password" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField style="-fx-background-radius: 20;">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="312.0">
+               <children>
+                  <Button fx:id="LoginButton" onAction="#handleLoginButtonClick" mnemonicParsing="false" prefHeight="26.0" prefWidth="196.0" style="-fx-background-radius: 20; -fx-background-color: #2c2c2c;" text="Login" textFill="WHITE" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="18.0" prefWidth="312.0">
+               <children>
+                  <Button id="SignupButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="196.0" style="-fx-background-radius: 20; -fx-background-color: #c00f0c;" text="Sign up" textFill="WHITE" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>
