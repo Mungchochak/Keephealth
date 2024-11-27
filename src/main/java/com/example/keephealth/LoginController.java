@@ -17,6 +17,7 @@ public class LoginController {
     @FXML
     private void handleLoginButtonClick() {
         System.out.println("Login button clicked!");
+        
         try {
             Stage stage = (Stage) LoginButton.getScene().getWindow();
 
