@@ -57,6 +57,7 @@ public class RegisterController {
 
         if (name.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 alertempty.showAndWait();
+                System.out.println("Name or Password cannot be empty");
         } else if (!password.equals(confirmPassword)) {
             alertpdnotsame.showAndWait();
         } else{
