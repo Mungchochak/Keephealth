@@ -86,11 +86,11 @@
                         <AutoCompleteTextField />
                         <PieChart prefHeight="160.0" prefWidth="160.0" />
                         <AutoCompleteTextField fx:id="WalkPercent" />
-                        <Label prefHeight="18.0" prefWidth="202.0" text="                  Walking target" />
+                        <Label prefHeight="18.0" prefWidth="202.0" text="                Walking target" />
                         <AutoCompleteTextField fx:id="Walk" />
                         <HBox prefHeight="40.0" prefWidth="183.0">
                            <children>
-                              <VBox prefHeight="39.0" prefWidth="79.0" />
+                              <VBox prefHeight="39.0" prefWidth="59.0" />
                               <VBox prefHeight="39.0" prefWidth="22.0" />
                               <VBox prefHeight="39.0" prefWidth="183.0">
                                  <children>
