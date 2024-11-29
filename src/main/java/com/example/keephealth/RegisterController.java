@@ -9,34 +9,19 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.HashMap;
 
 public class RegisterController {
     @FXML private TextField AccountName;
     @FXML private TextField Password;
     @FXML private TextField ConfirmPassword;
     @FXML private Button BackButton;
-    private static final String Fileuser = "Accounts.txt";
+    public static final String Fileuser = "Accounts.txt";
     private String name;
     private String password;
     String confirmPassword;
     private static int id =1;
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    
 
 
     private static int getnewId() {
@@ -74,6 +59,7 @@ public class RegisterController {
             e.printStackTrace();
         }
 
+
     }
 
 
@@ -90,25 +76,27 @@ public class RegisterController {
         alertpdnotsame.setHeaderText(null);
         alertpdnotsame.setContentText("Password and Confirm Password are not same");
 
-        name = AccountName.getText();
-        password = Password.getText();
+
+        UserModel newuser = new UserModel(id,name,password);
+
+        newuser.setUsername(AccountName.getText());
+        newuser.setPassword(Password.getText());
         confirmPassword = ConfirmPassword.getText();
 
 
-
-
-        if (name.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+        if (newuser.getUsername().isEmpty() || newuser.getPassword().isEmpty() || confirmPassword.isEmpty()) {
                 alertempty.showAndWait();
-        } else if (!password.equals(confirmPassword)) {
+        } else if (!newuser.getPassword().equals(confirmPassword)) {
             alertpdnotsame.showAndWait();
-        } else if (CheckAccountExist(name)) {
-            CheckAccountExist(name);
+        } else if (CheckAccountExist(newuser.getUsername())) {
+            CheckAccountExist(newuser.getUsername());
         } else{
             int newid = getnewId();
             System.out.println(newid);
-            SaveAccount(newid,name,password);
+            SaveAccount(newid,newuser.getUsername(),newuser.getPassword());
         }
     }
+
 
 
     private void SaveAccount(int newid,String name, String password){
@@ -119,8 +107,6 @@ public class RegisterController {
 
         UserModel user = new UserModel(newid,name,password);
 
-
-
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(Fileuser,true))) {
             writer.write(user.toString());
             writer.newLine();
@@ -128,8 +114,10 @@ public class RegisterController {
 
         }catch (IOException e){
             e.printStackTrace();
+
         }
     }
+
 
 
     private boolean CheckAccountExist(String name){

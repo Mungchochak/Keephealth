@@ -16,7 +16,7 @@
                <font>
                   <Font name="Apple SD Gothic Neo Bold" size="26.0" />
                </font></Label>
-            <Label alignment="CENTER" prefHeight="54.0" prefWidth="596.0" style="-fx-background-color: #38B6FF;" text="Changing Password">
+            <Label alignment="CENTER" prefHeight="54.0" prefWidth="596.0" style="-fx-background-color: #38B6FF;" text="Customer Support">
                <font>
                   <Font size="37.0" />
                </font></Label>

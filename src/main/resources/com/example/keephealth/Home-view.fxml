@@ -28,17 +28,17 @@
               <VBox prefHeight="437.0" prefWidth="147.0" spacing="20.0" style="-fx-background-color: #38B6FF; -fx-padding: 10;">
                <VBox alignment="CENTER" prefHeight="60.0" prefWidth="153.0">
                   <children>
-                     <Button contentDisplay="CENTER" graphicTextGap="0.0" minWidth="51.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 50;" text="Profile" />
+                     <Button fx:id="ProfileButton" contentDisplay="CENTER" graphicTextGap="0.0" minWidth="51.0" mnemonicParsing="false" onAction="#handleProfileClick" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 50;" text="Profile" />
                   </children>
                   <VBox.margin>
                      <Insets />
                   </VBox.margin>
                </VBox>
-                  <Button id="HomeButtion" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black; -fx-background-radius: 20; -fx-background-color: ffffff;" text="Home" />
-                  <Button id="WorkoutPlansButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Workout Plans" />
-                  <Button id="NutritionPlansButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Nutrition Plans" />
-                  <Button id="ActivityTrackingButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Activity Tracking" />
-                  <Button id="CustomerSupportButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Customer Support" />
+                  <Button id="HomeButtion" fx:id="HomeButton" onAction="#handleHomeButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black; -fx-background-radius: 20; -fx-background-color: ffffff;" text="Home" />
+                  <Button id="WorkoutPlansButton" fx:id="WorkoutPlansButton" onAction="#handleWorkoutPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Workout Plans" />
+                  <Button id="NutritionPlansButton" fx:id="NutritionPlansButton" onAction="#handleNutritionPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Nutrition Plans" />
+                  <Button id="ActivityTrackingButton" fx:id="ActivityTrackingButton" onAction="#handleActivityTrackingButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Activity Tracking" />
+                  <Button id="CustomerSupportButton" fx:id="CustomerSupportButton" onAction="#handleCustomerSupportButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Customer Support" />
                <VBox prefHeight="31.0" prefWidth="127.0">
                   <children>
                         <Button fx:id="LogoutButton" onAction="#handleLogoutButton" prefHeight="40.0" prefWidth="60.0" style="-fx-text-fill: red; -fx-background-color: ffffff; -fx-background-radius: 20;" text="Log out" />

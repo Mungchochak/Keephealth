@@ -38,7 +38,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField style="-fx-background-radius: 20;">
+                  <TextField fx:id="AccountNameInput" style="-fx-background-radius: 20;">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -58,7 +58,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <PasswordField style="-fx-background-radius: 20;">
+                  <PasswordField fx:id="PasswordInput" style="-fx-background-radius: 20;">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
