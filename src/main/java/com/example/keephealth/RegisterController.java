@@ -9,7 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.HashMap;
+import java.time.LocalDate;
+
 
 public class RegisterController {
     @FXML private TextField AccountName;
@@ -17,10 +18,10 @@ public class RegisterController {
     @FXML private TextField ConfirmPassword;
     @FXML private Button BackButton;
     public static final String Fileuser = "Accounts.txt";
-    private String name;
-    private String password;
     String confirmPassword;
     private static int id =1;
+
+
     
 
 
@@ -75,13 +76,17 @@ public class RegisterController {
         alertpdnotsame.setTitle("Error");
         alertpdnotsame.setHeaderText(null);
         alertpdnotsame.setContentText("Password and Confirm Password are not same");
+        LocalDate registrationDate = LocalDate.now();
+        String registerdate = registrationDate.toString();
 
 
-        UserModel newuser = new UserModel(id,name,password);
+
+        UserModel newuser = new UserModel();
 
         newuser.setUsername(AccountName.getText());
         newuser.setPassword(Password.getText());
         confirmPassword = ConfirmPassword.getText();
+        newuser.setRegisterdate(registerdate);
 
 
         if (newuser.getUsername().isEmpty() || newuser.getPassword().isEmpty() || confirmPassword.isEmpty()) {
@@ -93,19 +98,19 @@ public class RegisterController {
         } else{
             int newid = getnewId();
             System.out.println(newid);
-            SaveAccount(newid,newuser.getUsername(),newuser.getPassword());
+            SaveAccount(newid,newuser.getUsername(),newuser.getPassword(), newuser.getRegisterdate());
         }
     }
 
 
 
-    private void SaveAccount(int newid,String name, String password){
+    private void SaveAccount(int newid,String name, String password,String registerdate){
         Alert SucessRegister = new Alert(Alert.AlertType.INFORMATION);
         SucessRegister.setTitle("Success");
         SucessRegister.setHeaderText(null);
         SucessRegister.setContentText("Account successfully registered!");
 
-        UserModel user = new UserModel(newid,name,password);
+        UserModel user = new UserModel(newid,name,password,registerdate);
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(Fileuser,true))) {
             writer.write(user.toString());

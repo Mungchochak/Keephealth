@@ -1,19 +1,22 @@
 package com.example.keephealth;
 
+
+
 public class UserModel {
     private String username;
     private String password;
     private int userID;
+    String registerdate;
 
     public UserModel() {
     }
 
-    public UserModel(int userID,String username,String password) {
+    public UserModel(int userID,String username,String password,String registerdate) {
         this.password = password;
         this.userID = userID;
         this.username = username;
+        this.registerdate = registerdate;
     }
-
 
 
     public int getUserID() {
@@ -41,9 +44,18 @@ public class UserModel {
         this.username = username;
     }
 
+
+    public String getRegisterdate() {
+        return registerdate;
+    }
+
+    public void setRegisterdate(String registerdate) {
+        this.registerdate = registerdate;
+    }
+
     @Override
     public String toString() {
-        return userID+"/"+username+"/"+password;
+        return userID+"/"+username+"/"+password+"/"+registerdate;
     }
 
 
