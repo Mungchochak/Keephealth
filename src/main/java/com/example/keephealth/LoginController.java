@@ -92,7 +92,7 @@ public class LoginController {
                 if (userdata[1].equals(CurrentUser.getUsername())&&userdata[2].equals(CurrentUser.getPassword())) {
 
                     CurrentId = Integer.parseInt(userdata[0]);
-                    System.out.println(CurrentId);
+                    System.out.println("Current userID: "+ CurrentId);
                     return true;
 
                 }
