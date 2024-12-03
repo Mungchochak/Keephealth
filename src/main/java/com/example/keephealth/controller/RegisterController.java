@@ -1,5 +1,6 @@
-package com.example.keephealth;
+package com.example.keephealth.controller;
 
+import com.example.keephealth.Model.UserModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

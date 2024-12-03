@@ -1,4 +1,4 @@
-package com.example.keephealth;
+package com.example.keephealth.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ProfileController {
+public class NutritionPlansController {
     @FXML
     private Button ProfileButton;
 

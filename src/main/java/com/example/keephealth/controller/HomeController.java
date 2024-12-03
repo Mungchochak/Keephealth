@@ -1,4 +1,5 @@
-package com.example.keephealth;
+package com.example.keephealth.controller;
+
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class WorkoutPlansController {
+public class HomeController {
     @FXML
     private Button ProfileButton;
 
@@ -128,18 +129,16 @@ public class WorkoutPlansController {
 
     @FXML
     private void handleLogoutButton() {
-        try {
-            Stage stage = (Stage) LogoutButton.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/keephealth/Login-view.fxml"));
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-            stage.setTitle("Keephealth");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try {
+                Stage stage = (Stage) LogoutButton.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/keephealth/Login-view.fxml"));
+                Scene scene = new Scene(loader.load());
+                stage.setScene(scene);
+                stage.setTitle("Keephealth");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
     }
 }
-
-
