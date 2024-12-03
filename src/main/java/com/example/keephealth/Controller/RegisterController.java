@@ -1,4 +1,4 @@
-package com.example.keephealth.controller;
+package com.example.keephealth.Controller;
 
 import com.example.keephealth.Model.UserModel;
 import javafx.fxml.FXML;
