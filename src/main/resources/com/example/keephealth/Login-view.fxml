@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="740.0" style="-fx-background-color: #38B6FF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.LoginController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="740.0" style="-fx-background-color: #38B6FF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.LoginController">
    <children>
       <ImageView fitHeight="490.0" fitWidth="428.0" pickOnBounds="true">
          <image>
@@ -38,7 +38,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField style="-fx-background-radius: 20;">
+                  <TextField fx:id="AccountNameInput" style="-fx-background-radius: 20;">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -58,7 +58,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <PasswordField style="-fx-background-radius: 20;">
+                  <PasswordField fx:id="PasswordInput" style="-fx-background-radius: 20;">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>

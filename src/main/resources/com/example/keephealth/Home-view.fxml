@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.HomeController">
+<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.HomeController">
    <children>
       <HBox prefHeight="148.0" prefWidth="740.0">
          <children>
@@ -28,17 +33,25 @@
               <VBox prefHeight="437.0" prefWidth="147.0" spacing="20.0" style="-fx-background-color: #38B6FF; -fx-padding: 10;">
                <VBox alignment="CENTER" prefHeight="60.0" prefWidth="153.0">
                   <children>
-                     <Button contentDisplay="CENTER" graphicTextGap="0.0" minWidth="51.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 50;" text="Profile" />
+                     <Button fx:id="ProfileButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" minWidth="51.0" mnemonicParsing="false" onAction="#handleProfileClick" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 50; -fx-background-color: FFFFFF;" text="Profile">
+                        <graphic>
+                           <ImageView fitHeight="47.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../Image/Profile.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
                   </children>
                   <VBox.margin>
                      <Insets />
                   </VBox.margin>
                </VBox>
-                  <Button id="HomeButtion" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black; -fx-background-radius: 20; -fx-background-color: ffffff;" text="Home" />
-                  <Button id="WorkoutPlansButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Workout Plans" />
-                  <Button id="NutritionPlansButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Nutrition Plans" />
-                  <Button id="ActivityTrackingButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Activity Tracking" />
-                  <Button id="CustomerSupportButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Customer Support" />
+                  <Button id="HomeButtion" fx:id="HomeButton" onAction="#handleHomeButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black; -fx-background-radius: 20; -fx-background-color: ffffff;" text="Home" />
+                  <Button id="WorkoutPlansButton" fx:id="WorkoutPlansButton" onAction="#handleWorkoutPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Workout Plans" />
+                  <Button id="NutritionPlansButton" fx:id="NutritionPlansButton" onAction="#handleNutritionPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Nutrition Plans" />
+                  <Button id="ActivityTrackingButton" fx:id="ActivityTrackingButton" onAction="#handleActivityTrackingButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Activity Tracking" />
+                  <Button id="CustomerSupportButton" fx:id="CustomerSupportButton" onAction="#handleCustomerSupportButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Customer Support" />
                <VBox prefHeight="31.0" prefWidth="127.0">
                   <children>
                         <Button fx:id="LogoutButton" onAction="#handleLogoutButton" prefHeight="40.0" prefWidth="60.0" style="-fx-text-fill: red; -fx-background-color: ffffff; -fx-background-radius: 20;" text="Log out" />
@@ -49,6 +62,109 @@
                </VBox>
               </VBox>
           </left>
+         <center>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="437.0" prefWidth="296.5" spacing="15.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 20;">
+                           <children>
+                              <Label prefHeight="8.0" prefWidth="275.0" text="You've been">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="17.0" prefWidth="275.0" text="working out">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="119.0" prefWidth="235.0" style="-fx-background-color: yellow; -fx-background-radius: 20;">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" prefHeight="116.0" prefWidth="223.0" text="76" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="80.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="134.0" prefWidth="158.0" text="/days">
+                                       <HBox.margin>
+                                          <Insets top="40.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font></Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 20;">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="8.0" prefWidth="275.0" text="Daily calorie consumption （kcal）">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <LineChart>
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="437.0" prefWidth="296.5" spacing="15.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 20;" />
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 20;">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="8.0" prefWidth="275.0" text="Daily calorie consumption （kcal）">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <LineChart>
+                                 <xAxis>
+                                    <CategoryAxis side="BOTTOM" />
+                                 </xAxis>
+                                 <yAxis>
+                                    <NumberAxis side="LEFT" />
+                                 </yAxis>
+                              </LineChart>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
       </BorderPane>
    </children>
 </VBox>

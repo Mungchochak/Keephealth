@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.AutoCompleteTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.WorkoutPlansController">
+<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.WorkoutPlansController">
    <children>
       <HBox prefHeight="148.0" prefWidth="740.0">
          <children>
@@ -32,20 +30,27 @@
               <VBox prefHeight="437.0" prefWidth="147.0" spacing="20.0" style="-fx-background-color: #38B6FF; -fx-padding: 10;">
                <VBox alignment="CENTER" prefHeight="60.0" prefWidth="153.0">
                   <children>
-                     <Button contentDisplay="CENTER" graphicTextGap="0.0" minWidth="51.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 50;" text="Profile" />
+                     <Button fx:id="ProfileButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" minWidth="51.0" mnemonicParsing="false" onAction="#handleProfileClick" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 50; -fx-background-color: ffffff;" text="Profile">
+                        <graphic>
+                           <ImageView fitHeight="47.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../Image/Profile.png" />
+                              </image>
+                           </ImageView>
+                        </graphic></Button>
                   </children>
                   <VBox.margin>
                      <Insets />
                   </VBox.margin>
                </VBox>
-                  <Button id="HomeButtion" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black; -fx-background-radius: 20; -fx-background-color: ffffff;" text="Home" />
-                  <Button id="WorkoutPlansButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Workout Plans" />
-                  <Button id="NutritionPlansButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Nutrition Plans" />
-                  <Button id="ActivityTrackingButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Activity Tracking" />
-                  <Button id="CustomerSupportButton" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Customer Support" />
+                  <Button id="HomeButtion" fx:id="HomeButton" onAction="#handleHomeButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black; -fx-background-radius: 20; -fx-background-color: ffffff;" text="Home" />
+                  <Button id="WorkoutPlansButton" fx:id="WorkoutPlansButton" onAction="#handleWorkoutPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Workout Plans" />
+                  <Button id="NutritionPlansButton" fx:id="NutritionPlansButton" onAction="#handleNutritionPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Nutrition Plans" />
+                  <Button id="ActivityTrackingButton" fx:id="ActivityTrackingButton" onAction="#handleActivityTrackingButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Activity Tracking" />
+                  <Button id="CustomerSupportButton" fx:id="CustomerSupportButton" onAction="#handleCustomerSupportButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Customer Support" />
                <VBox prefHeight="31.0" prefWidth="127.0">
                   <children>
-                        <Button id="LogoutButton" prefHeight="40.0" prefWidth="60.0" style="-fx-text-fill: red; -fx-background-color: ffffff; -fx-background-radius: 20;" text="Log out" />
+                        <Button id="LogoutButton" fx:id="LogoutButton" onAction="#handleLogoutButton" prefHeight="40.0" prefWidth="60.0" style="-fx-text-fill: red; -fx-background-color: ffffff; -fx-background-radius: 20;" text="Log out" />
                   </children>
                   <VBox.margin>
                      <Insets top="20.0" />
@@ -53,106 +58,6 @@
                </VBox>
               </VBox>
           </left>
-         <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <VBox layoutX="27.0" prefHeight="297.0" prefWidth="170.0">
-                     <children>
-                        <AutoCompleteTextField fx:id="CaloTg" />
-                        <PieChart prefHeight="160.0" prefWidth="160.0" />
-                        <AutoCompleteTextField fx:id="CaloPercent" />
-                        <Label prefHeight="18.0" prefWidth="202.0" text="                  Calorie target" />
-                        <AutoCompleteTextField fx:id="Calo" />
-                        <HBox prefHeight="40.0" prefWidth="183.0">
-                           <children>
-                              <VBox prefHeight="39.0" prefWidth="51.0" />
-                              <VBox prefHeight="39.0" prefWidth="139.0">
-                                 <children>
-                                    <VBox prefHeight="39.0" prefWidth="22.0">
-                                       <children>
-                                          <Button fx:id="SetOne" mnemonicParsing="false" onAction="#SetOne" prefHeight="33.0" prefWidth="103.0" style="-fx-background-radius: 20;" text="set" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="39.0" prefWidth="22.0" />
-                              <VBox prefHeight="39.0" prefWidth="22.0" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox layoutX="207.0" prefHeight="297.0" prefWidth="170.0">
-                     <children>
-                        <AutoCompleteTextField />
-                        <PieChart prefHeight="160.0" prefWidth="160.0" />
-                        <AutoCompleteTextField fx:id="WalkPercent" />
-                        <Label prefHeight="18.0" prefWidth="202.0" text="                Walking target" />
-                        <AutoCompleteTextField fx:id="Walk" />
-                        <HBox prefHeight="40.0" prefWidth="183.0">
-                           <children>
-                              <VBox prefHeight="39.0" prefWidth="59.0" />
-                              <VBox prefHeight="39.0" prefWidth="22.0" />
-                              <VBox prefHeight="39.0" prefWidth="183.0">
-                                 <children>
-                                    <VBox prefHeight="39.0" prefWidth="151.0">
-                                       <children>
-                                          <Button fx:id="SetTwo" mnemonicParsing="false" onAction="#SetTwo" prefHeight="36.0" prefWidth="113.0" style="-fx-background-radius: 20;" text="set" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="39.0" prefWidth="22.0" />
-                              <VBox prefHeight="39.0" prefWidth="22.0" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox layoutX="387.0" prefHeight="297.0" prefWidth="170.0">
-                     <children>
-                        <AutoCompleteTextField />
-                        <PieChart prefHeight="160.0" prefWidth="160.0" />
-                        <AutoCompleteTextField fx:id="WeightPercent" />
-                        <Label prefHeight="18.0" prefWidth="202.0" text="                  Weight target" />
-                        <AutoCompleteTextField fx:id="Weight" />
-                        <HBox prefHeight="40.0" prefWidth="183.0">
-                           <children>
-                              <HBox prefHeight="39.0" prefWidth="151.0">
-                                 <children>
-                                    <HBox prefHeight="39.0" prefWidth="118.0" />
-                                    <Button fx:id="SetThree" mnemonicParsing="false" onAction="#SetThree" prefHeight="35.0" prefWidth="175.0" style="-fx-background-radius: 20;" text="set" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <HBox layoutX="-1.0" layoutY="320.0" prefHeight="115.0" prefWidth="592.0">
-                     <children>
-                        <VBox prefHeight="115.0" prefWidth="55.0" />
-                        <VBox prefHeight="115.0" prefWidth="141.0">
-                           <children>
-                              <ImageView fitHeight="115.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="115.0" prefWidth="55.0" />
-                        <VBox prefHeight="115.0" prefWidth="141.0">
-                           <children>
-                              <ImageView fx:id="ImageViewTwo" fitHeight="115.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="115.0" prefWidth="55.0" />
-                        <VBox prefHeight="115.0" prefWidth="141.0">
-                           <children>
-                              <ImageView fx:id="ImageViewThree" fitHeight="115.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="115.0" prefWidth="55.0" />
-                     </children>
-                  </HBox>
-                  <Label layoutY="299.0" prefHeight="26.0" prefWidth="114.0" style="-fx-background-radius: 20; -fx-background-color: FFA500;" text="Fitness knowledge" />
-               </children>
-            </AnchorPane>
-         </center>
       </BorderPane>
    </children>
 </VBox>

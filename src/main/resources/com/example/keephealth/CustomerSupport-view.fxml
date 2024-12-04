@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.NutritionPlansController">
+<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.CgPasswordController">
    <children>
       <HBox prefHeight="148.0" prefWidth="740.0">
          <children>
@@ -18,7 +18,7 @@
                <font>
                   <Font name="Apple SD Gothic Neo Bold" size="26.0" />
                </font></Label>
-            <Label alignment="CENTER" prefHeight="54.0" prefWidth="596.0" style="-fx-background-color: #38B6FF;" text="Nutrition Plans">
+            <Label alignment="CENTER" prefHeight="54.0" prefWidth="596.0" style="-fx-background-color: #38B6FF;" text="Customer Support">
                <font>
                   <Font size="37.0" />
                </font></Label>
