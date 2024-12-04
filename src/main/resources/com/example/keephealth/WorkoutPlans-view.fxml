@@ -3,11 +3,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.WorkoutPlansController">
@@ -58,6 +62,161 @@
                </VBox>
               </VBox>
           </left>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" layoutX="47.0" layoutY="76.0" prefHeight="123.0" prefWidth="500.0" spacing="50.0">
+                     <children>
+                        <AnchorPane prefHeight="50.0" prefWidth="50.0">
+                           <children>
+                              <Circle fill="#f3e1fc" layoutX="64.0" layoutY="66.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Arc fill="WHITE" layoutX="64.0" layoutY="66.0" length="60.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="50.0" prefWidth="50.0">
+                           <children>
+                              <Circle fill="#ffd387" layoutX="64.0" layoutY="66.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Arc fill="WHITE" layoutX="64.0" layoutY="66.0" length="60.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="50.0" prefWidth="50.0">
+                           <children>
+                              <Circle fill="#d9d9d9" layoutX="64.0" layoutY="66.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Arc fill="WHITE" layoutX="64.0" layoutY="66.0" length="60.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+                           </children>
+                        </AnchorPane>
+                     </children></HBox>
+                  <HBox alignment="CENTER" layoutX="47.0" layoutY="14.0" prefHeight="61.0" prefWidth="500.0" spacing="75.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;">
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="163.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="5.0" layoutY="13.0" prefHeight="19.0" prefWidth="91.0" text="Calorie target" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="57.0" layoutY="31.0" text="cal">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="26.0" layoutY="31.0" text="7500">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;">
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="163.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="5.0" layoutY="13.0" prefHeight="19.0" prefWidth="91.0" text="Workout target" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="57.0" layoutY="31.0" text="cal">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="26.0" layoutY="31.0" text="7500">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;">
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="163.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="5.0" layoutY="13.0" prefHeight="19.0" prefWidth="91.0" text="Weight target" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="57.0" layoutY="31.0" text="cal">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="26.0" layoutY="31.0" text="7500">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="52.0" layoutY="218.0" prefHeight="100.0" prefWidth="500.0" spacing="40.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="149.0" spacing="5.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="96.0" text="Calorie target" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Button>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="149.0" spacing="5.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="19.0" prefWidth="109.0" text="Workout  target" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="149.0" spacing="5.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="19.0" prefWidth="106.0" text="Weight target" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children></HBox>
+                  <Label alignment="CENTER_RIGHT" layoutY="318.0" prefHeight="20.0" prefWidth="119.0" style="-fx-background-color: FFD387; -fx-background-radius: 0 20 20 0;" text="Fitness knowledge">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </center>
       </BorderPane>
    </children>
 </VBox>
