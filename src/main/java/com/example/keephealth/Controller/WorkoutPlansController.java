@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
 
 public class WorkoutPlansController {
@@ -140,6 +141,40 @@ public class WorkoutPlansController {
 
 
     }
+
+
+    @FXML
+    private TextField set1;
+
+    @FXML
+    private TextField set2;
+
+    @FXML
+    private TextField set3;
+
+
+    @FXML
+    private void handlesetB1Button() {
+        WorkoutPlanModel W1 = new WorkoutPlanModel();
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
 
 

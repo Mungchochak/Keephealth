@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.shape.Arc?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
@@ -168,7 +169,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <TextField fx:id="set1" style="-fx-border-width: 1; -fx-border-color: black;" />
                               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -182,7 +183,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <TextField fx:id="set2" style="-fx-border-width: 1; -fx-border-color: black;" />
                               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -197,7 +198,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <TextField fx:id="set3" style="-fx-border-width: 1; -fx-border-color: black;" />
                               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -214,6 +215,35 @@
                         <Insets right="10.0" />
                      </padding>
                   </Label>
+                  <HBox alignment="CENTER" layoutY="338.0" prefHeight="100.0" prefWidth="594.0" spacing="10.0">
+                     <children>
+                        <MediaView fx:id="meida1" fitHeight="80.0" fitWidth="150.0" />
+                        <MediaView fitHeight="80.0" fitWidth="150.0" />
+                        <MediaView fitHeight="80.0" fitWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="44.0" layoutY="207.0" prefHeight="25.0" prefWidth="522.0" spacing="150.0">
+                     <children>
+                        <HBox prefHeight="31.0" prefWidth="30.0">
+                           <children>
+                              <Label text="60" />
+                              <Label text="\%" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="31.0" prefWidth="30.0">
+                           <children>
+                              <Label text="60" />
+                              <Label text="\%" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="31.0" prefWidth="30.0">
+                           <children>
+                              <Label text="60" />
+                              <Label text="\%" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
          </center>
