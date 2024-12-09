@@ -1,13 +1,14 @@
 package com.example.keephealth.Controller;
 
+import com.example.keephealth.Model.WorkoutPlanModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
-
 import java.io.IOException;
+import javafx.scene.control.TextField;
 
 public class WorkoutPlansController {
     @FXML
@@ -144,18 +145,34 @@ public class WorkoutPlansController {
 
 
     @FXML
-    private TextField set1;
+    private TextField Calorieinput;
 
     @FXML
-    private TextField set2;
+    private TextField Workoutinput;
 
     @FXML
-    private TextField set3;
+    private Label Calorieoutput;
+
+    @FXML
+    private Label Weightoutput;
+
+    @FXML
+     private Label Workoutoutput;
+     private  String userCalorieInput;
+     private  String userWorkoutInput;
+     private  String userWeightInput;
+     private int Currentid;
+
 
 
     @FXML
     private void handlesetB1Button() {
-        WorkoutPlanModel W1 = new WorkoutPlanModel();
+        WorkoutPlanModel workoutPlanModel = new WorkoutPlanModel();
+
+        Currentid = LoginController.getCurrentId();
+
+        System.out.println(Currentid);
+
 
 
 

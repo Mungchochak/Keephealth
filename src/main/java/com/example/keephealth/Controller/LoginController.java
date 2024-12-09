@@ -25,15 +25,17 @@ public class LoginController {
 
     String filepath = RegisterController.Fileuser;
 
-    private int CurrentId;
+    private static int CurrentId;
 
-    public int getCurrentId() {
+    public static int getCurrentId() {
         return CurrentId;
     }
 
     public void setCurrentId(int currentId) {
         CurrentId = currentId;
     }
+
+
 
 
 
@@ -82,6 +84,7 @@ public class LoginController {
         alert.setTitle("Wrong Account");
         alert.setHeaderText(null);
         alert.setContentText("Please enter Correct account!");
+
 
         CurrentUser.setUsername(AccountNameInput.getText());
         CurrentUser.setPassword(PasswordInput.getText());
