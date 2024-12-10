@@ -52,6 +52,7 @@ public class ProfileController {
     @FXML
     private void handleHomeButtonClick() {
 
+
         try {
             Stage stage = (Stage) HomeButton.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/keephealth/Home-view.fxml"));
@@ -137,9 +138,22 @@ public class ProfileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
+
+
+
+    private String name;
+    private String gender;
+    private String email;
+    private String phone;
+    private String weight;
+    private String height;
+    private int age;
+    private int currentid = LoginController.getCurrentId();
+    
+
+
+
 }
 
 
