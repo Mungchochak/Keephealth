@@ -148,13 +148,20 @@ public class WorkoutPlansController {
     private TextField Calorieinput;
 
     @FXML
+    private TextField Weightinput;
+
+    @FXML
     private TextField Workoutinput;
+
+
 
     @FXML
     private Label Calorieoutput;
 
     @FXML
     private Label Weightoutput;
+
+
 
     @FXML
      private Label Workoutoutput;
@@ -173,7 +180,66 @@ public class WorkoutPlansController {
 
         System.out.println(Currentid);
 
+    }
 
+    @FXML
+    private void handlesetB2Button() {
+        WorkoutPlanModel workoutPlanModel = new WorkoutPlanModel();
+
+        Currentid = LoginController.getCurrentId();
+
+        System.out.println(Currentid);
+
+    }
+    @FXML
+    private void handlesetB3Button() {
+        WorkoutPlanModel workoutPlanModel = new WorkoutPlanModel();
+
+        Currentid = LoginController.getCurrentId();
+
+        System.out.println(Currentid);
+
+    }
+
+
+    @FXML
+    private Button SetButtonOne;
+    @FXML
+    private Button SetButtonTwo;
+    @FXML
+    private Button SetButtonThree;
+
+    @FXML
+    public void initialize() {
+
+        SetButtonOne.setOnAction(event -> {
+            String inputText = Calorieinput.getText();
+            if (!inputText.isEmpty() && inputText.matches("\\d+")) {
+                Calorieoutput.setText(inputText );
+                Calorieinput.clear();
+            } else {
+                Calorieoutput.setText("Invalid input!");
+            }
+        });
+        SetButtonTwo.setOnAction(event -> {
+            String inputTextOne = Workoutinput.getText();
+            if (!inputTextOne.isEmpty() && inputTextOne.matches("\\d+")) {
+                Workoutoutput.setText(inputTextOne);
+                Workoutinput.clear();
+            } else {
+                Workoutoutput.setText("Invalid input!");
+            }
+        });
+
+        SetButtonThree.setOnAction(event -> {
+            String inputTextTwo = Weightinput.getText();
+            if (!inputTextTwo.isEmpty() && inputTextTwo.matches("\\d+")) {
+                Weightoutput.setText(inputTextTwo);
+                Weightinput.clear();
+            } else {
+                Weightoutput.setText("Invalid input!");
+            }
+        });
 
 
 
@@ -184,13 +250,8 @@ public class WorkoutPlansController {
 
 
 
-
-
-
-
-
-
 }
+
 
 
 
