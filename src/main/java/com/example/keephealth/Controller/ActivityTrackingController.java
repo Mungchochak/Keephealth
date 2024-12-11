@@ -46,9 +46,6 @@ public class ActivityTrackingController {
 
     }
 
-
-
-
     @FXML
     private void handleHomeButtonClick() {
 
@@ -125,7 +122,6 @@ public class ActivityTrackingController {
     }
 
 
-
     @FXML
     private void handleLogoutButton() {
         try {
@@ -140,6 +136,6 @@ public class ActivityTrackingController {
 
 
     }
+
+
 }
-
-
