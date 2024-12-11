@@ -102,7 +102,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="Calorieoutput" layoutX="26.0" layoutY="31.0" text="7500">
+                                    <Label fx:id="Calorieoutput" alignment="CENTER_RIGHT" layoutX="26.0" layoutY="31.0" text="7500">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -125,7 +125,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="Workoutoutput" layoutX="26.0" layoutY="31.0" text="7500">
+                                    <Label fx:id="Workoutoutput" alignment="CENTER_RIGHT" layoutX="26.0" layoutY="31.0" text="7500">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -148,7 +148,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="Weightoutput" layoutX="26.0" layoutY="31.0" text="7500">
+                                    <Label fx:id="Weightoutput" alignment="CENTER_RIGHT" layoutX="26.0" layoutY="31.0" text="7500">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>

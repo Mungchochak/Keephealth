@@ -93,7 +93,7 @@
                                                    </font>
                                                 </Label>
                                                 <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
-                                                <Label alignment="CENTER" layoutX="192.0" layoutY="5.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: pink; -fx-background-radius: 20;" text="CM" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" layoutX="192.0" layoutY="5.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;" text="CM" textAlignment="CENTER" />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -108,7 +108,7 @@
                                                    </font>
                                                 </Label>
                                                 <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
-                                                <Label alignment="CENTER" layoutX="192.0" layoutY="6.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: pink; -fx-background-radius: 20;" text="KG" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" layoutX="192.0" layoutY="6.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;" text="KG" textAlignment="CENTER" />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -123,7 +123,7 @@
                                                    </font>
                                                 </Label>
                                                 <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
-                                                <Label alignment="CENTER" layoutX="177.0" layoutY="3.0" prefHeight="22.0" prefWidth="42.0" style="-fx-background-color: pink; -fx-background-radius: 20;" text="YEAR" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" layoutX="177.0" layoutY="3.0" prefHeight="22.0" prefWidth="42.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;" text="YEAR" textAlignment="CENTER" />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -278,7 +278,7 @@
                                              </font>
                                           </Label>
                                           <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
-                                          <Label alignment="CENTER" layoutX="193.0" layoutY="6.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: pink; -fx-background-radius: 20;" text="g" textAlignment="CENTER" />
+                                          <Label alignment="CENTER" layoutX="193.0" layoutY="6.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;" text="g" textAlignment="CENTER" />
                                        </children>
                                     </AnchorPane>
                                     <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="224.0" spacing="10.0">

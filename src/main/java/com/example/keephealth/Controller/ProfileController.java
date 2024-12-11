@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -150,6 +152,42 @@ public class ProfileController {
     private String height;
     private int age;
     private int currentid = LoginController.getCurrentId();
+
+    @FXML
+    private TextField agefield;
+
+    @FXML
+    private TextField emailfield;
+
+    @FXML
+    private ChoiceBox<?> genderbox;
+
+    @FXML
+    private TextField heightfield;
+
+    @FXML
+    private TextField namefield;
+
+    @FXML
+    private TextField phonefield;
+
+    @FXML
+    private TextField weightfield;
+
+    @FXML
+    private void handleeditbutton() {
+
+        agefield.setEditable(true);
+        emailfield.setEditable(true);
+        phonefield.setEditable(true);
+        weightfield.setEditable(true);
+        namefield.setEditable(true);
+        heightfield.setEditable(true);
+        genderbox.setDisable(false);
+
+
+
+    }
     
 
 
