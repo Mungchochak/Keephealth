@@ -7,7 +7,7 @@ public class ProfileModel {
     String phone;
     String weight;
     String height;
-    int age;
+    String age;
     int currentid;
 
     public int getCurrentid() {
@@ -67,11 +67,11 @@ public class ProfileModel {
         this.email = email;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 

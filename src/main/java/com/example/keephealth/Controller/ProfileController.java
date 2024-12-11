@@ -1,14 +1,18 @@
 package com.example.keephealth.Controller;
 
+import com.example.keephealth.Model.ProfileModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileController {
     @FXML
@@ -31,6 +35,8 @@ public class ProfileController {
 
     @FXML
     private Button LogoutButton;
+
+
 
 
     @FXML
@@ -160,7 +166,7 @@ public class ProfileController {
     private TextField emailfield;
 
     @FXML
-    private ChoiceBox<?> genderbox;
+    private ChoiceBox<String> genderbox;
 
     @FXML
     private TextField heightfield;
@@ -175,7 +181,44 @@ public class ProfileController {
     private TextField weightfield;
 
     @FXML
+    private Label ShowdateLabel;
+
+    public static final String Fileuser = "Profiledata.txt";
+
+    private String Joindate;
+
+    private int Totaljoindate;
+
+
+
+    @FXML
+    public void initialize() {
+        Showinfo();
+        GetUserId();
+
+
+    }
+
+
+    public void GetUserId(){
+        ProfileModel Currentuser = new ProfileModel();
+
+        Currentuser.setCurrentid(currentid);
+
+        System.out.println("Currentid = "+currentid);
+    }
+
+
+
+
+
+    @FXML
     private void handleeditbutton() {
+        Alert Shownsucess = new Alert(Alert.AlertType.INFORMATION);
+        Shownsucess.setTitle("Edit Profile");
+        Shownsucess.setHeaderText(null);
+        Shownsucess.setContentText("Personal information can be edited");
+
 
         agefield.setEditable(true);
         emailfield.setEditable(true);
@@ -185,12 +228,221 @@ public class ProfileController {
         heightfield.setEditable(true);
         genderbox.setDisable(false);
 
+        Shownsucess.showAndWait();
+
 
     }
-    
+
+
+    private void Disablebuttion() {
+
+        agefield.setEditable(false);
+        emailfield.setEditable(false);
+        phonefield.setEditable(false);
+        weightfield.setEditable(false);
+        namefield.setEditable(false);
+        heightfield.setEditable(false);
+        genderbox.setDisable(true);
+
+    }
+
+
+    @FXML
+    private void handlesavebutton() {
+        Alert SucessSave = new Alert(Alert.AlertType.INFORMATION);
+        SucessSave.setTitle("Success");
+        SucessSave.setHeaderText(null);
+        SucessSave.setContentText("Information successfully saved!");
+
+        ProfileModel Currentuser = new ProfileModel();
+        Currentuser.setAge(agefield.getText());
+        Currentuser.setEmail(emailfield.getText());
+        Currentuser.setGender(genderbox.getValue());
+        Currentuser.setHeight(heightfield.getText());
+        Currentuser.setName(namefield.getText());
+        Currentuser.setPhone(phonefield.getText());
+        Currentuser.setWeight(weightfield.getText());
+        Currentuser.setGender(genderbox.getValue());
+        Currentuser.setCurrentid(currentid);
+
+
+
+        if (!CheckuserExist(currentid)) {
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(Fileuser, true))) {
+                writer.write(Currentuser.toString());
+                writer.newLine();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Disablebuttion();
+            SucessSave.showAndWait();
+
+        }else{
+            SavenewInfo(Currentuser);
+            Disablebuttion();
+            SucessSave.showAndWait();
+        }
+
+
+    }
+
+    private void SavenewInfo(ProfileModel Currentuser){
+        List<String> lines = new ArrayList<>();
+
+        try(BufferedReader reader= new BufferedReader(new FileReader("Profiledata.txt"))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (!userData[0].equals(Integer.toString(currentid))) {
+                    lines.add(data);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Fileuser, false))) {
+            for (String rewriter : lines){
+                writer.write(rewriter);
+                writer.newLine();
+            }
+
+            writer.write(Currentuser.toString());
+            writer.newLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
+
+
+
+    private void Showinfo(){
+        genderbox.getItems().addAll("Male", "Female");
+        DisplayData();
+        GetJoinDate();
+        setShowdateLabel();
+
+    }
+
+
+    private void setShowdateLabel(){
+        Totaljoindate = GetJoinDate();
+        ShowdateLabel.setText("You have persisted for " + Totaljoindate + " days !");
+    }
+
+
+
+
+    private void DisplayData(){
+        try(BufferedReader reader= new BufferedReader(new FileReader("Profiledata.txt"))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (userData[0].equals(Integer.toString(currentid))) {
+                    namefield.setText(userData[1]);
+                    genderbox.setValue(userData[2]);
+                    emailfield.setText(userData[3]);
+                    phonefield.setText(userData[4]);
+                    weightfield.setText(userData[5]);
+                    heightfield.setText(userData[6]);
+                    agefield.setText(userData[7]);
+
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private int GetJoinDate(){
+
+        LocalDate Nowdate = LocalDate.now();
+        try(BufferedReader reader = new BufferedReader(new FileReader("Accounts.txt"))){
+            String data;
+            while((data = reader.readLine())!= null){
+                String[] userData = data.split("/");
+                if (userData[0].equals(Integer.toString(currentid))) {
+                    Joindate = userData[3];
+                }
+
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate Registerdate = LocalDate.parse(Joindate, formatter);
+
+        int TotalJoindate = (int) ChronoUnit.DAYS.between(Registerdate, Nowdate);
+
+        System.out.println("Total days between " + Registerdate + " and " + Nowdate + " : " + TotalJoindate);
+
+        return TotalJoindate;
+    }
+
+
+
+
+
+
+
+
+    private boolean CheckuserExist(int id){
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(Fileuser))){
+            String data;
+            while((data = reader.readLine())!= null){
+                String[] userData = data.split("/");
+                if(userData[0].equals(Integer.toString(currentid))){
+                    return true;
+                }
+
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 }
+    
+
+
+
+
 
 

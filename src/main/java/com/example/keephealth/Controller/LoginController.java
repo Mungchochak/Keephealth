@@ -52,6 +52,8 @@ public class LoginController {
                 stage.setScene(scene);
                 stage.setTitle("Keephealth");
 
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

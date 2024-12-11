@@ -71,7 +71,7 @@
                         <Insets left="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label prefHeight="25.0" prefWidth="593.0" text="You have persisted for 25 days !">
+                  <Label fx:id="ShowdateLabel" prefHeight="25.0" prefWidth="593.0" text="You have persisted for 25 days !">
                      <font>
                         <Font size="23.0" />
                      </font>
@@ -220,7 +220,7 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="287.0" spacing="45.0">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#handleeditbutton" prefHeight="33.0" prefWidth="64.0" style="-fx-background-radius: 20;" text="Edit" />
-                                    <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="64.0" style="-fx-background-radius: 20;" text="Confirm" />
+                                    <Button mnemonicParsing="false" onAction="#handlesavebutton" prefHeight="33.0" prefWidth="64.0" style="-fx-background-radius: 20;" text="Save" />
                                  </children>
                                  <VBox.margin>
                                     <Insets left="10.0" top="15.0" />
