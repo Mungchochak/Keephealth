@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class NutritionPlansController {
     @FXML
@@ -62,8 +63,92 @@ public class NutritionPlansController {
     private Button checkin;
 
 
+
     // 卡路里总和变量
     private double totalCalories = 0.0;
+    @FXML
+    public void initialize() {
+        // 初始化性别
+        genderChoiceBox.getItems().addAll("Male", "Female");
+        genderChoiceBox.setValue("Male");
+
+        // 初始化活动水平
+        activityLevelChoiceBox.getItems().addAll("Sedentary", "Lightly active", "Moderately active", "Very active");
+        activityLevelChoiceBox.setValue("Sedentary");
+
+        // 初始化食物
+        foodChoiceBox.getItems().addAll("Beef", "Chicken", "Rice", "Vegetables", "Fruits");
+        foodChoiceBox.setValue("Beef");
+    }
+    @FXML
+    private void handleConfirmButton() {
+        try {
+            double height = Double.parseDouble(heightInput.getText());
+            double weight = Double.parseDouble(weightInput.getText());
+            int age = Integer.parseInt(ageInput.getText());
+            String gender = genderChoiceBox.getValue();
+            String activityLevel = activityLevelChoiceBox.getValue();
+
+            // 计算BMI
+            double bmi = weight / Math.pow(height / 100.0, 2);
+            bmiLabel.setText(String.format("%.2f", bmi));
+
+            // 根据性别计算BFP
+            double bfp = (gender.equals("Male"))
+                    ? (1.20 * bmi + 0.23 * age - 16.2)
+                    : (1.20 * bmi + 0.23 * age - 5.4);
+            bfpLabel.setText(String.format("%.2f", bfp));
+
+            // 计算BMR
+            double bmr = (gender.equals("Male"))
+                    ? (10 * weight + 6.25 * height - 5 * age + 5)
+                    : (10 * weight + 6.25 * height - 5 * age - 161);
+            bmrLabel.setText(String.format("%.2f", bmr));
+
+            // 计算TDEE
+            double activityFactor = switch (activityLevel) {
+                case "Sedentary" -> 1.2;
+                case "Lightly active" -> 1.375;
+                case "Moderately active" -> 1.55;
+                case "Very active" -> 1.725;
+                case "Extremely active" -> 1.9;
+                default -> 1.2;
+            };
+            double tdee = bmr * activityFactor;
+            tdeeLabel.setText(String.format("%.2f", tdee));
+        } catch (NumberFormatException e) {
+            System.out.println("please enter valid number");
+        }
+    }
+
+
+    @FXML
+    private void handleCheckInButton() {
+        try {
+            String food = foodChoiceBox.getValue();
+            double foodWeight = Double.parseDouble(foodWeightInput.getText());
+
+            // 每100g食物的热量
+            Map<String, Double> calorieMap = Map.of(
+                    "Beef", 250.0,
+                    "Chicken", 200.0,
+                    "Rice", 130.0,
+                    "Egg", 155.0,
+                    "Milk", 60.0
+            );
+
+            // 计算摄入热量
+            double calorieTaken = (calorieMap.get(food) / 100) * foodWeight;
+            calorieTakenLabel.setText(String.format("%.2f cal", calorieTaken));
+
+            // 累加到总热量
+            totalCalories += calorieTaken;
+            totalCaloriesLabel.setText(String.format("%.2f cal", totalCalories));
+        } catch (NumberFormatException e) {
+            System.out.println("please enter valid number！");
+        }
+    }
+
 
 
 
