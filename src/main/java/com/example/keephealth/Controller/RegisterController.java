@@ -35,7 +35,11 @@ public class RegisterController {
                 if (userData[0].isEmpty()){
                     lastid = id;
                 }else {
-                    lastid = Integer.parseInt(userData[0]);
+                    int currentId = Integer.parseInt(userData[0]);
+                    if (currentId > lastid) {
+                        lastid = currentId;
+                    }
+
                 }
             }
 
