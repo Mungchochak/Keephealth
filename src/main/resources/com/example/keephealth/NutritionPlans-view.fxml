@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.NutritionPlansController">
+<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.NutritionPlansController">
    <children>
       <HBox prefHeight="148.0" prefWidth="740.0">
          <children>
@@ -80,7 +80,7 @@
                                              <font>
                                                 <Font name="System Bold" size="13.0" />
                                              </font></Label>
-                                          <ChoiceBox prefWidth="150.0" style="-fx-background-radius: 20; -fx-background-color: white;" />
+                                          <ChoiceBox fx:id="genderChoiceBox" prefWidth="150.0" style="-fx-background-radius: 20; -fx-background-color: white;" />
                                        </children>
                                     </HBox>
                                     <HBox>
@@ -92,7 +92,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
+                                                <TextField fx:id="heightInput" layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
                                                 <Label alignment="CENTER" layoutX="192.0" layoutY="5.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: pink; -fx-background-radius: 20;" text="CM" textAlignment="CENTER" />
                                              </children>
                                           </AnchorPane>
@@ -107,7 +107,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
+                                                <TextField fx:id="weightInput" layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
                                                 <Label alignment="CENTER" layoutX="192.0" layoutY="6.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: pink; -fx-background-radius: 20;" text="KG" textAlignment="CENTER" />
                                              </children>
                                           </AnchorPane>
@@ -122,7 +122,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
+                                                <TextField fx:id="ageInput" layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
                                                 <Label alignment="CENTER" layoutX="177.0" layoutY="3.0" prefHeight="22.0" prefWidth="42.0" style="-fx-background-color: pink; -fx-background-radius: 20;" text="YEAR" textAlignment="CENTER" />
                                              </children>
                                           </AnchorPane>
@@ -152,7 +152,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="24.06">
+                                          <Label fx:id="bmiLabel" alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="24.06">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -176,7 +176,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="24.06">
+                                          <Label fx:id="bfpLabel" alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="24.06">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -200,7 +200,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="122.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="1666.00">
+                                          <Label fx:id="bmrLabel" alignment="CENTER_RIGHT" layoutX="122.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="1666.00">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -219,7 +219,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER" layoutX="130.0" layoutY="38.0" prefHeight="22.0" prefWidth="91.0" text="2459.23">
+                                          <Label fx:id="tdeeLabel" alignment="CENTER" layoutX="130.0" layoutY="38.0" prefHeight="22.0" prefWidth="91.0" text="2459.23">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -267,7 +267,7 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox prefWidth="150.0" style="-fx-background-radius: 20; -fx-background-color: white;" />
+                                          <ComboBox fx:id="foodChoiceBox" prefWidth="150.0" style="-fx-background-radius: 20; -fx-background-color: white;" />
                                        </children>
                                     </HBox>
                                     <AnchorPane>
@@ -277,7 +277,7 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
+                                          <TextField fx:id="foodWeightInput" layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
                                           <Label alignment="CENTER" layoutX="193.0" layoutY="6.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: pink; -fx-background-radius: 20;" text="g" textAlignment="CENTER" />
                                        </children>
                                     </AnchorPane>
@@ -301,7 +301,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="362">
+                                          <Label fx:id="calorieTakenLabel" alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="362">
                                              <font>
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
@@ -316,7 +316,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="327">
+                                          <Label fx:id="totalCaloriesLabel" alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="327">
                                              <font>
                                                 <Font name="System Bold" size="20.0" />
                                              </font>

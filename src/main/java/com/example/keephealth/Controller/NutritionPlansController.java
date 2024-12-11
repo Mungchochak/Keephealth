@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,9 +29,46 @@ public class NutritionPlansController {
 
     @FXML
     private Button CustomerSupportButton;
-
     @FXML
     private Button LogoutButton;
+
+    @FXML
+    private TextField heightInput; // 身高输入框
+    @FXML
+    private TextField weightInput; // 体重输入框
+    @FXML
+    private TextField ageInput; // 年龄输入框
+    @FXML
+    private ChoiceBox<String> genderChoiceBox; // 性别选择框
+    @FXML
+    private ChoiceBox<String> activityLevelChoiceBox; // 活动水平选择框
+    @FXML
+    private Label bmiLabel; // 显示 BMI
+    @FXML
+    private Label bfpLabel; // 显示 BFP（体脂率）
+    @FXML
+    private Label bmrLabel; // 显示 BMR
+    @FXML
+    private Label tdeeLabel; // 显示 TDEE
+    @FXML
+    private ChoiceBox<String> foodChoiceBox; // 食物选择框
+    @FXML
+    private TextField foodWeightInput; // 食物重量输入框
+    @FXML
+    private Label calorieTakenLabel; // 显示摄入卡路里
+    @FXML
+    private Label totalCaloriesLabel; // 显示今日总摄入卡路里
+    @FXML
+    private Button checkin;
+
+
+    // 卡路里总和变量
+    private double totalCalories = 0.0;
+
+
+
+
+
 
 
     @FXML
