@@ -329,7 +329,6 @@ public class ProfileController {
     private void Showinfo(){
         genderbox.getItems().addAll("Male", "Female");
         DisplayData();
-        GetJoinDate();
         setShowdateLabel();
 
     }
@@ -390,7 +389,6 @@ public class ProfileController {
 
         int TotalJoindate = (int) ChronoUnit.DAYS.between(Registerdate, Nowdate);
 
-        System.out.println("Total days between " + Registerdate + " and " + Nowdate + " : " + TotalJoindate);
 
         return TotalJoindate;
     }
