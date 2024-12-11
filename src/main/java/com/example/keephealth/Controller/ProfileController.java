@@ -148,6 +148,23 @@ public class ProfileController {
         }
     }
 
+    @FXML
+    private void handleChangepasswordButtonClick() {
+
+        try {
+            Stage stage = (Stage) CustomerSupportButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/keephealth/CgPassword-view.fxml"));
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setTitle("Keephealth");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
 
 
     private String name;
@@ -158,6 +175,7 @@ public class ProfileController {
     private String height;
     private int age;
     private int currentid = LoginController.getCurrentId();
+
 
     @FXML
     private TextField agefield;
@@ -183,11 +201,16 @@ public class ProfileController {
     @FXML
     private Label ShowdateLabel;
 
+    @FXML
+    private Label AccountnameLabel;
+
     public static final String Fileuser = "Profiledata.txt";
 
     private String Joindate;
 
     private int Totaljoindate;
+
+
 
 
 
@@ -330,6 +353,7 @@ public class ProfileController {
         genderbox.getItems().addAll("Male", "Female");
         DisplayData();
         setShowdateLabel();
+        setAccountnameLabel();
 
     }
 
@@ -337,6 +361,11 @@ public class ProfileController {
     private void setShowdateLabel(){
         Totaljoindate = GetJoinDate();
         ShowdateLabel.setText("You have persisted for " + Totaljoindate + " days !");
+    }
+
+    private void setAccountnameLabel(){
+        String username = GetUserName(currentid);
+        AccountnameLabel.setText("Welcome " + username + " to Keephealth !");
     }
 
 
@@ -406,7 +435,7 @@ public class ProfileController {
             String data;
             while((data = reader.readLine())!= null){
                 String[] userData = data.split("/");
-                if(userData[0].equals(Integer.toString(currentid))){
+                if(userData[0].equals(Integer.toString(id))){
                     return true;
                 }
 
@@ -417,6 +446,30 @@ public class ProfileController {
         }
 
         return false;
+
+    }
+
+
+    private String GetUserName(int id) {
+
+        String Accountname = null;
+        try (BufferedReader reader = new BufferedReader(new FileReader("Accounts.txt"))) {
+            String data;
+            while ((data = reader.readLine()) != null) {
+                String[] userData = data.split("/");
+                if (userData[0].equals(Integer.toString(id))) {
+                    Accountname = userData[1];
+                    break;
+
+                }
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return Accountname;
 
     }
 
