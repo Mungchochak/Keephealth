@@ -4,11 +4,13 @@ import com.example.keephealth.Model.WorkoutPlanModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.scene.control.TextField;
+
 
 public class WorkoutPlansController {
     @FXML
@@ -218,7 +220,11 @@ public class WorkoutPlansController {
                 Calorieoutput.setText(inputText );
                 Calorieinput.clear();
             } else {
-                Calorieoutput.setText("Invalid input!");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Input error");
+                alert.setHeaderText("Invalid input");
+                alert.setContentText("Please input valid number！");
+                alert.showAndWait();
             }
         });
         SetButtonTwo.setOnAction(event -> {
@@ -227,7 +233,11 @@ public class WorkoutPlansController {
                 Workoutoutput.setText(inputTextOne);
                 Workoutinput.clear();
             } else {
-                Workoutoutput.setText("Invalid input!");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Input error");
+                alert.setHeaderText("Invalid input");
+                alert.setContentText("Please input valid number！");
+                alert.showAndWait();
             }
         });
 
@@ -237,7 +247,11 @@ public class WorkoutPlansController {
                 Weightoutput.setText(inputTextTwo);
                 Weightinput.clear();
             } else {
-                Weightoutput.setText("Invalid input!");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Input error");
+                alert.setHeaderText("Invalid input");
+                alert.setContentText("Please input valid number！");
+                alert.showAndWait();
             }
         });
 
