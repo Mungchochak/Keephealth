@@ -46,7 +46,6 @@ public class LoginController {
 
         if(isCorrect){
             try {
-
                 Stage stage = (Stage) LoginButton.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/keephealth/Home-view.fxml"));
                 Scene scene = new Scene(loader.load());
@@ -98,11 +97,9 @@ public class LoginController {
                     CurrentId = Integer.parseInt(userdata[0]);
                     System.out.println("Current userID: "+ CurrentId);
                     return true;
-
                 }
 
             }
-
             CurrentId = -1;
             System.out.println(CurrentId);
             alert.showAndWait();
