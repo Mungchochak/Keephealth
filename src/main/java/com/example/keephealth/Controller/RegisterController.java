@@ -96,10 +96,12 @@ public class RegisterController {
 
         if (newuser.getUsername().isEmpty() || newuser.getPassword().isEmpty() || confirmPassword.isEmpty()) {
                 alertempty.showAndWait();
+                Refresh();
         } else if (!newuser.getPassword().equals(confirmPassword)) {
             alertpdnotsame.showAndWait();
+            Refresh();
         } else if (CheckAccountExist(newuser.getUsername())) {
-            CheckAccountExist(newuser.getUsername());
+            Refresh();
         } else{
             int newid = getnewId();
             System.out.println(newid);
@@ -153,6 +155,12 @@ public class RegisterController {
 
         return false;
 
+    }
+
+    private void Refresh(){
+        AccountName.clear();
+        Password.clear();
+        ConfirmPassword.clear();
     }
 
 
