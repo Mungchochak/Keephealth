@@ -186,7 +186,6 @@ public class ProfileController {
         genderbox.setDisable(false);
 
 
-
     }
     
 
