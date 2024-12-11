@@ -214,7 +214,7 @@
                         <Insets right="10.0" />
                      </padding>
                   </Label>
-                  <HBox alignment="CENTER" layoutY="338.0" prefHeight="100.0" prefWidth="594.0" spacing="10.0" />
+                  <HBox alignment="CENTER" layoutY="338.0" prefHeight="92.0" prefWidth="594.0" spacing="10.0" />
                   <HBox alignment="CENTER" layoutX="44.0" layoutY="207.0" prefHeight="25.0" prefWidth="522.0" spacing="150.0">
                      <children>
                         <HBox prefHeight="31.0" prefWidth="30.0">
