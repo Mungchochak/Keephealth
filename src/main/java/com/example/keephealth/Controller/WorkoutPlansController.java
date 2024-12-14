@@ -8,7 +8,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import java.io.IOException;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.control.TextField;
 
 
@@ -170,7 +174,22 @@ public class WorkoutPlansController {
      private  String userCalorieInput;
      private  String userWorkoutInput;
      private  String userWeightInput;
+    public static final String Fileuser = "Workoutplans.txt";
      private int Currentid;
+
+
+     private int getcurrentId(){
+
+
+         Currentid = LoginController.getCurrentId();
+
+         System.out.println(Currentid);
+
+         return Currentid;
+
+     }
+
+
 
 
 
@@ -204,6 +223,151 @@ public class WorkoutPlansController {
     }
 
 
+
+
+    private void SavecalInfo(WorkoutPlanModel model){
+        List<String> lines = new ArrayList<>();
+
+        try(BufferedReader reader= new BufferedReader(new FileReader(Fileuser))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (!userData[0].equals(Integer.toString(Currentid))) {
+                    lines.add(data);
+
+                } if (userData[0].equals(Integer.toString(Currentid))) {
+                    model.setWeightTarget(Integer.parseInt(userData[3]));
+                    model.setWorkoutTarget(Integer.parseInt(userData[2]));
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Fileuser, false))) {
+            for (String rewriter : lines){
+                writer.write(rewriter);
+                writer.newLine();
+            }
+
+            writer.write(model.toString());
+            writer.newLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
+
+    private void SavehoursInfo(WorkoutPlanModel model){
+        List<String> lines = new ArrayList<>();
+
+        try(BufferedReader reader= new BufferedReader(new FileReader(Fileuser))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (!userData[0].equals(Integer.toString(Currentid))) {
+                    lines.add(data);
+
+                } if (userData[0].equals(Integer.toString(Currentid))) {
+                    model.setCalorieTarget(Integer.parseInt(userData[1]));
+                    model.setWeightTarget(Integer.parseInt(userData[3]));
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Fileuser, false))) {
+            for (String rewriter : lines){
+                writer.write(rewriter);
+                writer.newLine();
+            }
+
+            writer.write(model.toString());
+            writer.newLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    private void SaveWeightInfo(WorkoutPlanModel model){
+        List<String> lines = new ArrayList<>();
+
+        try(BufferedReader reader= new BufferedReader(new FileReader(Fileuser))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (!userData[0].equals(Integer.toString(Currentid))) {
+                    lines.add(data);
+
+                } if (userData[0].equals(Integer.toString(Currentid))) {
+                    model.setCalorieTarget(Integer.parseInt(userData[1]));
+                    model.setWorkoutTarget(Integer.parseInt(userData[2]));
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Fileuser, false))) {
+            for (String rewriter : lines){
+                writer.write(rewriter);
+                writer.newLine();
+            }
+
+            writer.write(model.toString());
+            writer.newLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+    private void showinfo(){
+
+        try(BufferedReader reader= new BufferedReader(new FileReader(Fileuser))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (userData[0].equals(Integer.toString(Currentid))) {
+
+                    Calorieoutput.setText(userData[1]);
+                    Workoutoutput.setText(userData[2]);
+                    Weightoutput.setText(userData[3]);
+
+
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
+
+
+
+
     @FXML
     private Button SetButtonOne;
     @FXML
@@ -211,15 +375,47 @@ public class WorkoutPlansController {
     @FXML
     private Button SetButtonThree;
 
+    public static WorkoutPlanModel Model;
+
+
+
+
+
+
     @FXML
     public void initialize() {
+        Model = new WorkoutPlanModel();
+        Model.setId(getcurrentId());
+        showinfo();
+
+
+
+
 
         SetButtonOne.setOnAction(event -> {
+
             String inputText = Calorieinput.getText();
+
             if (!inputText.isEmpty() && inputText.matches("\\d+")) {
-                Calorieoutput.setText(inputText );
-                Calorieinput.clear();
-            } else {
+                int IntCalorieinput = Integer.parseInt(Calorieinput.getText());
+
+                if (IntCalorieinput >= 100000) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Input error");
+                    alert.setHeaderText("Invalid input");
+                    alert.setContentText("Please No more than 100,000！");
+                    alert.showAndWait();
+                } else {
+                    Calorieoutput.setText(inputText );
+                    Model.setCalorieTarget(Integer.parseInt(inputText));
+                    System.out.println("Calorietarget: " + Model.getCalorieTarget());
+                    Calorieinput.clear();
+                    SavecalInfo(Model);
+
+
+                }
+            }
+            else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Input error");
                 alert.setHeaderText("Invalid input");
@@ -228,11 +424,27 @@ public class WorkoutPlansController {
             }
         });
         SetButtonTwo.setOnAction(event -> {
-            String inputTextOne = Workoutinput.getText();
-            if (!inputTextOne.isEmpty() && inputTextOne.matches("\\d+")) {
-                Workoutoutput.setText(inputTextOne);
-                Workoutinput.clear();
-            } else {
+            String inputtext= Workoutinput.getText();
+
+            if (!inputtext.isEmpty() && inputtext.matches("\\d+")) {
+                int IntWorkoutinput = Integer.parseInt(Workoutinput.getText());
+
+                if (IntWorkoutinput >= 1000) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Input error");
+                    alert.setHeaderText("Invalid input");
+                    alert.setContentText("Please No more than 1000 hours");
+                    alert.showAndWait();
+                } else {
+                    Workoutoutput.setText(inputtext);
+                    Model.setWorkoutTarget(Integer.parseInt(inputtext));
+                    System.out.println("Workouttarget: " + Model.getWorkoutTarget());
+                    Workoutinput.clear();
+                    SavehoursInfo(Model);
+
+                }
+            }
+            else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Input error");
                 alert.setHeaderText("Invalid input");
@@ -242,11 +454,35 @@ public class WorkoutPlansController {
         });
 
         SetButtonThree.setOnAction(event -> {
+
             String inputTextTwo = Weightinput.getText();
             if (!inputTextTwo.isEmpty() && inputTextTwo.matches("\\d+")) {
-                Weightoutput.setText(inputTextTwo);
-                Weightinput.clear();
-            } else {
+                int IntWeightinput = Integer.parseInt(Weightinput.getText());
+
+                if (IntWeightinput >= 250) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Input error");
+                    alert.setHeaderText("Invalid input");
+                    alert.setContentText("You won't be that strong");
+                    alert.showAndWait();
+                } else if (IntWeightinput <= 25 ) {
+
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Input error");
+                    alert.setHeaderText("Invalid input");
+                    alert.setContentText("That's not a healthy weight！");
+                    alert.showAndWait();
+
+                } else {
+                    Weightoutput.setText(inputTextTwo );
+                    Model.setWeightTarget(Integer.parseInt(inputTextTwo));
+                    System.out.println("Weighttarget: " + Model.getWeightTarget());
+                    Weightinput.clear();
+                    SaveWeightInfo(Model);
+
+                }
+            }
+            else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Input error");
                 alert.setHeaderText("Invalid input");
@@ -258,6 +494,7 @@ public class WorkoutPlansController {
 
 
     }
+
 
 
 

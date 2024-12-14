@@ -4,27 +4,60 @@ public class WorkoutPlanModel {
 
     @Override
     public String toString() {
-        return id+"/"+caloTaget+"/"+caloPercent+"/"+length;
+        return id+"/"+CalorieTarget+"/"+WorkoutTarget+"/"+WeightTarget;
+    }
+
+    public WorkoutPlanModel(int calorieTarget, int id, int weightTarget, int workoutTarget) {
+        CalorieTarget = calorieTarget;
+        this.id = id;
+        WeightTarget = weightTarget;
+        WorkoutTarget = workoutTarget;
     }
 
     private int id;
-    private int caloTaget;
-    private int caloPercent;
-    private int length;
+    private int CalorieTarget;
+    private int WorkoutTarget;
+    private int WeightTarget;
 
-    public int getCaloPercent() {return caloPercent;}
 
-    public void setCaloPercent(int caloPercent) {this.caloPercent = caloPercent;}
 
-    public int getCaloTaget() {return caloTaget;}
 
-    public void setCaloTaget(int caloTaget) {this.caloTaget = caloTaget;}
+    public WorkoutPlanModel() {
 
-    public int getId() {return id;}
+    }
 
-    public void setId(int id) {this.id = id;}
+    public int getWorkoutTarget() {
+        return WorkoutTarget;
+    }
 
-    public int getLength() {return length;}
+    public void setWorkoutTarget(int workoutTarget) {
+        WorkoutTarget = workoutTarget;
+    }
 
-    public void setLength(int length) {this.length = length;}
+
+    public int getCalorieTarget() {
+        return CalorieTarget;
+    }
+
+    public void setCalorieTarget(int calorieTarget) {
+        CalorieTarget = calorieTarget;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+
+    public int getWeightTarget() {
+        return WeightTarget;
+    }
+
+    public void setWeightTarget(int weightTarget) {
+        WeightTarget = weightTarget;
+    }
 }

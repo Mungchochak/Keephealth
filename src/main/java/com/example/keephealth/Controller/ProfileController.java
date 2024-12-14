@@ -429,7 +429,7 @@ public class ProfileController {
 
 
 
-    private boolean CheckuserExist(int id){
+    public boolean CheckuserExist(int id){
 
         try(BufferedReader reader = new BufferedReader(new FileReader(Fileuser))){
             String data;
