@@ -1,15 +1,19 @@
 package com.example.keephealth.Controller;
 
-import com.example.keephealth.Model.ProfileModel;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -149,7 +153,6 @@ public class ActivityTrackingController {
 
     }
 
-
     @FXML
     private void handleLogoutButton() {
         try {
@@ -162,9 +165,88 @@ public class ActivityTrackingController {
             e.printStackTrace();
         }
 
+    }
+
+    public void SetButtonStyle(Button button) {
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(Color.BLACK);
+        dropShadow.setRadius(20);
+        dropShadow.setOffsetY(0);
+        dropShadow.setOffsetX(0);
+
+        ScaleTransition scale = new ScaleTransition(Duration.millis(100),button);
+        scale.setToX(0.95);
+        scale.setToY(0.95);
+        scale.play();
+
+        Bloom bloom = new Bloom();
+        bloom.setThreshold(0.1);
+
+        button.setEffect(bloom);
+        button.setEffect(dropShadow);
 
     }
-    @FXML
+
+    private void SetEffectNull(Button button ) {
+
+        button.setEffect(null);
+
+    }
+
+    private void RefreshButton(Button button) {
+        if (button.equals(WalikingButton)) {
+            SetEffectNull(CyclingButton);
+            SetEffectNull(PushUpButton);
+            SetEffectNull(SwimmingButton);
+            SetEffectNull(PullUpButton);
+            SetEffectNull(HikingButton);
+            SetButtonStyle(WalikingButton);
+
+        } else if (button.equals(CyclingButton)) {
+            SetEffectNull(WalikingButton);
+            SetEffectNull(PushUpButton);
+            SetEffectNull(SwimmingButton);
+            SetEffectNull(PullUpButton);
+            SetEffectNull(HikingButton);
+            SetButtonStyle(CyclingButton);
+
+        } else if (button.equals(PushUpButton)) {
+            SetEffectNull(WalikingButton);
+            SetEffectNull(CyclingButton);
+            SetEffectNull(SwimmingButton);
+            SetEffectNull(PullUpButton);
+            SetEffectNull(HikingButton);
+            SetButtonStyle(PushUpButton);
+
+        } else if (button.equals(SwimmingButton)) {
+            SetEffectNull(WalikingButton);
+            SetEffectNull(CyclingButton);
+            SetEffectNull(PushUpButton);
+            SetEffectNull(PullUpButton);
+            SetEffectNull(HikingButton);
+            SetButtonStyle(SwimmingButton);
+
+        } else if (button.equals(PullUpButton)) {
+            SetEffectNull(WalikingButton);
+            SetEffectNull(CyclingButton);
+            SetEffectNull(PushUpButton);
+            SetEffectNull(SwimmingButton);
+            SetEffectNull(HikingButton);
+            SetButtonStyle(PullUpButton);
+
+        } else if (button.equals(HikingButton)) {
+            SetEffectNull(WalikingButton);
+            SetEffectNull(CyclingButton);
+            SetEffectNull(PushUpButton);
+            SetEffectNull(SwimmingButton);
+            SetEffectNull(PullUpButton);
+            SetButtonStyle(HikingButton);
+        }
+    }
+
+
+
+        @FXML
     public void initialize() {
         dailyEncouragement();
         ShowBurnedCal();
@@ -172,12 +254,12 @@ public class ActivityTrackingController {
     }
 
     private void ShowBurnedCal(){
+        choiceOfExercise();
         //this part return the burned calories
         ConfirmButton.setOnAction(actionEvent -> {
             duration = DurationInput.getText();
-            choiceOfExercise();
-            double calories = calculateCalBurned(mode,duration);
-            FinalBurnedCalOutput.setText(calories+" Cal");
+            int calories = calculateCalBurned(mode,duration);
+            FinalBurnedCalOutput.setText(String.valueOf(calories));
         });
 
     }
@@ -210,26 +292,32 @@ public class ActivityTrackingController {
 
 
         WalikingButton.setOnAction(event -> {
+            RefreshButton(WalikingButton);
             mode = "Walking";
             System.out.println(mode);
 
         });
         HikingButton.setOnAction(event -> {
+            RefreshButton(HikingButton);
             mode = "Hiking";
             System.out.println(mode);
         });
         CyclingButton.setOnAction(event -> {
+            RefreshButton(CyclingButton);
             mode = "Cycling";
             System.out.println(mode);
         });
         PushUpButton.setOnAction(event -> {
+            RefreshButton(PushUpButton);
             mode = "Push Up";
         });
         SwimmingButton.setOnAction(event -> {
+            RefreshButton(SwimmingButton);
             mode = "Swimming";
             duration = DurationInput.getText();
         });
         PullUpButton.setOnAction(event -> {
+            RefreshButton(PullUpButton);
             mode = "Pull Up";
             duration = DurationInput.getText();
         });
@@ -239,8 +327,9 @@ public class ActivityTrackingController {
 
 
 
-    private double calculateCalBurned(String m, String d){
+    private int calculateCalBurned(String m, String d){
         String w ="0";
+
         try(BufferedReader reader= new BufferedReader(new FileReader("Profiledata.txt"))){
             String data;
             while((data = reader.readLine())!= null) {
@@ -260,42 +349,40 @@ public class ActivityTrackingController {
         }
 
 
-        double calBurned = 0;
-        double MET = 0;
-        double weight =0;
-        double dur = 0;
-        weight = Double.parseDouble(w);
-        dur = Double.parseDouble(d);
+        double MET;
+        int calBurned = 0;
+        double weight = Double.parseDouble(w);
+        double dur = Double.parseDouble(d);
 
         switch (m){
             case "Walking":
                 MET = 3.3;
-                calBurned = MET * weight * dur;
+                calBurned =(int) (MET * weight * dur);
                 break;
 
             case "Hiking":
                 MET = 6.0;
-                calBurned = MET * weight * dur;
+                calBurned =(int)  (MET * weight * dur);
                 break;
 
             case "Cycling":
                 MET = 6.8;
-                calBurned = MET * weight * dur;
+                calBurned =(int)  (MET * weight * dur);
                 break;
 
             case "Push Up":
                 MET = 3.8;
-                calBurned = MET * weight * dur;
+                calBurned =(int)  (MET * weight * dur);
                 break;
 
             case "Swimming":
                 MET = 7.0;
-                calBurned = MET * weight * dur;
+                calBurned =(int)  (MET * weight * dur);
                 break;
 
             case "Pull Up":
                 MET = 5.0;
-                calBurned = MET * weight * dur;
+                calBurned =(int)  (MET * weight * dur);
                 break;
 
         }

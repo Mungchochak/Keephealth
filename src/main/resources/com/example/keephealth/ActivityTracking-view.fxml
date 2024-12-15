@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.ActivityTrackingController">
+<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.ActivityTrackingController">
    <children>
       <HBox prefHeight="148.0" prefWidth="740.0">
          <children>
@@ -77,7 +77,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="CheckInOutput" layoutX="51.0" layoutY="52.0" prefHeight="54.0" prefWidth="157.0" text="Successful !" textAlignment="CENTER">
+                              <Label fx:id="CheckInOutput" alignment="CENTER" layoutX="39.0" layoutY="53.0" prefHeight="54.0" prefWidth="185.0" text="Successful !" textAlignment="CENTER">
                                  <font>
                                     <Font name="Arial" size="28.0" />
                                  </font>
@@ -123,12 +123,12 @@
                                              <children>
                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                    <children>
-                                                      <Label layoutX="103.0" layoutY="17.0" prefHeight="48.0" prefWidth="42.0" text="cal">
+                                                      <Label layoutX="109.0" layoutY="17.0" prefHeight="48.0" prefWidth="42.0" text="cal">
                                                          <font>
                                                             <Font name="System Bold" size="24.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="FinalBurnedCalOutput" layoutX="41.0" layoutY="17.0" prefHeight="48.0" prefWidth="62.0" text="675" textAlignment="CENTER">
+                                                      <Label fx:id="FinalBurnedCalOutput" alignment="CENTER_RIGHT" layoutX="28.0" layoutY="17.0" prefHeight="48.0" prefWidth="75.0" text="675" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="System Bold" size="24.0" />
                                                          </font>
@@ -136,7 +136,7 @@
                                                    </children></AnchorPane>
                                              </children>
                                           </HBox>
-                                          <Label layoutX="1.0" layoutY="100.0" prefHeight="23.0" prefWidth="198.0" text="Congratulation on reaching your goal !">
+                                          <Label alignment="CENTER" layoutX="1.0" layoutY="102.0" prefHeight="23.0" prefWidth="198.0" text="Congratulation on reaching your goal !">
                                              <font>
                                                 <Font name="System Italic" size="11.0" />
                                              </font>
@@ -183,17 +183,17 @@
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Label>
-                              <TextField fx:id="DurationInput" layoutX="86.0" layoutY="116.0" style="-fx-background-radius: 20;" />
-                              <Button fx:id="ConfirmButton" layoutX="109.0" layoutY="146.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" style="-fx-background-radius: 20; -fx-background-color: F3E1FC;" text="Confirm">
+                              <TextField fx:id="DurationInput" alignment="CENTER" layoutX="86.0" layoutY="116.0" style="-fx-background-radius: 20;" />
+                              <Button fx:id="ConfirmButton" alignment="CENTER" layoutX="109.0" layoutY="146.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" style="-fx-background-radius: 20; -fx-background-color: F3E1FC;" text="Confirm">
                                  <font>
-                                    <Font name="System Bold" size="12.0" />
+                                    <Font name="System Bold" size="10.0" />
                                  </font>
                               </Button>
-                              <HBox layoutX="189.0" layoutY="119.0" prefHeight="20.0" prefWidth="43.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;">
+                              <HBox layoutX="199.0" layoutY="119.0" prefHeight="20.0" prefWidth="43.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;">
                                  <children>
-                                    <Label prefHeight="18.0" prefWidth="45.0" text="  Hour" textAlignment="CENTER">
+                                    <Label alignment="CENTER" prefHeight="18.0" prefWidth="45.0" text="Hours" textAlignment="CENTER">
                                        <font>
-                                          <Font name="System Bold" size="12.0" />
+                                          <Font name="System Bold" size="10.0" />
                                        </font></Label>
                                  </children>
                               </HBox>
