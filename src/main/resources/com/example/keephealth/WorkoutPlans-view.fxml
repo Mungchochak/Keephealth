@@ -70,7 +70,7 @@
                         <AnchorPane prefHeight="50.0" prefWidth="50.0">
                            <children>
                               <Circle fill="#f3e1fc" layoutX="64.0" layoutY="66.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Arc fill="WHITE" layoutX="64.0" layoutY="66.0" length="60.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+                              <Arc fill="WHITE" layoutX="64.0" layoutY="66.0" length="360.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="50.0" prefWidth="50.0">
@@ -97,12 +97,12 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="57.0" layoutY="31.0" text="cal">
+                                    <Label layoutX="60.0" layoutY="31.0" text="cal">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="Calorieoutput" alignment="CENTER_RIGHT" layoutX="26.0" layoutY="31.0" text="7500">
+                                    <Label fx:id="Calorieoutput" alignment="CENTER" layoutX="16.0" layoutY="31.0" prefHeight="17.0" prefWidth="43.0" text="0">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -120,12 +120,12 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="57.0" layoutY="31.0" text="cal">
+                                    <Label layoutX="60.0" layoutY="31.0" text="hours">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="Workoutoutput" alignment="CENTER_RIGHT" layoutX="26.0" layoutY="31.0" text="7500">
+                                    <Label fx:id="Workoutoutput" alignment="CENTER" layoutX="13.0" layoutY="31.0" prefHeight="17.0" prefWidth="46.0" text="0">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -143,12 +143,12 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="57.0" layoutY="31.0" text="cal">
+                                    <Label layoutX="60.0" layoutY="31.0" text="KG">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="Weightoutput" alignment="CENTER_RIGHT" layoutX="26.0" layoutY="31.0" text="7500">
+                                    <Label fx:id="Weightoutput" alignment="CENTER" layoutX="17.0" layoutY="31.0" prefHeight="17.0" prefWidth="42.0" text="0">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
