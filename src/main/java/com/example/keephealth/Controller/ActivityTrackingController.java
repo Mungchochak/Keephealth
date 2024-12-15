@@ -172,9 +172,10 @@ public class ActivityTrackingController {
     }
 
     private void ShowBurnedCal(){
-        choiceOfExercise();
         //this part return the burned calories
         ConfirmButton.setOnAction(actionEvent -> {
+            duration = DurationInput.getText();
+            choiceOfExercise();
             double calories = calculateCalBurned(mode,duration);
             FinalBurnedCalOutput.setText(calories+" Cal");
         });
@@ -206,9 +207,12 @@ public class ActivityTrackingController {
     public String mode,duration;
 
     private void choiceOfExercise(){
+
+
         WalikingButton.setOnAction(event -> {
             mode = "Walking";
             System.out.println(mode);
+
         });
         HikingButton.setOnAction(event -> {
             mode = "Hiking";
@@ -223,11 +227,12 @@ public class ActivityTrackingController {
         });
         SwimmingButton.setOnAction(event -> {
             mode = "Swimming";
+            duration = DurationInput.getText();
         });
         PullUpButton.setOnAction(event -> {
             mode = "Pull Up";
+            duration = DurationInput.getText();
         });
-        duration = DurationInput.getText();
 
     }
 
@@ -235,7 +240,7 @@ public class ActivityTrackingController {
 
 
     private double calculateCalBurned(String m, String d){
-        String w =" ";
+        String w ="0";
         try(BufferedReader reader= new BufferedReader(new FileReader("Profiledata.txt"))){
             String data;
             while((data = reader.readLine())!= null) {
@@ -254,9 +259,14 @@ public class ActivityTrackingController {
             e.printStackTrace();
         }
 
-        double calBurned = 0, MET;
-        double weight = Double.parseDouble(w);
-        double dur = Double.parseDouble(d);
+
+        double calBurned = 0;
+        double MET = 0;
+        double weight =0;
+        double dur = 0;
+        weight = Double.parseDouble(w);
+        dur = Double.parseDouble(d);
+
         switch (m){
             case "Walking":
                 MET = 3.3;
