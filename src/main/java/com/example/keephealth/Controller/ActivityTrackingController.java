@@ -228,23 +228,7 @@ public class ActivityTrackingController {
         duration = DurationInput.getText();
 
     }
-    private void DisplayData(){
-        try(BufferedReader reader= new BufferedReader(new FileReader("Profiledata.txt"))){
-            String data;
-            while((data = reader.readLine())!= null) {
-                String [] userData = data.split("/");
-                if (userData[0].equals(Integer.toString(currentid))) {
-                    String weight = userData[5];
 
-
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
 
 
