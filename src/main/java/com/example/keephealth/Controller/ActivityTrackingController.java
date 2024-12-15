@@ -175,8 +175,11 @@ public class ActivityTrackingController {
     private void ShowBurnedCal(){
         choiceOfExercise();
         //this part return the burned calories
-        //double calories = calculateCalBurned(mode,duration);
-        //FinalBurnedCalOutput.setText(calories+" Cal");
+        ConfirmButton.setOnAction(actionEvent -> {
+            double calories = calculateCalBurned(mode,duration);
+            FinalBurnedCalOutput.setText(calories+" Cal");
+        });
+
     }
 
     private void dailyEncouragement() {
