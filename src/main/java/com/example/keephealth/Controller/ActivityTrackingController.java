@@ -169,7 +169,6 @@ public class ActivityTrackingController {
         dailyEncouragement();
         ShowBurnedCal();
 
-
     }
 
     private void ShowBurnedCal(){
