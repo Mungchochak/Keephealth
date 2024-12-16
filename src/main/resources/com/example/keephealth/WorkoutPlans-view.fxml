@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.WorkoutPlansController">
+<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.WorkoutPlansController">
    <children>
       <HBox prefHeight="148.0" prefWidth="740.0">
          <children>
@@ -48,7 +49,10 @@
                   </VBox.margin>
                </VBox>
                   <Button id="HomeButtion" fx:id="HomeButton" onAction="#handleHomeButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black; -fx-background-radius: 20; -fx-background-color: ffffff;" text="Home" />
-                  <Button id="WorkoutPlansButton" fx:id="WorkoutPlansButton" onAction="#handleWorkoutPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Workout Plans" />
+                  <Button id="WorkoutPlansButton" fx:id="WorkoutPlansButton" onAction="#handleWorkoutPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Workout Plans">
+                  <effect>
+                     <DropShadow />
+                  </effect></Button>
                   <Button id="NutritionPlansButton" fx:id="NutritionPlansButton" onAction="#handleNutritionPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Nutrition Plans" />
                   <Button id="ActivityTrackingButton" fx:id="ActivityTrackingButton" onAction="#handleActivityTrackingButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Activity Tracking" />
                   <Button id="CustomerSupportButton" fx:id="CustomerSupportButton" onAction="#handleCustomerSupportButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Customer Support" />
@@ -214,7 +218,7 @@
                         <Insets right="10.0" />
                      </padding>
                   </Label>
-                  <HBox alignment="CENTER" layoutY="338.0" prefHeight="92.0" prefWidth="594.0" spacing="10.0" />
+                  <AnchorPane layoutY="338.0" />
                   <HBox alignment="CENTER" layoutX="44.0" layoutY="207.0" prefHeight="25.0" prefWidth="522.0" spacing="150.0">
                      <children>
                         <HBox prefHeight="31.0" prefWidth="30.0">
@@ -235,6 +239,41 @@
                               <Label text="\%" />
                            </children>
                         </HBox>
+                     </children>
+                  </HBox>
+                  <HBox />
+                  <HBox layoutX="43.0" layoutY="347.0" prefHeight="77.0" prefWidth="536.0" spacing="10.0">
+                     <children>
+                        <AnchorPane prefHeight="24.0" prefWidth="166.0">
+                           <children>
+                              <Button fx:id="MediaoneButton" layoutX="5.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleMediaoneButton" prefHeight="85.0" prefWidth="146.0" style="-fx-background-color: black; -fx-background-radius: 5;" text="Button" />
+                              <ImageView disable="true" fitHeight="74.0" fitWidth="138.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../Image/IMG_6978.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="24.0" prefWidth="166.0">
+                           <children>
+                              <Button fx:id="MediaTwoButton" layoutX="5.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleMediaTwoButton" prefHeight="85.0" prefWidth="146.0" style="-fx-background-color: black; -fx-background-radius: 5;" text="Button" />
+                              <ImageView disable="true" fitHeight="74.0" fitWidth="138.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../Image/IMG_6980.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="24.0" prefWidth="166.0">
+                           <children>
+                              <Button fx:id="MediaThreeButton" layoutX="5.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleMediaThreeButton" prefHeight="85.0" prefWidth="146.0" style="-fx-background-color: black; -fx-background-radius: 5;" text="Button" />
+                              <ImageView disable="true" fitHeight="74.0" fitWidth="138.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../Image/IMG_6979.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </HBox>
                </children>

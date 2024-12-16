@@ -1,6 +1,10 @@
 module com.example.keephealth {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
+
+    
+
 
     requires org.controlsfx.controls;
     requires javafx.graphics;
@@ -12,3 +16,4 @@ module com.example.keephealth {
     exports com.example.keephealth.Controller;
     opens com.example.keephealth.Controller to javafx.fxml;
 }
+

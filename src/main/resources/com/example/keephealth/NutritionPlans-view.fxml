@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.NutritionPlansController">
+<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.NutritionPlansController">
    <children>
       <HBox prefHeight="148.0" prefWidth="740.0">
          <children>
@@ -49,7 +50,10 @@
                </VBox>
                   <Button id="HomeButtion" fx:id="HomeButton" onAction="#handleHomeButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black; -fx-background-radius: 20; -fx-background-color: ffffff;" text="Home" />
                   <Button id="WorkoutPlansButton" fx:id="WorkoutPlansButton" onAction="#handleWorkoutPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Workout Plans" />
-                  <Button id="NutritionPlansButton" fx:id="NutritionPlansButton" onAction="#handleNutritionPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Nutrition Plans" />
+                  <Button id="NutritionPlansButton" fx:id="NutritionPlansButton" onAction="#handleNutritionPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Nutrition Plans">
+                  <effect>
+                     <DropShadow />
+                  </effect></Button>
                   <Button id="ActivityTrackingButton" fx:id="ActivityTrackingButton" onAction="#handleActivityTrackingButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Activity Tracking" />
                   <Button id="CustomerSupportButton" fx:id="CustomerSupportButton" onAction="#handleCustomerSupportButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Customer Support" />
                <VBox prefHeight="31.0" prefWidth="127.0">
@@ -80,7 +84,7 @@
                                              <font>
                                                 <Font name="System Bold" size="13.0" />
                                              </font></Label>
-                                          <ChoiceBox prefWidth="150.0" style="-fx-background-radius: 20; -fx-background-color: white;" />
+                                          <ChoiceBox fx:id="genderChoiceBox" prefWidth="150.0" style="-fx-background-radius: 20; -fx-background-color: white;" />
                                        </children>
                                     </HBox>
                                     <HBox>
@@ -92,7 +96,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
+                                                <TextField fx:id="heightInput" layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
                                                 <Label alignment="CENTER" layoutX="192.0" layoutY="5.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;" text="CM" textAlignment="CENTER" />
                                              </children>
                                           </AnchorPane>
@@ -107,7 +111,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
+                                                <TextField fx:id="weightInput" layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
                                                 <Label alignment="CENTER" layoutX="192.0" layoutY="6.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;" text="KG" textAlignment="CENTER" />
                                              </children>
                                           </AnchorPane>
@@ -122,7 +126,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
+                                                <TextField fx:id="ageInput" layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
                                                 <Label alignment="CENTER" layoutX="177.0" layoutY="3.0" prefHeight="22.0" prefWidth="42.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;" text="YEAR" textAlignment="CENTER" />
                                              </children>
                                           </AnchorPane>
@@ -130,7 +134,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="224.0" spacing="10.0">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" style="-fx-background-radius: 20; -fx-background-color: white;" text="Confirm">
+                                          <Button fx:id="confirmBasicInfoButton" mnemonicParsing="false" onAction="#handleConfirmBasicInfoButton" prefHeight="35.0" prefWidth="92.0" style="-fx-background-radius: 20; -fx-background-color: white;" text="Confirm">
                                              <font>
                                                 <Font name="System Bold" size="13.0" />
                                              </font></Button>
@@ -152,7 +156,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="24.06">
+                                          <Label fx:id="bmiLabel" alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="24.06">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -176,7 +180,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="24.06">
+                                          <Label fx:id="bfpLabel" alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="24.06">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -200,7 +204,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="122.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="1666.00">
+                                          <Label fx:id="bmrLabel" alignment="CENTER_RIGHT" layoutX="122.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="1666.00">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -219,7 +223,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER" layoutX="130.0" layoutY="38.0" prefHeight="22.0" prefWidth="91.0" text="2459.23">
+                                          <Label fx:id="tdeeLabel" alignment="CENTER" layoutX="130.0" layoutY="38.0" prefHeight="22.0" prefWidth="91.0" text="2459.23">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -229,7 +233,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox layoutX="100.0" layoutY="5.0" prefHeight="20.0" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-image-width: 1; -fx-border-radius: 20; -fx-border-color: black;" />
+                                          <ComboBox fx:id="activityLevelChoiceBox" layoutX="100.0" layoutY="5.0" prefHeight="20.0" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-image-width: 1; -fx-border-radius: 20; -fx-border-color: black;" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -267,7 +271,7 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox prefWidth="150.0" style="-fx-background-radius: 20; -fx-background-color: white;" />
+                                          <ComboBox fx:id="foodChoiceBox" prefWidth="150.0" style="-fx-background-radius: 20; -fx-background-color: white;" />
                                        </children>
                                     </HBox>
                                     <AnchorPane>
@@ -277,13 +281,13 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
+                                          <TextField fx:id="foodWeightInput" layoutX="74.0" layoutY="-1.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 20;" />
                                           <Label alignment="CENTER" layoutX="193.0" layoutY="6.0" prefHeight="17.0" prefWidth="27.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;" text="g" textAlignment="CENTER" />
                                        </children>
                                     </AnchorPane>
                                     <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="224.0" spacing="10.0">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" style="-fx-background-radius: 20; -fx-background-color: white;" text="Confirm">
+                                          <Button fx:id="confirmFoodButton" mnemonicParsing="false" onAction="#handleCheckInButton" prefHeight="35.0" prefWidth="92.0" style="-fx-background-radius: 20; -fx-background-color: white;" text="Confirm">
                                              <font>
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
@@ -301,7 +305,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="362">
+                                          <Label fx:id="calorieTakenLabel" alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="362">
                                              <font>
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
@@ -316,7 +320,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="327">
+                                          <Label fx:id="totalCaloriesLabel" alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="327">
                                              <font>
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
@@ -326,7 +330,7 @@
                                     </AnchorPane>
                                     <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="224.0" spacing="10.0">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" style="-fx-background-radius: 20; -fx-background-color: white;" text="Check in">
+                                          <Button fx:id="checkin" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" style="-fx-background-radius: 20; -fx-background-color: white;" text="Check in">
                                              <font>
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
