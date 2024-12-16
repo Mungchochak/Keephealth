@@ -1,5 +1,7 @@
 package com.example.keephealth.Controller;
 
+import com.example.keephealth.Model.ActivityTrackingModel;
+import com.example.keephealth.Model.ProfileModel;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +17,10 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class ActivityTrackingController {
@@ -28,7 +30,6 @@ public class ActivityTrackingController {
     public TextFlow DailyEncouragement;
     //Record Part
     public Label FinalBurnedCalOutput;
-    public Button RecordButton;
     //Choice of Exercise buttons
     public Button WalikingButton;
     public Button HikingButton;
@@ -60,7 +61,10 @@ public class ActivityTrackingController {
     @FXML
     private Button LogoutButton;
 
-    private int currentid = LoginController.getCurrentId();
+    private final int CurrentId = LoginController.getCurrentId();
+
+    public static final String FileUser = "CalBurned.txt";
+
 
 
     @FXML
@@ -167,6 +171,7 @@ public class ActivityTrackingController {
 
     }
 
+
     public void SetButtonStyle(Button button) {
         DropShadow dropShadow = new DropShadow();
         dropShadow.setColor(Color.BLACK);
@@ -188,7 +193,6 @@ public class ActivityTrackingController {
     }
 
     private void SetEffectNull(Button button ) {
-
         button.setEffect(null);
 
     }
@@ -246,23 +250,61 @@ public class ActivityTrackingController {
 
 
 
-        @FXML
+    @FXML
     public void initialize() {
+        ActivityTrackingModel ATModel = new ActivityTrackingModel();
+        ATModel.setCurrentId(CurrentId);
         dailyEncouragement();
         ShowBurnedCal();
+        //LocalDateTime currentDateAndTime = LocalDateTime.now();
 
     }
 
     private void ShowBurnedCal(){
         choiceOfExercise();
-        //this part return the burned calories
+        ActivityTrackingModel ATModel = new ActivityTrackingModel();
+        //this part return the burned calories and saves into the database
         ConfirmButton.setOnAction(actionEvent -> {
-            duration = DurationInput.getText();
-            int calories = calculateCalBurned(mode,duration);
-            FinalBurnedCalOutput.setText(String.valueOf(calories));
+            ATModel.setExerciseDuration(Double.parseDouble(DurationInput.getText()));
+            int calories = calculateCalBurned(mode, ATModel.getExerciseDuration());
+            ATModel.setCalBurned(calories);
+            FinalBurnedCalOutput.setText(String.valueOf(ATModel.getCalBurned()));
+            SaveBurnedCal(ATModel);
         });
 
     }
+
+    private void SaveBurnedCal(ActivityTrackingModel CurrentUser){
+        List<String> lines = new ArrayList<>();
+        try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (!userData[0].equals(Integer.toString(CurrentId))) {
+                    lines.add(data);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileUser, false))) {
+            for (String rewriter : lines){
+                writer.write(rewriter);
+                writer.newLine();
+            }
+
+            writer.write(CurrentUser.toString());
+            writer.newLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
     private void dailyEncouragement() {
 
@@ -286,16 +328,14 @@ public class ActivityTrackingController {
         DailyEncouragement.getChildren().add(text1);
     }
 
-    public String mode,duration;
+    public String mode;
+
 
     private void choiceOfExercise(){
-
-
         WalikingButton.setOnAction(event -> {
             RefreshButton(WalikingButton);
             mode = "Walking";
             System.out.println(mode);
-
         });
         HikingButton.setOnAction(event -> {
             RefreshButton(HikingButton);
@@ -310,35 +350,33 @@ public class ActivityTrackingController {
         PushUpButton.setOnAction(event -> {
             RefreshButton(PushUpButton);
             mode = "Push Up";
+            System.out.println(mode);
         });
         SwimmingButton.setOnAction(event -> {
             RefreshButton(SwimmingButton);
             mode = "Swimming";
-            duration = DurationInput.getText();
+            System.out.println(mode);
         });
         PullUpButton.setOnAction(event -> {
             RefreshButton(PullUpButton);
             mode = "Pull Up";
-            duration = DurationInput.getText();
+            System.out.println(mode);
         });
 
     }
 
 
-
-
-    private int calculateCalBurned(String m, String d){
+    private int calculateCalBurned(String m, Double dur){
         String w ="0";
-
         try(BufferedReader reader= new BufferedReader(new FileReader("Profiledata.txt"))){
             String data;
             while((data = reader.readLine())!= null) {
                 String [] userData = data.split("/");
-                if (userData[0].equals(Integer.toString(currentid))) {
+                if (userData[0].equals(Integer.toString(CurrentId))) {
                     if (userData.length > 5) {
                         w = userData[5];
                     } else {
-                        throw new IllegalArgumentException("Insufficient data for the current user in the file.");
+                        throw new IllegalArgumentException("User have not enter their weight ! ");
                     }
                     break;
                 }
@@ -348,44 +386,37 @@ public class ActivityTrackingController {
             e.printStackTrace();
         }
 
-
-        double MET;
+        double MET = 0.0;
         int calBurned = 0;
         double weight = Double.parseDouble(w);
-        double dur = Double.parseDouble(d);
 
         switch (m){
             case "Walking":
                 MET = 3.3;
-                calBurned =(int) (MET * weight * dur);
                 break;
 
             case "Hiking":
                 MET = 6.0;
-                calBurned =(int)  (MET * weight * dur);
                 break;
 
             case "Cycling":
                 MET = 6.8;
-                calBurned =(int)  (MET * weight * dur);
                 break;
 
             case "Push Up":
                 MET = 3.8;
-                calBurned =(int)  (MET * weight * dur);
                 break;
 
             case "Swimming":
                 MET = 7.0;
-                calBurned =(int)  (MET * weight * dur);
                 break;
 
             case "Pull Up":
                 MET = 5.0;
-                calBurned =(int)  (MET * weight * dur);
                 break;
 
         }
+        calBurned =(int) (MET * weight * dur);
         return calBurned;
 
     }

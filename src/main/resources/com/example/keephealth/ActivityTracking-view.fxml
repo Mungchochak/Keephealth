@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.ActivityTrackingController">
+<VBox prefHeight="490.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.keephealth.Controller.ActivityTrackingController">
    <children>
       <HBox prefHeight="148.0" prefWidth="740.0">
          <children>
@@ -145,10 +145,6 @@
                                     </AnchorPane>
                                  </children>
                               </HBox>
-                              <Button fx:id="RecordButton" layoutX="365.0" layoutY="146.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" style="-fx-background-radius: 20; -fx-background-color: #FFA500;" text="Record">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font></Button>
                               <Button fx:id="WalikingButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" style="-fx-background-radius: 20; -fx-background-color: F3E1FC;" text="Walking">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
