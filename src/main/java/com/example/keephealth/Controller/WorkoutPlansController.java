@@ -7,6 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -37,6 +42,9 @@ public class WorkoutPlansController {
 
     @FXML
     private Button LogoutButton;
+
+    @FXML
+    private Button MediaoneButton;
 
 
     @FXML
@@ -149,6 +157,51 @@ public class WorkoutPlansController {
 
     }
 
+    @FXML
+    private void handleMediaoneButton() {
+
+        try {
+            Stage stage = (Stage) MediaoneButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/keephealth/Mediaone.fxml"));
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setTitle("Media player");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    private void handleMediaTwoButton() {
+
+        try {
+            Stage stage = (Stage) MediaoneButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/keephealth/Mediatwo.fxml"));
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setTitle("Media player");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    private void handleMediaThreeButton() {
+
+        try {
+            Stage stage = (Stage) MediaoneButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/keephealth/Mediathree.fxml"));
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setTitle("Media player");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @FXML
     private TextField Calorieinput;
@@ -158,7 +211,6 @@ public class WorkoutPlansController {
 
     @FXML
     private TextField Workoutinput;
-
 
 
     @FXML
@@ -221,6 +273,8 @@ public class WorkoutPlansController {
         System.out.println(Currentid);
 
     }
+
+
 
 
 
@@ -387,6 +441,7 @@ public class WorkoutPlansController {
         Model = new WorkoutPlanModel();
         Model.setId(getcurrentId());
         showinfo();
+        /*PlayMedia();*/
 
 
 
@@ -491,9 +546,10 @@ public class WorkoutPlansController {
             }
         });
 
-
-
     }
+
+
+
 
 
 

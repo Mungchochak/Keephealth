@@ -216,6 +216,8 @@ public class HomeController {
         series.getData().add(new XYChart.Data<>("Wed", 300));
         series.getData().add(new XYChart.Data<>("Thur", 900));
         series.getData().add(new XYChart.Data<>("Fri", 1100));
+        series.getData().add(new XYChart.Data<>("Sat", 1400));
+        series.getData().add(new XYChart.Data<>("Sun", 1500));
 
 
         Caloriechart.getData().add(series);
