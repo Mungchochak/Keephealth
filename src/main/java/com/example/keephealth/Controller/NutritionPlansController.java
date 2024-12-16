@@ -3,10 +3,7 @@ package com.example.keephealth.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -33,6 +30,10 @@ public class NutritionPlansController {
     @FXML
     private Button LogoutButton;
 
+
+
+
+
     @FXML
     private TextField heightInput; // 身高输入框
     @FXML
@@ -42,7 +43,7 @@ public class NutritionPlansController {
     @FXML
     private ChoiceBox<String> genderChoiceBox; // 性别选择框
     @FXML
-    private ChoiceBox<String> activityLevelChoiceBox; // 活动水平选择框
+    private ComboBox<String> activityLevelChoiceBox; // 活动水平选择框
     @FXML
     private Label bmiLabel; // 显示 BMI
     @FXML
@@ -52,7 +53,7 @@ public class NutritionPlansController {
     @FXML
     private Label tdeeLabel; // 显示 TDEE
     @FXML
-    private ChoiceBox<String> foodChoiceBox; // 食物选择框
+    private ComboBox<String> foodChoiceBox; // 食物选择框
     @FXML
     private TextField foodWeightInput; // 食物重量输入框
     @FXML
@@ -61,10 +62,11 @@ public class NutritionPlansController {
     private Label totalCaloriesLabel; // 显示今日总摄入卡路里
     @FXML
     private Button checkin;
+    @FXML
+    private Button confirmBasicInfoButton; // 第一个Confirm按钮
+    @FXML
+    private Button confirmFoodButton; // 第二个Confirm按钮
 
-
-
-    // 卡路里总和变量
     private double totalCalories = 0.0;
     @FXML
     public void initialize() {
@@ -77,11 +79,10 @@ public class NutritionPlansController {
         activityLevelChoiceBox.setValue("Sedentary");
 
         // 初始化食物
-        foodChoiceBox.getItems().addAll("Beef", "Chicken", "Rice", "Vegetables", "Fruits");
+        foodChoiceBox.getItems().addAll("Beef", "Chicken", "Rice", "Egg", "Milk","Vegetable","Pork");
         foodChoiceBox.setValue("Beef");
     }
-    @FXML
-    private void handleConfirmButton() {
+    public void handleConfirmBasicInfoButton() {
         try {
             double height = Double.parseDouble(heightInput.getText());
             double weight = Double.parseDouble(weightInput.getText());
@@ -93,7 +94,7 @@ public class NutritionPlansController {
             double bmi = weight / Math.pow(height / 100.0, 2);
             bmiLabel.setText(String.format("%.2f", bmi));
 
-            // 根据性别计算BFP
+            // 计算BFP
             double bfp = (gender.equals("Male"))
                     ? (1.20 * bmi + 0.23 * age - 16.2)
                     : (1.20 * bmi + 0.23 * age - 5.4);
@@ -111,43 +112,47 @@ public class NutritionPlansController {
                 case "Lightly active" -> 1.375;
                 case "Moderately active" -> 1.55;
                 case "Very active" -> 1.725;
-                case "Extremely active" -> 1.9;
                 default -> 1.2;
             };
             double tdee = bmr * activityFactor;
             tdeeLabel.setText(String.format("%.2f", tdee));
         } catch (NumberFormatException e) {
-            System.out.println("please enter valid number");
+            System.out.println("Please enter valid numbers for height, weight, and age.");
         }
     }
 
-
     @FXML
-    private void handleCheckInButton() {
+    public void handleCheckInButton() {
         try {
             String food = foodChoiceBox.getValue();
             double foodWeight = Double.parseDouble(foodWeightInput.getText());
 
             // 每100g食物的热量
             Map<String, Double> calorieMap = Map.of(
-                    "Beef", 250.0,
-                    "Chicken", 200.0,
-                    "Rice", 130.0,
-                    "Egg", 155.0,
-                    "Milk", 60.0
+                    "Beef", 1.5,
+                    "Chicken", 2.5,
+                    "Rice", 1.3,
+                    "Egg", 1.4,
+                    "Milk", 0.6,
+                    "Vegetable", 0.5,
+                    "Pork",2.5
             );
 
-            // 计算摄入热量
-            double calorieTaken = (calorieMap.get(food) / 100) * foodWeight;
-            calorieTakenLabel.setText(String.format("%.2f cal", calorieTaken));
 
-            // 累加到总热量
+            // 计算摄入热量
+            int calorieTaken = (int) ((calorieMap.get(food)) * foodWeight);
+            calorieTakenLabel.setText(String.format("%d ", calorieTaken));
+
+// 累加到总热量
             totalCalories += calorieTaken;
-            totalCaloriesLabel.setText(String.format("%.2f cal", totalCalories));
+            totalCaloriesLabel.setText(String.format("%d ", (int) totalCalories));
+
         } catch (NumberFormatException e) {
             System.out.println("please enter valid number！");
         }
     }
+
+
 
 
 
