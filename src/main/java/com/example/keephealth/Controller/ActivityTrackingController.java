@@ -2,10 +2,12 @@ package com.example.keephealth.Controller;
 
 import com.example.keephealth.Model.ActivityTrackingModel;
 import com.example.keephealth.Model.ProfileModel;
+import com.example.keephealth.Model.UserModel;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -263,19 +265,22 @@ public class ActivityTrackingController {
     private void ShowBurnedCal(){
         choiceOfExercise();
         ActivityTrackingModel ATModel = new ActivityTrackingModel();
+        ATModel.setCurrentId(CurrentId);
         //this part return the burned calories and saves into the database
         ConfirmButton.setOnAction(actionEvent -> {
             ATModel.setExerciseDuration(Double.parseDouble(DurationInput.getText()));
             int calories = calculateCalBurned(mode, ATModel.getExerciseDuration());
             ATModel.setCalBurned(calories);
             FinalBurnedCalOutput.setText(String.valueOf(ATModel.getCalBurned()));
-            SaveBurnedCal(ATModel);
+            /*SaveBurnedCal(ATModel);*/
+            SaveData(ATModel);
         });
 
     }
 
     private void SaveBurnedCal(ActivityTrackingModel CurrentUser){
         List<String> lines = new ArrayList<>();
+
         try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
             String data;
             while((data = reader.readLine())!= null) {
@@ -303,6 +308,20 @@ public class ActivityTrackingController {
         }
 
     }
+
+
+    private void SaveData(ActivityTrackingModel CurrentUser){
+
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("CalBurned.txt",true))) {
+            writer.write(CurrentUser.toString());
+            writer.newLine();
+
+        }catch (IOException e){
+            e.printStackTrace();
+
+        }
+    }
+
 
 
 
