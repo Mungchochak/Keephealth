@@ -2,6 +2,7 @@ package com.example.keephealth.Controller;
 
 
 import com.example.keephealth.Model.FitnessData;
+import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +14,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -54,7 +59,6 @@ public class HomeController {
         }
 
     }
-
 
 
 

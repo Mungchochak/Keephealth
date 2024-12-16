@@ -441,7 +441,7 @@ public class WorkoutPlansController {
         Model = new WorkoutPlanModel();
         Model.setId(getcurrentId());
         showinfo();
-        /*PlayMedia();*/
+
 
 
 

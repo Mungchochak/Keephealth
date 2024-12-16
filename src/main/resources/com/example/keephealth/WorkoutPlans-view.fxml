@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -48,7 +49,10 @@
                   </VBox.margin>
                </VBox>
                   <Button id="HomeButtion" fx:id="HomeButton" onAction="#handleHomeButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black; -fx-background-radius: 20; -fx-background-color: ffffff;" text="Home" />
-                  <Button id="WorkoutPlansButton" fx:id="WorkoutPlansButton" onAction="#handleWorkoutPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Workout Plans" />
+                  <Button id="WorkoutPlansButton" fx:id="WorkoutPlansButton" onAction="#handleWorkoutPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Workout Plans">
+                  <effect>
+                     <DropShadow />
+                  </effect></Button>
                   <Button id="NutritionPlansButton" fx:id="NutritionPlansButton" onAction="#handleNutritionPlansButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Nutrition Plans" />
                   <Button id="ActivityTrackingButton" fx:id="ActivityTrackingButton" onAction="#handleActivityTrackingButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Activity Tracking" />
                   <Button id="CustomerSupportButton" fx:id="CustomerSupportButton" onAction="#handleCustomerSupportButtonClick" prefHeight="35.0" prefWidth="127.0" style="-fx-text-fill: black;-fx-background-radius: 20; -fx-background-color: ffffff;" text="Customer Support" />
