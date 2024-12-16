@@ -31,7 +31,7 @@ public class MediaOnePlayer {
 
 
         private void showMedia(){
-            String videoPath = "/Users/gavinmeng/IdeaProjects/Keephealth/src/main/resources/Video/3003269217a081caeaa2c71a3316ca9f.MP4";
+            String videoPath = "/Users/gavinmeng/IdeaProjects/Keephealth/src/main/resources/Video/video1.MP4";
 
             File file = new File(videoPath);
 

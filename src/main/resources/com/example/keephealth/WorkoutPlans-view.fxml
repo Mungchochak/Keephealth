@@ -246,30 +246,30 @@
                      <children>
                         <AnchorPane prefHeight="24.0" prefWidth="166.0">
                            <children>
-                              <Button fx:id="MediaoneButton" layoutX="5.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleMediaoneButton" prefHeight="85.0" prefWidth="146.0" style="-fx-background-color: black; -fx-background-radius: 5;" text="Button" />
-                              <ImageView disable="true" fitHeight="74.0" fitWidth="138.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="MediaoneButton" layoutX="5.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleMediaoneButton" prefHeight="85.0" prefWidth="146.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-color: black;" text="Button" />
+                              <ImageView disable="true" fitHeight="80.0" fitWidth="137.0" layoutX="10.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../Image/IMG_6978.jpg" />
+                                    <Image url="@../../../Image/1.jpg" />
                                  </image>
                               </ImageView>
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="24.0" prefWidth="166.0">
                            <children>
-                              <Button fx:id="MediaTwoButton" layoutX="5.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleMediaTwoButton" prefHeight="85.0" prefWidth="146.0" style="-fx-background-color: black; -fx-background-radius: 5;" text="Button" />
-                              <ImageView disable="true" fitHeight="74.0" fitWidth="138.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="MediaTwoButton" layoutX="5.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleMediaTwoButton" prefHeight="85.0" prefWidth="146.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-color: black;" text="Button" />
+                              <ImageView disable="true" fitHeight="74.0" fitWidth="138.0" layoutX="12.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../Image/IMG_6980.jpg" />
+                                    <Image url="@../../../Image/2.jpg" />
                                  </image>
                               </ImageView>
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="24.0" prefWidth="166.0">
                            <children>
-                              <Button fx:id="MediaThreeButton" layoutX="5.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleMediaThreeButton" prefHeight="85.0" prefWidth="146.0" style="-fx-background-color: black; -fx-background-radius: 5;" text="Button" />
-                              <ImageView disable="true" fitHeight="74.0" fitWidth="138.0" layoutX="11.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="MediaThreeButton" layoutX="5.0" layoutY="-3.0" mnemonicParsing="false" onAction="#handleMediaThreeButton" prefHeight="85.0" prefWidth="146.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-color: black;" text="Button" />
+                              <ImageView disable="true" fitHeight="74.0" fitWidth="138.0" layoutX="12.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../Image/IMG_6979.jpg" />
+                                    <Image url="@../../../Image/3.jpg" />
                                  </image>
                               </ImageView>
                            </children>
