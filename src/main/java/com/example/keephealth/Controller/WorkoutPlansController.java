@@ -422,14 +422,30 @@ public class WorkoutPlansController {
 
 
 
-    @FXML
+
+
+        @FXML
     private Button SetButtonOne;
     @FXML
     private Button SetButtonTwo;
     @FXML
     private Button SetButtonThree;
 
+
     public static WorkoutPlanModel Model;
+
+    public void preloadmedia(){
+        String videoPath = "/Users/gavinmeng/IdeaProjects/Keephealth/src/main/resources/Video/video1.MP4";
+
+        File file = new File(videoPath);
+
+        String videoURL = file.toURI().toString();
+
+        Media media = new Media(videoURL);
+
+        MediaPlayer mediaPlayer = new MediaPlayer (media);
+
+    }
 
 
 
@@ -440,6 +456,7 @@ public class WorkoutPlansController {
     public void initialize() {
         Model = new WorkoutPlanModel();
         Model.setId(getcurrentId());
+        preloadmedia();
         showinfo();
 
 
