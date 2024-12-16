@@ -30,8 +30,6 @@ public class MediaOnePlayer {
 
 
 
-
-
         private void showMedia(){
             String videoPath = "/Users/gavinmeng/IdeaProjects/Keephealth/src/main/resources/Video/3003269217a081caeaa2c71a3316ca9f.MP4";
 
@@ -44,6 +42,8 @@ public class MediaOnePlayer {
             MediaPlayer mediaPlayer = new MediaPlayer (media);
 
             Mediaplayerone.setMediaPlayer(mediaPlayer);
+
+            Mediaplayerone.getMediaPlayer().play();
 
             playbutton.setOnAction(event -> {
                 Mediaplayerone.getMediaPlayer().play();

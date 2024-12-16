@@ -44,6 +44,8 @@ public class MediaThreePlayer {
 
             Mediaplayerone.setMediaPlayer(mediaPlayer);
 
+            Mediaplayerone.getMediaPlayer().play();
+
             playbutton.setOnAction(event -> {
                 Mediaplayerone.getMediaPlayer().play();
             });
