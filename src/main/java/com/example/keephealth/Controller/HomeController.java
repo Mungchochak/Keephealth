@@ -2,6 +2,8 @@ package com.example.keephealth.Controller;
 
 
 import com.example.keephealth.Model.FitnessData;
+import com.example.keephealth.Model.HomeModel;
+import com.example.keephealth.Model.WorkoutPlanModel;
 import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -170,10 +173,49 @@ public class HomeController {
     @FXML
     private LineChart<String, Number> Caloriechart;
 
+    @FXML
+    private Label CheckingDaysL;
+    @FXML
+    private Label BurningTodayL;
+    @FXML
+    private Label IntakeTodayL;
+    @FXML
+    private Label CalGoalRemainingL;
+
+    private int CheckingDays;
+
+    private int BurningToday;
+
+    private int IntakeToday;
+
+    private int CalGoalRemaining;
+
+    public HomeModel Model;
+
+    private void Model(){
+        Model = new HomeModel();
+    }
+
+    private int getcurrentId(){
+        Model();
+
+        Model.setId(LoginController.getCurrentId());
+
+        System.out.println(Model.getId());
+
+        return Model.getId();
+
+    }
+
     public void initialize() {
 
         showTable();
         showChart();
+
+    }
+
+    private void ShowCheckingDays(){
+
 
     }
 
@@ -222,6 +264,8 @@ public class HomeController {
         series.getData().add(new XYChart.Data<>("Fri", 1100));
         series.getData().add(new XYChart.Data<>("Sat", 1400));
         series.getData().add(new XYChart.Data<>("Sun", 1500));
+
+
 
 
         Caloriechart.getData().add(series);

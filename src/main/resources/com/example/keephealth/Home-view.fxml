@@ -102,7 +102,7 @@
                                  <children>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label alignment="CENTER" layoutY="1.0" prefHeight="117.0" prefWidth="200.0" text="9999">
+                                          <Label fx:id="CheckingDaysL" alignment="CENTER" layoutY="1.0" prefHeight="117.0" prefWidth="200.0" text="9999">
                                              <font>
                                                 <Font size="75.0" />
                                              </font>
@@ -131,7 +131,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </LineChart>
-                              <Label alignment="CENTER" layoutY="3.0" prefHeight="20.0" prefWidth="256.0" text="Daily calorie consumption （kcal）">
+                              <Label alignment="CENTER" layoutY="5.0" prefHeight="20.0" prefWidth="256.0" text="Daily calorie burning （kcal）">
                                  <padding>
                                     <Insets left="10.0" />
                                  </padding>
@@ -150,8 +150,8 @@
                               <AnchorPane prefHeight="91.0" prefWidth="116.0" style="-fx-background-color: F3E1FC; -fx-background-radius: 20;">
                                  <children>
                                     <Label layoutX="6.0" layoutY="6.0" text="Current" />
-                                    <Label layoutX="6.0" layoutY="24.0" prefHeight="18.0" prefWidth="54.0" text="burning" />
-                                    <Label layoutX="6.0" layoutY="62.0" prefHeight="35.0" prefWidth="72.0" text="67cal">
+                                    <Label layoutX="6.0" layoutY="24.0" prefHeight="18.0" prefWidth="81.0" text="burning today" />
+                                    <Label fx:id="BurningTodayL" layoutX="6.0" layoutY="62.0" prefHeight="35.0" prefWidth="72.0" text="67cal">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -160,7 +160,7 @@
                               <AnchorPane prefHeight="91.0" prefWidth="116.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 20;">
                                  <children>
                                     <Label layoutX="6.0" layoutY="6.0" text="Intake today" />
-                                    <Label layoutX="6.0" layoutY="62.0" prefHeight="35.0" prefWidth="88.0" text="327cal">
+                                    <Label fx:id="IntakeTodayL" layoutX="6.0" layoutY="62.0" prefHeight="35.0" prefWidth="88.0" text="327cal">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -171,7 +171,7 @@
                                  <children>
                                     <Label layoutX="6.0" layoutY="6.0" prefHeight="18.0" prefWidth="68.0" text="Calorie" />
                                     <Label layoutX="6.0" layoutY="24.0" prefHeight="18.0" prefWidth="83.0" text="burning goal" />
-                                    <Label layoutX="6.0" layoutY="62.0" prefHeight="35.0" prefWidth="94.0" text="27630cal">
+                                    <Label fx:id="CalGoalRemainingL" layoutX="6.0" layoutY="62.0" prefHeight="35.0" prefWidth="94.0" text="27630cal">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
