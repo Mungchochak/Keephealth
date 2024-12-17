@@ -22,6 +22,7 @@ import javafx.util.Duration;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -264,32 +265,46 @@ public class ActivityTrackingController {
 
     }
 
+    private void clearData(){
+        LocalDate CurrentDate = LocalDate.now();
+
+    }
+
     private void ShowBurnedCal(){
         choiceOfExercise();
         ActivityTrackingModel ATModel = new ActivityTrackingModel();
         ATModel.setCurrentId(CurrentId);
         //this part return the burned calories and saves into the database
         ConfirmButton.setOnAction(actionEvent -> {
+
             ATModel.setExerciseDuration(Double.parseDouble(DurationInput.getText()));
+
             int calories = calculateCalBurned(mode, ATModel.getExerciseDuration());
             ATModel.setCalBurned(calories);
             FinalBurnedCalOutput.setText(String.valueOf(ATModel.getCalBurned()));
 
+            if(checkFile()){
+                int CurrentCal = Integer.parseInt(ReadCalData());
+                double CurrentDuration = Double.parseDouble(ReadDurationData());
+                ATModel.setCalBurned(ATModel.getCalBurned() + CurrentCal);
+                ATModel.setExerciseDuration(ATModel.getExerciseDuration() + CurrentDuration);
+            }
             SaveBurnedCal(ATModel);
-            //SaveData(ATModel);
+
         });
 
     }
 
-    private void ReadModel(){
-        try(BufferedReader reader= new BufferedReader(new FileReader("Profiledata.txt"))){
+    private boolean checkFile(){
+        boolean FileExist = false;
+        try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
             String data;
             while((data = reader.readLine())!= null) {
                 String [] userData = data.split("/");
                 if (userData[0].equals(Integer.toString(CurrentId))) {
-                    String Cal = (userData[2]);
-
-
+                    if(userData[2]!= null){
+                        FileExist = true;
+                    }
 
                 }
             }
@@ -297,6 +312,43 @@ public class ActivityTrackingController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return FileExist;
+    }
+
+    private String ReadDurationData(){
+        String Dur = " ";
+        try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (userData[0].equals(Integer.toString(CurrentId))) {
+                    Dur = (userData[1]);
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Dur;
+    }
+
+    private String ReadCalData(){
+        String Cal = " ";
+        try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (userData[0].equals(Integer.toString(CurrentId))) {
+                    Cal = (userData[2]);
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Cal;
     }
 
     private void SaveBurnedCal(ActivityTrackingModel CurrentUser){
@@ -329,20 +381,6 @@ public class ActivityTrackingController {
         }
 
     }
-
-
-    private void SaveData(ActivityTrackingModel CurrentUser){
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("CalBurned.txt",true))) {
-            writer.write(CurrentUser.toString());
-            writer.newLine();
-
-        }catch (IOException e){
-            e.printStackTrace();
-
-        }
-    }
-
-
 
 
     private void dailyEncouragement() {
