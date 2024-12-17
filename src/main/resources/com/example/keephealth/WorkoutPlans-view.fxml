@@ -86,7 +86,7 @@
                         <AnchorPane prefHeight="50.0" prefWidth="50.0">
                            <children>
                               <Circle fill="#d9d9d9" layoutX="64.0" layoutY="66.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Arc fill="WHITE" layoutX="64.0" layoutY="66.0" length="60.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+                              <Arc fx:id="Intakechart" fill="WHITE" layoutX="64.0" layoutY="66.0" length="340.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
                            </children>
                         </AnchorPane>
                      </children></HBox>
@@ -142,17 +142,17 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="163.0">
                                  <children>
-                                    <Label alignment="CENTER" layoutX="5.0" layoutY="13.0" prefHeight="19.0" prefWidth="91.0" text="Weight target" textAlignment="CENTER">
+                                    <Label alignment="CENTER" layoutX="5.0" layoutY="13.0" prefHeight="19.0" prefWidth="91.0" text="Intake target" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="60.0" layoutY="31.0" text="KG">
+                                    <Label layoutX="60.0" layoutY="31.0" text="cal">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="Weightoutput" alignment="CENTER" layoutX="17.0" layoutY="31.0" prefHeight="17.0" prefWidth="42.0" text="0">
+                                    <Label fx:id="Intakeoutput" alignment="CENTER" layoutX="17.0" layoutY="31.0" prefHeight="17.0" prefWidth="42.0" text="0">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -172,7 +172,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="Calorieinput" style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <TextField fx:id="Calorieinput" promptText="Cal burning goal" style="-fx-border-width: 1; -fx-border-color: black;" />
                               <Button fx:id="SetButtonOne" mnemonicParsing="false" onAction="#handlesetB1Button" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -186,7 +186,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="Workoutinput" style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <TextField fx:id="Workoutinput" promptText="Workout hours goal" style="-fx-border-width: 1; -fx-border-color: black;" />
                               <Button fx:id="SetButtonTwo" mnemonicParsing="false" onAction="#handlesetB2Button" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -196,12 +196,12 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="149.0" spacing="5.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="19.0" prefWidth="112.0" text="Weight target" textAlignment="CENTER">
+                              <Label alignment="CENTER" prefHeight="19.0" prefWidth="112.0" text="Intake target" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="Weightinput" style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <TextField fx:id="Intaketinput" promptText="Intake (cal) goal" style="-fx-border-width: 1; -fx-border-color: black;" />
                               <Button fx:id="SetButtonThree" mnemonicParsing="false" onAction="#handlesetB3Button" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -219,23 +219,23 @@
                      </padding>
                   </Label>
                   <AnchorPane layoutY="338.0" />
-                  <HBox alignment="CENTER" layoutX="44.0" layoutY="207.0" prefHeight="25.0" prefWidth="522.0" spacing="150.0">
+                  <HBox alignment="CENTER" layoutX="37.0" layoutY="206.0" prefHeight="25.0" prefWidth="522.0" spacing="45.0">
                      <children>
-                        <HBox prefHeight="31.0" prefWidth="30.0">
+                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="130.0">
                            <children>
-                              <Label text="60" />
+                              <Label alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="35.0" text="100.0" />
+                              <Label prefHeight="17.0" prefWidth="14.0" text="\%" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="130.0">
+                           <children>
+                              <Label alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="34.0" text="100.0" />
                               <Label text="\%" />
                            </children>
                         </HBox>
-                        <HBox prefHeight="31.0" prefWidth="30.0">
+                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="130.0">
                            <children>
-                              <Label text="60" />
-                              <Label text="\%" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="31.0" prefWidth="30.0">
-                           <children>
-                              <Label text="60" />
+                              <Label fx:id="Intakepercent" alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="42.0" text="100.0" />
                               <Label text="\%" />
                            </children>
                         </HBox>

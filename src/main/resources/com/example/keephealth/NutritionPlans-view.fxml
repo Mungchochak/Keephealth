@@ -287,7 +287,7 @@
                                     </AnchorPane>
                                     <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="224.0" spacing="10.0">
                                        <children>
-                                          <Button fx:id="confirmFoodButton" mnemonicParsing="false" onAction="#handleCheckInButton" prefHeight="35.0" prefWidth="92.0" style="-fx-background-radius: 20; -fx-background-color: white;" text="Confirm">
+                                          <Button fx:id="confirmFoodButton" mnemonicParsing="false" onAction="#handleComfirmButton" prefHeight="35.0" prefWidth="92.0" style="-fx-background-radius: 20; -fx-background-color: white;" text="Confirm">
                                              <font>
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
@@ -305,7 +305,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="calorieTakenLabel" alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="362">
+                                          <Label fx:id="calorieTakenLabel" alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="0">
                                              <font>
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
@@ -320,7 +320,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="totalCaloriesLabel" alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="327">
+                                          <Label fx:id="totalCaloriesLabel" alignment="CENTER_RIGHT" layoutX="84.0" layoutY="4.0" prefHeight="28.0" prefWidth="91.0" text="0">
                                              <font>
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
@@ -330,7 +330,7 @@
                                     </AnchorPane>
                                     <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="224.0" spacing="10.0">
                                        <children>
-                                          <Button fx:id="checkin" mnemonicParsing="false" onAction="#handleCheckIntoButton" prefHeight="35.0" prefWidth="92.0" style="-fx-background-radius: 20; -fx-background-color: white;" text="Check in">
+                                          <Button fx:id="checkin" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" onAction="#handleCheckinButton" style="-fx-background-radius: 20; -fx-background-color: white;" text="Check in">
                                              <font>
                                                 <Font name="System Bold" size="13.0" />
                                              </font>

@@ -1,18 +1,27 @@
 package com.example.keephealth.Controller;
 
+import com.example.keephealth.Model.NutritionModel;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.shape.Arc;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import static com.example.keephealth.Controller.PublicMethod.ReadData;
 
 public class NutritionPlansController {
     @FXML
@@ -74,11 +83,36 @@ public class NutritionPlansController {
     @FXML
     private Label bmiConditionLabel, bfpConditionLabel;
 
-    private double intakeToday = 0;
-    private int currentId;
+    private int intakeToday = 0;
+    private int CurrentId = LoginController.getCurrentId();
+    private NutritionModel UserModel;
+    private int OldIntakeData;
+    private LocalDate nowdate = LocalDate.now();
+    private LocalDate Lastdate;
+
+    public static boolean Clicked;
+    public static int intakeonetimedata;
+    public static int CheckinIntaketoday;
+
+
+    public void ClassModel(){
+        UserModel = new NutritionModel();
+        UserModel.setUserId(CurrentId);
+        UserModel.setIntakeToday(intakeToday);
+        UserModel.setCheckinDate(nowdate);
+
+
+    }
+
 
     @FXML
     public void initialize() {
+
+        RenewData();
+        ReadTodaysTotalIntakeData();
+        totalCaloriesLabel.setText(String.valueOf(OldIntakeData));
+
+
         // 初始化性别
         genderChoiceBox.getItems().addAll("Male", "Female");
         genderChoiceBox.setValue("Male");
@@ -91,6 +125,146 @@ public class NutritionPlansController {
         foodChoiceBox.getItems().addAll("Beef", "Chicken", "Rice", "Egg", "Milk","Vegetable","Pork");
         foodChoiceBox.setValue("Beef");
     }
+
+
+
+    public void handleCheckinButton(){
+        ReadTodaysTotalIntakeData();
+        totalCaloriesLabel.setText(String.valueOf(OldIntakeData+intakeToday));
+        SaveIntakeData();
+
+        SaveTotalIntake();
+
+
+    }
+
+
+
+    public LocalDate getLastDate(){
+
+        try(BufferedReader reader= new BufferedReader(new FileReader("NutritionData.txt"))){
+            String data;
+
+            data = reader.readLine() ;
+            data = reader.readLine() ;
+            String [] userData = data.split("/");
+            Lastdate = LocalDate.parse(userData[2]);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Lastdate;
+
+    }
+
+
+    public void RenewData(){
+        Lastdate = getLastDate();
+        if (Lastdate == null || Lastdate.isBefore(nowdate)) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("NutritionData.txt"))) {
+                writer.write("");
+                writer.newLine();
+                System.out.println("Renew Data");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else {
+            System.out.println("Didn't renew Data");
+        }
+    }
+
+
+
+    public void SaveIntakeData(){
+
+        List<String> lines = new ArrayList<>();
+        ClassModel();
+
+
+
+        try(BufferedReader reader= new BufferedReader(new FileReader("NutritionData.txt"))){
+            String data;
+            ReadTodaysTotalIntakeData();
+
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (!userData[0].equals(Integer.toString(UserModel.getCurrentId()))) {
+                    lines.add(data);
+                }else {
+                    UserModel.setIntakeToday(OldIntakeData+intakeToday);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("NutritionData.txt", false))) {
+            for (String rewriter : lines){
+                writer.write(rewriter);
+                writer.newLine();
+            }
+
+            writer.write(UserModel.toString());
+            writer.newLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void ReadTodaysTotalIntakeData(){
+
+        try(BufferedReader reader= new BufferedReader(new FileReader("NutritionData.txt"))){
+            String data;
+            ClassModel();
+
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (userData[0].equals(Integer.toString(UserModel.getCurrentId()))) {
+                    OldIntakeData = Integer.parseInt(userData[1]);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public int GetTotalIntakeData(){
+
+        try(BufferedReader reader= new BufferedReader(new FileReader("NutritionData.txt"))){
+            String data;
+            ClassModel();
+
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (userData[0].equals(Integer.toString(UserModel.getCurrentId()))) {
+                    OldIntakeData = Integer.parseInt(userData[1]);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return OldIntakeData;
+
+    }
+
+
+
+
+
+
+
+
+
+
     public void handleConfirmBasicInfoButton() {
         try {
             double height = Double.parseDouble(heightInput.getText());
@@ -192,7 +366,7 @@ public class NutritionPlansController {
 
 
     @FXML
-    public void handleCheckInButton() {
+    public void handleComfirmButton() {
         try {
             String food = foodChoiceBox.getValue();
             double foodWeight = Double.parseDouble(foodWeightInput.getText());
@@ -214,13 +388,22 @@ public class NutritionPlansController {
             calorieTakenLabel.setText(String.format("%d ", calorieTaken));
 
 // 累加到总热量
-            intakeToday += calorieTaken;
-            totalCaloriesLabel.setText(String.format("%d ", (int) intakeToday));
+            intakeToday = 0+calorieTaken;
 
         } catch (NumberFormatException e) {
             System.out.println("please enter valid number！");
         }
     }
+
+
+
+
+
+
+
+
+
+
     public void startDailyResetTask() {
         // 计算从当前时间到今天 0 点的时间差
         Calendar now = Calendar.getInstance();
@@ -258,20 +441,11 @@ public class NutritionPlansController {
     public NutritionPlansController() {
         startDailyResetTask(); // 启动每日 0 点重置卡路里的定时任务
     }
-    @FXML
-    private int Currentid;
 
 
-    private int getcurrentId(){
 
 
-        Currentid = LoginController.getCurrentId();
 
-        System.out.println(Currentid);
-
-        return Currentid;
-
-    }
 
 
 
@@ -388,6 +562,48 @@ public class NutritionPlansController {
 
 
     }
+
+
+
+
+    public void SaveTotalIntake(){
+        List<String> lines = new ArrayList<>();
+        ClassModel();
+        int TotalOldData = Integer.parseInt(ReadData(UserModel.getCurrentId(),1,"TotalIntakeData.txt"));
+
+
+
+        try(BufferedReader reader= new BufferedReader(new FileReader("TotalIntakeData.txt"))){
+            String data;
+            ReadTodaysTotalIntakeData();
+
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (!userData[0].equals(Integer.toString(UserModel.getCurrentId()))) {
+                    lines.add(data);
+                }else {
+                    UserModel.setIntakeToday(TotalOldData+intakeToday);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("TotalIntakeData.txt", false))) {
+            for (String rewriter : lines){
+                writer.write(rewriter);
+                writer.newLine();
+            }
+
+            writer.write(UserModel.toStringNodate());
+            writer.newLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
 

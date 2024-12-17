@@ -7,11 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.scene.transform.Scale;
+import javafx.scene.shape.Arc;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -19,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.control.TextField;
+
+import static com.example.keephealth.Controller.PublicMethod.ReadData;
 
 
 public class WorkoutPlansController {
@@ -207,7 +207,7 @@ public class WorkoutPlansController {
     private TextField Calorieinput;
 
     @FXML
-    private TextField Weightinput;
+    private TextField Intaketinput;
 
     @FXML
     private TextField Workoutinput;
@@ -217,7 +217,11 @@ public class WorkoutPlansController {
     private Label Calorieoutput;
 
     @FXML
-    private Label Weightoutput;
+    private Label Intakeoutput;
+
+    public static WorkoutPlanModel Model;
+
+
 
 
 
@@ -401,7 +405,7 @@ public class WorkoutPlansController {
 
                     Calorieoutput.setText(userData[1]);
                     Workoutoutput.setText(userData[2]);
-                    Weightoutput.setText(userData[3]);
+                    Intakeoutput.setText(userData[3]);
 
 
 
@@ -432,7 +436,91 @@ public class WorkoutPlansController {
     private Button SetButtonThree;
 
 
-    public static WorkoutPlanModel Model;
+    @FXML
+    private Label Intakepercent;
+
+    @FXML
+    private  Arc Intakechart;
+
+
+    public void CheckUserIntakeComdition(){
+        double CurrentIntakeTotal = Integer.parseInt(ReadData(getcurrentId(),1,"TotalIntakeData.txt"));
+
+        double userintakegoal = Integer.parseInt(ReadData(getcurrentId(),3,"Workoutplans.txt"));
+
+        if (CurrentIntakeTotal< userintakegoal ){
+            return;
+        }else {
+            List<String> lines = new ArrayList<>();
+
+            try (BufferedReader reader = new BufferedReader(new FileReader("TotalIntakeData.txt"))) {
+                String data;
+                while ((data = reader.readLine()) != null) {
+                    String[] userData = data.split("/");
+                    if (!userData[0].equals(Integer.toString(Currentid))) {
+                        lines.add(data);
+
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("TotalIntakeData.txt", false))) {
+                for (String rewriter : lines) {
+                    writer.write(rewriter);
+                    writer.newLine();
+                }
+
+                writer.write(getcurrentId() + "/" + "0");
+                writer.newLine();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
+
+
+    public void Intakeworkoutshow(){
+
+        double userintakegoal = Integer.parseInt(ReadData(getcurrentId(),3,"Workoutplans.txt"));
+        System.out.println(userintakegoal);
+
+        double CurrentIntakeTotal = Integer.parseInt(ReadData(getcurrentId(),1,"TotalIntakeData.txt"));
+
+        double currentintakegoalremaining = userintakegoal - CurrentIntakeTotal;
+
+        System.out.println(currentintakegoalremaining);
+
+        double finalcurrentremaining = ((double) currentintakegoalremaining / userintakegoal) * 100;
+
+        System.out.println(finalcurrentremaining);
+
+        String formattedResult = String.format("%.1f", finalcurrentremaining);
+
+        System.out.println(formattedResult);
+
+        Intakepercent.setText(formattedResult);
+
+        AdjustchartData(finalcurrentremaining,Intakechart);
+    }
+
+
+
+
+    public void AdjustchartData(double data,Arc chart){
+
+        double angle = (data / 100) * 360;
+        chart.setLength(angle);
+
+    }
+
+
 
     public void preloadmedia(){
         String videoPath = "/Users/gavinmeng/IdeaProjects/Keephealth/src/main/resources/Video/video1.MP4";
@@ -451,13 +539,21 @@ public class WorkoutPlansController {
 
 
 
-
     @FXML
     public void initialize() {
         Model = new WorkoutPlanModel();
         Model.setId(getcurrentId());
         preloadmedia();
         showinfo();
+        Intakeworkoutshow();
+        CheckUserIntakeComdition();
+
+
+
+
+
+
+
 
 
 
@@ -531,32 +627,18 @@ public class WorkoutPlansController {
 
         SetButtonThree.setOnAction(event -> {
 
-            String inputTextTwo = Weightinput.getText();
+            String inputTextTwo = Intaketinput.getText();
             if (!inputTextTwo.isEmpty() && inputTextTwo.matches("\\d+")) {
-                int IntWeightinput = Integer.parseInt(Weightinput.getText());
 
-                if (IntWeightinput >= 250) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Input error");
-                    alert.setHeaderText("Invalid input");
-                    alert.setContentText("You won't be that strong");
-                    alert.showAndWait();
-                } else if (IntWeightinput <= 25 ) {
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Input error");
-                    alert.setHeaderText("Invalid input");
-                    alert.setContentText("That's not a healthy weight！");
-                    alert.showAndWait();
-
-                } else {
-                    Weightoutput.setText(inputTextTwo );
+                    Intakeoutput.setText(inputTextTwo);
                     Model.setWeightTarget(Integer.parseInt(inputTextTwo));
                     System.out.println("Weighttarget: " + Model.getWeightTarget());
-                    Weightinput.clear();
+                    Intaketinput.clear();
                     SaveWeightInfo(Model);
+                    Intakeworkoutshow();
 
-                }
+
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
