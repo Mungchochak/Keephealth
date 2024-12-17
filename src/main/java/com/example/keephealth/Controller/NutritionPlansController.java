@@ -7,7 +7,12 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Map;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class NutritionPlansController {
     @FXML
@@ -66,8 +71,12 @@ public class NutritionPlansController {
     private Button confirmBasicInfoButton; // 第一个Confirm按钮
     @FXML
     private Button confirmFoodButton; // 第二个Confirm按钮
+    @FXML
+    private Label bmiConditionLabel, bfpConditionLabel;
 
-    private double totalCalories = 0.0;
+    private double intakeToday = 0;
+    private int currentId;
+
     @FXML
     public void initialize() {
         // 初始化性别
@@ -93,12 +102,72 @@ public class NutritionPlansController {
             // 计算BMI
             double bmi = weight / Math.pow(height / 100.0, 2);
             bmiLabel.setText(String.format("%.2f", bmi));
+            String bmiStatus;
+            String bmiColor; // 颜色
+            if (bmi < 18.5) {
+                bmiStatus = "Underweight";
+                bmiColor = "red";
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                bmiStatus = "Normal";
+                bmiColor = "green";
+            } else if (bmi >= 25 && bmi < 29.9) {
+                bmiStatus = "Overweight";
+                bmiColor = "red";
+            } else {
+                bmiStatus = "Obesity";
+                bmiColor = "red";
+            }
+
+            // 显示 BMI 状态并设置颜色
+            bmiConditionLabel.setText(bmiStatus);
+            bmiConditionLabel.setStyle("-fx-text-fill: " + bmiColor + ";");
+
 
             // 计算BFP
             double bfp = (gender.equals("Male"))
                     ? (1.20 * bmi + 0.23 * age - 16.2)
                     : (1.20 * bmi + 0.23 * age - 5.4);
             bfpLabel.setText(String.format("%.2f", bfp));
+
+
+            String bfpStatus;
+            String bfpColor; // 颜色
+            if (gender.equals("Male")) {
+                if (bfp < 6) {
+                    bfpStatus = "Underfat";
+                    bfpColor = "red";
+                } else if (bfp >= 6 && bfp < 25) {
+                    bfpStatus = "Healthy";
+                    bfpColor = "green";
+                } else if (bfp >= 25 && bfp < 30) {
+                    bfpStatus = "Overfat";
+                    bfpColor = "red";
+                } else {
+                    bfpStatus = "Obese";
+                    bfpColor = "red";
+                }
+            } else {
+                if (bfp < 16) {
+                    bfpStatus = "Underfat";
+                    bfpColor = "red";
+                } else if (bfp >= 16 && bfp < 30) {
+                    bfpStatus = "Healthy";
+                    bfpColor = "green";
+                } else if (bfp >= 30 && bfp < 35) {
+                    bfpStatus = "Overfat";
+                    bfpColor = "red";
+                } else {
+                    bfpStatus = "Obese";
+                    bfpColor = "red";
+                }
+            }
+
+            // 显示 BFP 状态并设置颜色
+            bfpConditionLabel.setText(bfpStatus);
+            bfpConditionLabel.setStyle("-fx-text-fill: " + bfpColor + ";");
+
+            // 显示 BFP 状态
+            bfpConditionLabel.setText(bfpStatus);
 
             // 计算BMR
             double bmr = (gender.equals("Male"))
@@ -120,6 +189,7 @@ public class NutritionPlansController {
             System.out.println("Please enter valid numbers for height, weight, and age.");
         }
     }
+
 
     @FXML
     public void handleCheckInButton() {
@@ -144,16 +214,64 @@ public class NutritionPlansController {
             calorieTakenLabel.setText(String.format("%d ", calorieTaken));
 
 // 累加到总热量
-            totalCalories += calorieTaken;
-            totalCaloriesLabel.setText(String.format("%d ", (int) totalCalories));
+            intakeToday += calorieTaken;
+            totalCaloriesLabel.setText(String.format("%d ", (int) intakeToday));
 
         } catch (NumberFormatException e) {
             System.out.println("please enter valid number！");
         }
     }
+    public void startDailyResetTask() {
+        // 计算从当前时间到今天 0 点的时间差
+        Calendar now = Calendar.getInstance();
+        Calendar midnight = Calendar.getInstance();
+        midnight.set(Calendar.HOUR_OF_DAY, 0);
+        midnight.set(Calendar.MINUTE, 0);
+        midnight.set(Calendar.SECOND, 0);
+        midnight.set(Calendar.MILLISECOND, 0);
+
+        // 如果当前时间已经过了 0 点，则设置为明天 0 点
+        if (now.after(midnight)) {
+            midnight.add(Calendar.DATE, 1);
+        }
+
+        // 计算从当前时间到 0 点的剩余时间（毫秒）
+        long initialDelay = midnight.getTimeInMillis() - now.getTimeInMillis();
+
+        // 每天 0 点重置 intakeToday
+        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(() -> {
+            resetIntakeToday();
+        }, initialDelay, TimeUnit.DAYS.toMillis(1), TimeUnit.MILLISECONDS);
+    }
+
+    // 重置 intakeToday 为 0，并更新 UI 显示
+    private void resetIntakeToday() {
+        intakeToday = 0; // 重置今日卡路里值
+        System.out.println("intakeToday has been reset at midnight.");
+
+        // 更新 UI 上显示的卡路里值
+        totalCaloriesLabel.setText("0.00 cal");
+    }
+
+    // 在构造器或初始化方法中启动定时任务
+    public NutritionPlansController() {
+        startDailyResetTask(); // 启动每日 0 点重置卡路里的定时任务
+    }
+    @FXML
+    private int Currentid;
 
 
+    private int getcurrentId(){
 
+
+        Currentid = LoginController.getCurrentId();
+
+        System.out.println(Currentid);
+
+        return Currentid;
+
+    }
 
 
 
@@ -270,6 +388,10 @@ public class NutritionPlansController {
 
 
     }
+
+
+
+
 
 
 

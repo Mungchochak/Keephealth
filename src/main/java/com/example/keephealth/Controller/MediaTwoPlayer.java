@@ -30,7 +30,7 @@ public class MediaTwoPlayer {
 
 
         private void showMedia(){
-            String videoPath = "/Users/gavinmeng/IdeaProjects/Keephealth/src/main/resources/Video/99f6758b75884fcc15d669af08729a73.MP4";
+            String videoPath = "/Users/gavinmeng/IdeaProjects/Keephealth/src/main/resources/Video/video2.MP4";
 
             File file = new File(videoPath);
 
