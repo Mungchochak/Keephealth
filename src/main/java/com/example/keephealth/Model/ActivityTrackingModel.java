@@ -1,15 +1,28 @@
 package com.example.keephealth.Model;
 
+import java.time.LocalDate;
+
 public class ActivityTrackingModel {
 
-    private boolean checkIn;
+    private LocalDate LastCheckInDate;
     private double ExerciseDuration;
     private int CalBurned ;
     private int currentId;
+    private int checkedInDays;
+
+    private LocalDate RecordDate;
 
     @Override
     public String toString() {
-        return currentId+"/"+ExerciseDuration+"/"+CalBurned;
+        return currentId+"/"+ExerciseDuration+"/"+CalBurned+"/"+RecordDate;
+    }
+
+    public LocalDate getRecordDate() {
+        return RecordDate;
+    }
+
+    public void setRecordDate(LocalDate recordDate) {
+        RecordDate = recordDate;
     }
 
     public int getCurrentId() {
@@ -20,12 +33,20 @@ public class ActivityTrackingModel {
         this.currentId = currentId;
     }
 
-    public boolean isCheckIn() {
-        return checkIn;
+    public LocalDate getLastCheckInDate() {
+        return LastCheckInDate;
     }
 
-    public void setCheckIn(boolean checkIn) {
-        this.checkIn = checkIn;
+    public void setLastCheckInDate(LocalDate LastCheckInDate) {
+        this.LastCheckInDate = LastCheckInDate;
+    }
+
+    public int getCheckedInDays() {
+        return checkedInDays;
+    }
+
+    public void setCheckedInDays(int checkedInDays) {
+        this.checkedInDays = checkedInDays;
     }
 
     public int getCalBurned() {
@@ -45,5 +66,7 @@ public class ActivityTrackingModel {
     }
 
 
-
+    public String toString2() {
+        return currentId + "/" + LastCheckInDate + "/"+ checkedInDays;
+    }
 }

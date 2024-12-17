@@ -81,7 +81,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="CheckInOutput" alignment="CENTER" layoutX="39.0" layoutY="53.0" prefHeight="54.0" prefWidth="185.0" text="Successful !" textAlignment="CENTER">
+                              <Label fx:id="CheckInOutput" alignment="CENTER" layoutX="39.0" layoutY="53.0" prefHeight="54.0" prefWidth="185.0" text="Not Marked" textAlignment="CENTER">
                                  <font>
                                     <Font name="Arial" size="28.0" />
                                  </font>
@@ -132,7 +132,7 @@
                                                             <Font name="System Bold" size="24.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="FinalBurnedCalOutput" alignment="CENTER_RIGHT" layoutX="28.0" layoutY="17.0" prefHeight="48.0" prefWidth="75.0" text="675" textAlignment="CENTER">
+                                                      <Label fx:id="FinalBurnedCalOutput" alignment="CENTER_RIGHT" layoutX="28.0" layoutY="17.0" prefHeight="48.0" prefWidth="75.0" text="0" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="System Bold" size="24.0" />
                                                          </font>
