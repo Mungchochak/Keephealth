@@ -261,12 +261,23 @@ public class ActivityTrackingController {
         ATModel.setCurrentId(CurrentId);
         dailyEncouragement();
         ShowBurnedCal();
+        clearData();
 
 
     }
-
+    //the record will be clear at day after recorded
     private void clearData(){
         LocalDate CurrentDate = LocalDate.now();
+        //CurrentDate.plusDays(1);
+        String Date = String.valueOf(CurrentDate);
+        if(Date != ReadRecordDateData()){
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileUser, false))) {
+                writer.write(" ");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -274,6 +285,7 @@ public class ActivityTrackingController {
         choiceOfExercise();
         ActivityTrackingModel ATModel = new ActivityTrackingModel();
         ATModel.setCurrentId(CurrentId);
+        LocalDate CurrentDate = LocalDate.now();
         //this part return the burned calories and saves into the database
         ConfirmButton.setOnAction(actionEvent -> {
 
@@ -282,6 +294,8 @@ public class ActivityTrackingController {
             int calories = calculateCalBurned(mode, ATModel.getExerciseDuration());
             ATModel.setCalBurned(calories);
             FinalBurnedCalOutput.setText(String.valueOf(ATModel.getCalBurned()));
+
+            ATModel.setRecordDate(CurrentDate);
 
             if(checkFile()){
                 int CurrentCal = Integer.parseInt(ReadCalData());
@@ -349,6 +363,24 @@ public class ActivityTrackingController {
             e.printStackTrace();
         }
         return Cal;
+    }
+
+    private String ReadRecordDateData(){
+        String Date = " ";
+        try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (userData[0].equals(Integer.toString(CurrentId))) {
+                    Date = (userData[3]);
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Date;
     }
 
     private void SaveBurnedCal(ActivityTrackingModel CurrentUser){

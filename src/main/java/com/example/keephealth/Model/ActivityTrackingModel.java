@@ -10,9 +10,19 @@ public class ActivityTrackingModel {
     private int currentId;
     private int checkedInDays;
 
+    private LocalDate RecordDate;
+
     @Override
     public String toString() {
-        return currentId+"/"+ExerciseDuration+"/"+CalBurned;
+        return currentId+"/"+ExerciseDuration+"/"+CalBurned+"/"+RecordDate;
+    }
+
+    public LocalDate getRecordDate() {
+        return RecordDate;
+    }
+
+    public void setRecordDate(LocalDate recordDate) {
+        RecordDate = recordDate;
     }
 
     public int getCurrentId() {
