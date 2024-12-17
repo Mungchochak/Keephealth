@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,7 @@ public class ActivityTrackingController {
     private final int CurrentId = LoginController.getCurrentId();
 
     public static final String FileUser = "CalBurned.txt";
+
 
 
 
@@ -258,7 +260,7 @@ public class ActivityTrackingController {
         ATModel.setCurrentId(CurrentId);
         dailyEncouragement();
         ShowBurnedCal();
-        //LocalDateTime currentDateAndTime = LocalDateTime.now();
+
 
     }
 
@@ -272,10 +274,29 @@ public class ActivityTrackingController {
             int calories = calculateCalBurned(mode, ATModel.getExerciseDuration());
             ATModel.setCalBurned(calories);
             FinalBurnedCalOutput.setText(String.valueOf(ATModel.getCalBurned()));
-            /*SaveBurnedCal(ATModel);*/
-            SaveData(ATModel);
+
+            SaveBurnedCal(ATModel);
+            //SaveData(ATModel);
         });
 
+    }
+
+    private void ReadModel(){
+        try(BufferedReader reader= new BufferedReader(new FileReader("Profiledata.txt"))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (userData[0].equals(Integer.toString(CurrentId))) {
+                    String Cal = (userData[2]);
+
+
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void SaveBurnedCal(ActivityTrackingModel CurrentUser){
@@ -311,7 +332,6 @@ public class ActivityTrackingController {
 
 
     private void SaveData(ActivityTrackingModel CurrentUser){
-
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("CalBurned.txt",true))) {
             writer.write(CurrentUser.toString());
             writer.newLine();
@@ -433,11 +453,50 @@ public class ActivityTrackingController {
             case "Pull Up":
                 MET = 5.0;
                 break;
-
         }
         calBurned =(int) (MET * weight * dur);
         return calBurned;
 
+    }
+
+    private boolean isCheckIn(){
+        LocalDate currentDate = LocalDate.now();
+        ActivityTrackingModel ATModel = new ActivityTrackingModel();
+        ATModel.setLastCheckInDate(currentDate);
+        boolean c;
+        if(currentDate.equals(currentDate)){
+            Alert NoticeAlert = new Alert(Alert.AlertType.INFORMATION);
+            NoticeAlert.setTitle("Check-In Notice");
+            NoticeAlert.setHeaderText(null);
+            NoticeAlert.setContentText("You had Checked In for today! Please Check In tomorrow");
+            c = true;
+        }else{
+            c = false;
+        }
+        return c ;
+    }
+
+    private void checkIn(){
+
+        LocalDate currentDate = LocalDate.now();
+        ActivityTrackingModel ATModel = new ActivityTrackingModel();
+
+        System.out.println(currentDate);
+        MarkButton.setOnAction(actionEvent -> {
+            SaveCheckInData(ATModel);
+        });
+
+    }
+
+    private void SaveCheckInData(ActivityTrackingModel CurrentUser){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("CheckInRecord.txt",true))) {
+            writer.write(CurrentUser.toString2());
+            writer.newLine();
+
+        }catch (IOException e){
+            e.printStackTrace();
+
+        }
     }
     
     
