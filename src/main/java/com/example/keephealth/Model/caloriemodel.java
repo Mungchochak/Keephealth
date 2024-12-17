@@ -4,19 +4,41 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class caloriemodel {
-    // 用于模拟存储用户卡路里数据的 Map，key 为用户ID，value 为卡路里数据
-    private static final Map<Integer, Double> calorieDataMap = new HashMap<>();
 
-    // 保存卡路里数据
-    public static void saveCalorieData(int userId, double calorieIntake) {
-        calorieDataMap.put(userId, calorieIntake);
-        System.out.println("User ID: " + userId + " | Calorie Data Saved: " + calorieIntake + " cal");
+        private int userId;      // 用户ID
+        private double intakeToday; // 今日卡路里摄入
+
+        // 构造方法
+        public caloriemodel(int userId, double intakeToday) {
+            this.userId = userId;
+            this.intakeToday = intakeToday;
+        }
+
+        // Getter 和 Setter 方法
+        public int getCurrentId() {
+            return userId;
+        }
+
+        public void setUserId(int userId) {
+            this.userId = userId;
+        }
+
+        public double getIntakeToday() {
+            return intakeToday;
+        }
+
+        public void setIntakeToday(double intakeToday) {
+            this.intakeToday = intakeToday;
+        }
+
+        // 显示用户数据的方法
+        @Override
+        public String toString() {
+            return "User ID: " + userId + " | Today's Calorie Intake: " + intakeToday + " cal";
+
     }
 
-    // 获取用户卡路里数据
-    public static double getCalorieData(int userId) {
-        return calorieDataMap.getOrDefault(userId, 0.0);  // 如果没有该用户数据，则返回 0.0
-    }
+
 
 
 }

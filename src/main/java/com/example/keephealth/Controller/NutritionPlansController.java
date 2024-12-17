@@ -258,20 +258,25 @@ public class NutritionPlansController {
     public NutritionPlansController() {
         startDailyResetTask(); // 启动每日 0 点重置卡路里的定时任务
     }
+    @FXML
+    private int Currentid;
 
 
+    private int getcurrentId(){
 
 
+        Currentid = LoginController.getCurrentId();
 
+        System.out.println(Currentid);
 
+        return Currentid;
 
-
-    // 模拟将数据保存到数据库的方法
-    private void saveCalorieIntake(int userId, double intake) {
-        System.out.println("User ID: " + userId + " | Today's Calorie Intake: " + intake + " cal");
-        // 在这里加入数据库存储逻辑，如写入文件或连接数据库
-        // 例如：存储到文件或数据库，将 userId 和 intakeToday 保存在数据库里
     }
+
+
+
+
+
 
 
     @FXML
