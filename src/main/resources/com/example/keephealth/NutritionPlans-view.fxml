@@ -156,7 +156,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="bmiLabel" alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="24.06">
+                                          <Label fx:id="bmiLabel" alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="00.00">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -180,7 +180,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="bfpLabel" alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="24.06">
+                                          <Label fx:id="bfpLabel" alignment="CENTER_RIGHT" layoutX="85.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="00.00">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -204,7 +204,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="bmrLabel" alignment="CENTER_RIGHT" layoutX="122.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="1666.00">
+                                          <Label fx:id="bmrLabel" alignment="CENTER_RIGHT" layoutX="122.0" layoutY="2.0" prefHeight="39.0" prefWidth="91.0" text="00.00">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -223,7 +223,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="tdeeLabel" alignment="CENTER" layoutX="130.0" layoutY="38.0" prefHeight="22.0" prefWidth="91.0" text="2459.23">
+                                          <Label fx:id="tdeeLabel" alignment="CENTER" layoutX="130.0" layoutY="38.0" prefHeight="22.0" prefWidth="91.0" text="00.00">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -233,7 +233,7 @@
                                                 <Font name="System Bold" size="9.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="activityLevelChoiceBox" layoutX="100.0" layoutY="5.0" prefHeight="20.0" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-image-width: 1; -fx-border-radius: 20; -fx-border-color: black;" />
+                                          <ComboBox fx:id="activityLevelChoiceBox" layoutX="100.0" layoutY="5.0" prefHeight="20.0" prefWidth="150.0" promptText="TDEE" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-image-width: 1; -fx-border-radius: 20; -fx-border-color: black;" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -330,7 +330,7 @@
                                     </AnchorPane>
                                     <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="224.0" spacing="10.0">
                                        <children>
-                                          <Button fx:id="checkin" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" onAction="#handleCheckinButton" style="-fx-background-radius: 20; -fx-background-color: white;" text="Check in">
+                                          <Button fx:id="checkin" mnemonicParsing="false" onAction="#handleCheckinButton" prefHeight="35.0" prefWidth="92.0" style="-fx-background-radius: 20; -fx-background-color: white;" text="Check in">
                                              <font>
                                                 <Font name="System Bold" size="13.0" />
                                              </font>

@@ -69,4 +69,14 @@ public class ActivityTrackingModel {
     public String toString2() {
         return currentId + "/" + LastCheckInDate + "/"+ checkedInDays;
     }
+
+    public String TotaltoString() {
+        return currentId + "/" + ExerciseDuration+"/"+CalBurned;
+    }
+
+
+
+
+
 }
+

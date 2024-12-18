@@ -22,6 +22,7 @@ import javafx.util.Duration;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public class ActivityTrackingController {
     @FXML
     private Button LogoutButton;
 
-    private final int CurrentId = LoginController.getCurrentId();
+    private int CurrentId = LoginController.getCurrentId();
 
     public static final String FileUser = "CalBurned.txt";
 
@@ -254,6 +255,9 @@ public class ActivityTrackingController {
         }
     }
 
+    private LocalDate Lastdate;
+    private LocalDate nowdate = LocalDate.now();
+
 
 
     @FXML
@@ -263,17 +267,21 @@ public class ActivityTrackingController {
         ATModel.setCurrentId(CurrentId);
         dailyEncouragement();
         ShowBurnedCal();
-        clearData();
+        /*clearData();*/
+        Lastdate = PublicMethod.getLastDate("CalBurned.txt",3,Lastdate);
+        System.out.println(Lastdate);
+        PublicMethod.RenewData(Lastdate,nowdate,"CalBurned.txt");
 
 
     }
+
     //the record will be clear at day after recorded
-    private void clearData(){
+   /* private void clearData(){
         LocalDate CurrentDate = LocalDate.now();
         //CurrentDate.plusDays(3);
-       /* String Date = String.valueOf(CurrentDate);
+        String Date = String.valueOf(CurrentDate);
         System.out.println("|"+Date+"|");
-        System.out.println("|"+ReadRecordDateData()+"|");*/
+        System.out.println("|"+ReadRecordDateData()+"|");
         ReadRecordDateData();
         LocalDate Lastdate = Lastdays;
         if(Lastdate.isBefore(CurrentDate)){
@@ -286,7 +294,8 @@ public class ActivityTrackingController {
             }
         }
 
-    }
+    }*/
+
 
     private void ShowBurnedCal(){
         choiceOfExercise();
@@ -310,7 +319,10 @@ public class ActivityTrackingController {
                 ATModel.setCalBurned(ATModel.getCalBurned() + CurrentCal);
                 ATModel.setExerciseDuration(ATModel.getExerciseDuration() + CurrentDuration);
             }
+
             SaveBurnedCal(ATModel);
+            SaveTotalBurnedCal(ATModel);
+
 
             DurationInput.setText("");
 
@@ -378,7 +390,7 @@ public class ActivityTrackingController {
 
 
 
-    private void ReadRecordDateData(){
+/*    private void ReadRecordDateData(){
         try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
             String data;
             while((data = reader.readLine())!= null) {
@@ -394,12 +406,46 @@ public class ActivityTrackingController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
+
 
     private void SaveBurnedCal(ActivityTrackingModel CurrentUser){
         List<String> lines = new ArrayList<>();
 
         try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (!userData[0].equals(Integer.toString(CurrentId))) {
+                    lines.add(data);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("CalBurned.txt", false))) {
+            for (String rewriter : lines){
+                writer.write(rewriter);
+                writer.newLine();
+            }
+
+            writer.write(CurrentUser.toString());
+            writer.newLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+    private void SaveTotalBurnedCal(ActivityTrackingModel CurrentUser){
+        List<String> lines = new ArrayList<>();
+
+        try(BufferedReader reader= new BufferedReader(new FileReader("TotalCalBurned.txt"))){
             String data;
             while((data = reader.readLine())!= null) {
                 String [] userData = data.split("/");
@@ -412,13 +458,14 @@ public class ActivityTrackingController {
             e.printStackTrace();
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileUser, false))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("TotalCalBurned.txt", false))) {
             for (String rewriter : lines){
                 writer.write(rewriter);
                 writer.newLine();
             }
 
-            writer.write(CurrentUser.toString());
+            writer.write(CurrentUser.TotaltoString());
+
             writer.newLine();
 
         } catch (IOException e) {
