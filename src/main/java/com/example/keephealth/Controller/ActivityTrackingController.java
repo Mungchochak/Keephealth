@@ -280,6 +280,7 @@ public class ActivityTrackingController {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileUser, false))) {
                 writer.write(" ");
 
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
