@@ -7,7 +7,6 @@ public class PublicMethod {
 
     public static String ReadData(int currentId,int position,String fileName){
         String Data ="0";
-
         try(BufferedReader reader= new BufferedReader(new FileReader(fileName))){
             String line;
 
