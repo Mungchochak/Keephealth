@@ -236,7 +236,7 @@ public class NutritionPlansController {
     }
 
 
-    public int GetTotalIntakeData(){
+/*    public int GetTotalIntakeData(){
 
         try(BufferedReader reader= new BufferedReader(new FileReader("NutritionData.txt"))){
             String data;
@@ -254,7 +254,7 @@ public class NutritionPlansController {
         }
         return OldIntakeData;
 
-    }
+    }*/
 
 
 
