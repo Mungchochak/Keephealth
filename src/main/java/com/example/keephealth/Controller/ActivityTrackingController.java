@@ -715,7 +715,10 @@ public class ActivityTrackingController {
     }
 
     private void RenewCheckInData(LocalDate Lastdate,LocalDate Currentdate,String fileName){
-        if (Lastdate == null || Currentdate.isEqual(Lastdate.plusDays(2))) {
+        if (Lastdate == null || Currentdate.isAfter(Lastdate.plusDays(2))) {
+
+
+
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
                 writer.write("");
                 writer.newLine();

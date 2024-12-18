@@ -32,7 +32,7 @@ public class MediaThreePlayer {
 
 
         private void showMedia(){
-            String videoPath = "/Users/gavinmeng/IdeaProjects/Keephealth/src/main/resources/Video/video3.MP4";
+            String videoPath = "src/main/resources/Video/video3.mp4";
 
             File file = new File(videoPath);
 
