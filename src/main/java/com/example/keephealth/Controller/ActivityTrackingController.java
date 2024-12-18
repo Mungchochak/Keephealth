@@ -269,14 +269,21 @@ public class ActivityTrackingController {
         ATModel.setCurrentId(CurrentId);
         dailyEncouragement();
         ShowBurnedCal();
-        LastDate = PublicMethod.getLastDate("CalBurned.txt",3,LastDate);
-        System.out.println(LastDate);
-        PublicMethod.RenewData(LastDate,nowdate,"CalBurned.txt");
-        HandleMarkButton();
-        if(isCheckIn()){
-            CheckInOutput.setText("Successful");
+        if(isFileRecorded("CalBurned.txt")){
+            LastDate = PublicMethod.getLastDate("CalBurned.txt",3,LastDate);
+            System.out.println(LastDate);
+            PublicMethod.RenewData(LastDate,nowdate,"CalBurned.txt");
         }
-        RenewCheckInData(LocalDate.parse(PublicMethod.ReadData(CurrentId,1,"CheckInData.txt")),CurrentDate,"CheckInData.txt");
+        HandleMarkButton();
+        if(isFileRecorded("CheckInData.txt")){
+            if(isCheckIn()){
+                CheckInOutput.setText("Successful");
+            }
+        }
+        if(isFileRecorded("CheckInData.txt")){
+            RenewCheckInData(LocalDate.parse(PublicMethod.ReadData(CurrentId,1,"CheckInData.txt")),CurrentDate,"CheckInData.txt");
+        }
+
 
 
     }
@@ -586,7 +593,7 @@ public class ActivityTrackingController {
             ATModel.setCurrentId(CurrentId);
             ATModel.setLastCheckInDate(currentDate);
 
-            if(isFileRecorded()){
+            if(isFileRecorded("CheckInData.txt")){
                 if(isCheckIn()){
                     Alert NoticeAlert = new Alert(Alert.AlertType.INFORMATION);
                     NoticeAlert.setTitle("Check-In Notice");
@@ -639,9 +646,9 @@ public class ActivityTrackingController {
         }
     }
 
-    private Boolean isFileRecorded(){
+    private Boolean isFileRecorded(String fileName){
         boolean FileExist = false;
-        try(BufferedReader reader= new BufferedReader(new FileReader("CheckInData.txt"))){
+        try(BufferedReader reader= new BufferedReader(new FileReader(fileName))){
             String data;
             while((data = reader.readLine())!= null) {
                 String [] userData = data.split("/");
