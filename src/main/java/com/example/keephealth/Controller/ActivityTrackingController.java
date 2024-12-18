@@ -74,6 +74,8 @@ public class ActivityTrackingController {
 
 
 
+
+
     @FXML
     private void handleProfileClick() {
 
@@ -255,46 +257,30 @@ public class ActivityTrackingController {
         }
     }
 
-    private LocalDate Lastdate;
+    private LocalDate LastDate;
     private LocalDate nowdate = LocalDate.now();
 
 
 
     @FXML
     public void initialize() {
-
+        LocalDate CurrentDate = LocalDate.now();
         ActivityTrackingModel ATModel = new ActivityTrackingModel();
         ATModel.setCurrentId(CurrentId);
         dailyEncouragement();
         ShowBurnedCal();
-        /*clearData();*/
-        Lastdate = PublicMethod.getLastDate("CalBurned.txt",3,Lastdate);
-        System.out.println(Lastdate);
-        PublicMethod.RenewData(Lastdate,nowdate,"CalBurned.txt");
+        LastDate = PublicMethod.getLastDate("CalBurned.txt",3,LastDate);
+        System.out.println(LastDate);
+        PublicMethod.RenewData(LastDate,nowdate,"CalBurned.txt");
+        HandleMarkButton();
+        if(isCheckIn()){
+            CheckInOutput.setText("Successful");
+        }
+        RenewCheckInData(LocalDate.parse(PublicMethod.ReadData(CurrentId,1,"CheckInData.txt")),CurrentDate,"CheckInData.txt");
 
 
     }
 
-    //the record will be clear at day after recorded
-   /* private void clearData(){
-        LocalDate CurrentDate = LocalDate.now();
-        //CurrentDate.plusDays(3);
-        String Date = String.valueOf(CurrentDate);
-        System.out.println("|"+Date+"|");
-        System.out.println("|"+ReadRecordDateData()+"|");
-        ReadRecordDateData();
-        LocalDate Lastdate = Lastdays;
-        if(Lastdate.isBefore(CurrentDate)){
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileUser, false))) {
-                writer.write(" ");
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }*/
 
 
     private void ShowBurnedCal(){
@@ -322,7 +308,6 @@ public class ActivityTrackingController {
 
             SaveBurnedCal(ATModel);
             SaveTotalBurnedCal(ATModel);
-
 
             DurationInput.setText("");
 
@@ -385,28 +370,6 @@ public class ActivityTrackingController {
         }
         return Cal;
     }
-
-    LocalDate Lastdays;
-
-
-
-/*    private void ReadRecordDateData(){
-        try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
-            String data;
-            while((data = reader.readLine())!= null) {
-                String [] userData = data.split("/");
-                if (userData[3].isEmpty()){
-                    return;
-                }
-                if (userData[0].equals(Integer.toString(CurrentId))) {
-                    Lastdays = LocalDate.parse(userData[3]);
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 
 
     private void SaveBurnedCal(ActivityTrackingModel CurrentUser){
@@ -589,46 +552,115 @@ public class ActivityTrackingController {
 
     }
 
+
     private boolean isCheckIn(){
-        LocalDate currentDate = LocalDate.now();
-        ActivityTrackingModel ATModel = new ActivityTrackingModel();
-        ATModel.setLastCheckInDate(currentDate);
-        boolean c;
-        if(currentDate.equals(currentDate)){
-            Alert NoticeAlert = new Alert(Alert.AlertType.INFORMATION);
-            NoticeAlert.setTitle("Check-In Notice");
-            NoticeAlert.setHeaderText(null);
-            NoticeAlert.setContentText("You had Checked In for today! Please Check In tomorrow");
-            c = true;
+        LocalDate DateNow = LocalDate.now();
+        LocalDate LastCheckInDate = LocalDate.parse(PublicMethod.ReadData(CurrentId,1,"CheckInData.txt"));
+        boolean checker;
+        if(DateNow.isEqual(LastCheckInDate)){
+            checker = true;
         }else{
-            c = false;
+            checker = false;
         }
-        return c ;
+        return checker ;
     }
 
+
+
     private void HandleMarkButton(){
+        LocalDate currentDate = LocalDate.now();
+        ActivityTrackingModel ATModel = new ActivityTrackingModel();
+
         MarkButton.setOnAction(event -> {
+            CheckInOutput.setText("Successful");
+            ATModel.setCurrentId(CurrentId);
+            ATModel.setLastCheckInDate(currentDate);
+
+            if(isFileRecorded()){
+                if(isCheckIn()){
+                    Alert NoticeAlert = new Alert(Alert.AlertType.INFORMATION);
+                    NoticeAlert.setTitle("Check-In Notice");
+                    NoticeAlert.setHeaderText(null);
+                    NoticeAlert.setContentText("You had Checked In for today! Please Check In tomorrow");
+                    NoticeAlert.showAndWait();
+                    ATModel.setCheckedInDays(Integer.parseInt(PublicMethod.ReadData(CurrentId,2,"CheckInData.txt")));
+                }else{
+                    int numOfDay = Integer.parseInt(PublicMethod.ReadData(CurrentId,2,"CheckInData.txt"));
+                    ATModel.setCheckedInDays(numOfDay+1);
+                }
+
+            }else{
+                ATModel.setCheckedInDays(1);
+            }
+            SaveCheckInData(ATModel);
 
         });
     }
 
 
-    private void checkIn(){
-        LocalDate currentDate = LocalDate.now();
-        ActivityTrackingModel ATModel = new ActivityTrackingModel();
-        ATModel.setLastCheckInDate(currentDate);
-        ATModel.setCheckedInDays(1);
-
-    }
-
     private void SaveCheckInData(ActivityTrackingModel CurrentUser){
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("CheckInRecord.txt",true))) {
+        List<String> lines = new ArrayList<>();
+
+        try(BufferedReader reader= new BufferedReader(new FileReader("CheckInData.txt"))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (!userData[0].equals(Integer.toString(CurrentId))) {
+                    lines.add(data);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("CheckInData.txt", false))) {
+            for (String rewriter : lines){
+                writer.write(rewriter);
+                writer.newLine();
+            }
+
             writer.write(CurrentUser.toString2());
+
             writer.newLine();
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
 
+    private Boolean isFileRecorded(){
+        boolean FileExist = false;
+        try(BufferedReader reader= new BufferedReader(new FileReader("CheckInData.txt"))){
+            String data;
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (userData[0].equals(Integer.toString(CurrentId))) {
+                    if(userData[1]!= null){
+                        FileExist = true;
+                    }
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return FileExist;
+    }
+
+    private void RenewCheckInData(LocalDate Lastdate,LocalDate Currentdate,String fileName){
+        if (Lastdate == null || Currentdate.isEqual(Lastdate.plusDays(2))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+                writer.write("");
+                writer.newLine();
+                System.out.println("Renewed Check-In Data");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else {
+            System.out.println("Didn't renew Check-In Data");
         }
     }
     
