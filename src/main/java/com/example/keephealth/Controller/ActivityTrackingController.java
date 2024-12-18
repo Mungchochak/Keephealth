@@ -300,15 +300,25 @@ public class ActivityTrackingController {
     private void ShowBurnedCal(){
         choiceOfExercise();
         ActivityTrackingModel ATModel = new ActivityTrackingModel();
+
+        ActivityTrackingModel TotalATModel = new ActivityTrackingModel();
+
         ATModel.setCurrentId(CurrentId);
+        TotalATModel.setCurrentId(CurrentId);
+
         LocalDate CurrentDate = LocalDate.now();
         //this part return the burned calories and saves into the database
         ConfirmButton.setOnAction(actionEvent -> {
 
             ATModel.setExerciseDuration(Double.parseDouble(DurationInput.getText()));
+            TotalATModel.setExerciseDuration(Double.parseDouble(DurationInput.getText()));
 
             int calories = calculateCalBurned(mode, ATModel.getExerciseDuration());
             ATModel.setCalBurned(calories);
+
+            TotalATModel.setCalBurned(calories+Integer.parseInt(PublicMethod.ReadData(TotalATModel.getCurrentId(),2,"TotalCalBurned.txt")));
+            TotalATModel.setExerciseDuration(TotalATModel.getExerciseDuration()+Double.parseDouble(PublicMethod.ReadData(TotalATModel.getCurrentId(),1,"TotalCalBurned.txt")));
+
             FinalBurnedCalOutput.setText(String.valueOf(ATModel.getCalBurned()));
 
             ATModel.setRecordDate(CurrentDate);
@@ -321,7 +331,7 @@ public class ActivityTrackingController {
             }
 
             SaveBurnedCal(ATModel);
-            SaveTotalBurnedCal(ATModel);
+            SaveTotalBurnedCal(TotalATModel);
 
 
             DurationInput.setText("");

@@ -73,20 +73,20 @@
                      <children>
                         <AnchorPane prefHeight="50.0" prefWidth="50.0">
                            <children>
-                              <Circle fill="#f3e1fc" layoutX="64.0" layoutY="66.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Arc fill="WHITE" layoutX="64.0" layoutY="66.0" length="360.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+                              <Circle fill="WHITE" layoutX="64.0" layoutY="66.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Arc fx:id="Calchart" fill="#f3e1fc" layoutX="64.0" layoutY="66.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="50.0" prefWidth="50.0">
                            <children>
-                              <Circle fill="#ffd387" layoutX="64.0" layoutY="66.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Arc fill="WHITE" layoutX="64.0" layoutY="66.0" length="60.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+                              <Circle fill="WHITE" layoutX="64.0" layoutY="66.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Arc fx:id="Hourschart" fill="#ffd387" layoutX="64.0" layoutY="66.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="50.0" prefWidth="50.0">
                            <children>
-                              <Circle fill="#d9d9d9" layoutX="64.0" layoutY="66.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Arc fx:id="Intakechart" fill="WHITE" layoutX="64.0" layoutY="66.0" length="340.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+                              <Circle fill="WHITE" layoutX="64.0" layoutY="66.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Arc fx:id="Intakechart" fill="#d9d9d9" layoutX="64.0" layoutY="66.0" radiusX="60.0" radiusY="60.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
                            </children>
                         </AnchorPane>
                      </children></HBox>
@@ -223,19 +223,19 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="25.0" prefWidth="130.0">
                            <children>
-                              <Label alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="35.0" text="100.0" />
+                              <Label fx:id="Calpercent" alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="35.0" text="0" />
                               <Label prefHeight="17.0" prefWidth="14.0" text="\%" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="25.0" prefWidth="130.0">
                            <children>
-                              <Label alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="34.0" text="100.0" />
+                              <Label fx:id="Hourspercent" alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="34.0" text="0" />
                               <Label text="\%" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="25.0" prefWidth="130.0">
                            <children>
-                              <Label fx:id="Intakepercent" alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="42.0" text="100.0" />
+                              <Label fx:id="Intakepercent" alignment="TOP_RIGHT" prefHeight="17.0" prefWidth="42.0" text="0" />
                               <Label text="\%" />
                            </children>
                         </HBox>

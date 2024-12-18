@@ -438,9 +438,19 @@ public class WorkoutPlansController {
 
     @FXML
     private Label Intakepercent;
+    @FXML
+    private Label Hourspercent;
+    @FXML
+    private Label Calpercent;
 
     @FXML
     private  Arc Intakechart;
+
+    @FXML
+    private  Arc Hourschart;
+
+    @FXML
+    private  Arc Calchart;
 
 
     public void CheckUserIntakeComdition(){
@@ -497,7 +507,7 @@ public class WorkoutPlansController {
 
         System.out.println(currentintakegoalremaining);
 
-        double finalcurrentremaining = ((double) currentintakegoalremaining / userintakegoal) * 100;
+        double finalcurrentremaining = 100-(((double) currentintakegoalremaining / userintakegoal) * 100);
 
         System.out.println(finalcurrentremaining);
 
@@ -512,6 +522,153 @@ public class WorkoutPlansController {
 
 
 
+    public void CheckUserHoursComdition(){
+        double CurrentHoursTotal = Double.parseDouble(ReadData(getcurrentId(),1,"TotalCalBurned.txt"));
+
+        double userHoursgoal = Double.parseDouble(ReadData(getcurrentId(),2,"Workoutplans.txt"));
+
+        String OldData = "";
+
+        if (CurrentHoursTotal< userHoursgoal ){
+            return;
+        }else {
+            List<String> lines = new ArrayList<>();
+
+            try (BufferedReader reader = new BufferedReader(new FileReader("TotalCalBurned.txt"))) {
+                String data;
+                while ((data = reader.readLine()) != null) {
+                    String[] userData = data.split("/");
+                    if (!userData[0].equals(Integer.toString(Currentid))) {
+                        lines.add(data);
+
+                    }if (userData[0].equals(Integer.toString(Currentid))) {
+                        OldData = userData[2];
+
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("TotalCalBurned.txt", false))) {
+                for (String rewriter : lines) {
+                    writer.write(rewriter);
+                    writer.newLine();
+                }
+
+                writer.write(getcurrentId() + "/" + "0"+"/"+OldData);
+                writer.newLine();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
+
+
+    public void Hoursworkoutshow(){
+
+        double userHoursgoal = Double.parseDouble(ReadData(getcurrentId(),2,"Workoutplans.txt"));
+        System.out.println(userHoursgoal);
+
+        double CurrentHoursTotal = Double.parseDouble(ReadData(getcurrentId(),1,"TotalCalBurned.txt"));
+
+        double currentHoursgoalremaining = userHoursgoal - CurrentHoursTotal;
+
+        System.out.println(currentHoursgoalremaining);
+
+        double finalcurrentremaining = 100-(((double) currentHoursgoalremaining / userHoursgoal) * 100);
+
+        System.out.println(finalcurrentremaining);
+
+        String formattedResult = String.format("%.1f", finalcurrentremaining);
+
+        System.out.println(formattedResult);
+
+        Hourspercent.setText(formattedResult);
+
+        AdjustchartData(finalcurrentremaining,Hourschart);
+    }
+
+
+    public void CheckUserCalComdition(){
+        double CurrentCalburnedTotal = Double.parseDouble(ReadData(getcurrentId(),1,"TotalCalBurned.txt"));
+
+        double userCalburngoal = Double.parseDouble(ReadData(getcurrentId(),1,"Workoutplans.txt"));
+
+        String OldData = "";
+
+        if (CurrentCalburnedTotal< userCalburngoal  ){
+            return;
+        }else {
+            List<String> lines = new ArrayList<>();
+
+            try (BufferedReader reader = new BufferedReader(new FileReader("TotalCalBurned.txt"))) {
+                String data;
+                while ((data = reader.readLine()) != null) {
+                    String[] userData = data.split("/");
+                    if (!userData[0].equals(Integer.toString(Currentid))) {
+                        lines.add(data);
+
+                    }if (userData[0].equals(Integer.toString(Currentid))) {
+                        OldData = userData[1];
+
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("TotalCalBurned.txt", false))) {
+                for (String rewriter : lines) {
+                    writer.write(rewriter);
+                    writer.newLine();
+                }
+
+                writer.write(getcurrentId() + "/" + "0"+"/"+OldData);
+                writer.newLine();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
+
+
+    public void Calsworkoutshow(){
+
+        double userCalburngoal = Double.parseDouble(ReadData(getcurrentId(),1,"Workoutplans.txt"));
+        System.out.println(userCalburngoal);
+
+        double CurrentCalburnedTotal = Double.parseDouble(ReadData(getcurrentId(),2,"TotalCalBurned.txt"));
+
+        double currentHoursgoalremaining = userCalburngoal  - CurrentCalburnedTotal;
+
+        System.out.println(currentHoursgoalremaining);
+
+        double finalcurrentremaining =100-(((double)currentHoursgoalremaining/ userCalburngoal) * 100);
+
+        System.out.println(finalcurrentremaining);
+
+        String formattedResult = String.format("%.1f", finalcurrentremaining);
+
+        System.out.println(formattedResult);
+
+        Calpercent.setText(formattedResult);
+
+        AdjustchartData(finalcurrentremaining,Calchart);
+    }
+
+
+
 
     public void AdjustchartData(double data,Arc chart){
 
@@ -519,6 +676,8 @@ public class WorkoutPlansController {
         chart.setLength(angle);
 
     }
+
+
 
 
 
@@ -547,6 +706,10 @@ public class WorkoutPlansController {
         showinfo();
         Intakeworkoutshow();
         CheckUserIntakeComdition();
+        CheckUserHoursComdition();
+        Hoursworkoutshow();
+        Calsworkoutshow();
+        CheckUserCalComdition();
 
 
 
