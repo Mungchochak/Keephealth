@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class ActivityTrackingController {
@@ -257,6 +258,7 @@ public class ActivityTrackingController {
 
     @FXML
     public void initialize() {
+
         ActivityTrackingModel ATModel = new ActivityTrackingModel();
         ATModel.setCurrentId(CurrentId);
         dailyEncouragement();
@@ -268,9 +270,12 @@ public class ActivityTrackingController {
     //the record will be clear at day after recorded
     private void clearData(){
         LocalDate CurrentDate = LocalDate.now();
-        //CurrentDate.plusDays(1);
+        //CurrentDate.plusDays(3);
         String Date = String.valueOf(CurrentDate);
-        if(Date != ReadRecordDateData()){
+        System.out.println("|"+Date+"|");
+        System.out.println("|"+ReadRecordDateData()+"|");
+
+        if(!Objects.equals(Date, ReadRecordDateData())){
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileUser, false))) {
                 writer.write(" ");
 
@@ -366,7 +371,7 @@ public class ActivityTrackingController {
     }
 
     private String ReadRecordDateData(){
-        String Date = " ";
+        String Date = "";
         try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
             String data;
             while((data = reader.readLine())!= null) {
