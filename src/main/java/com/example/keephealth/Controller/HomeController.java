@@ -3,8 +3,6 @@ package com.example.keephealth.Controller;
 
 import com.example.keephealth.Model.FitnessData;
 import com.example.keephealth.Model.HomeModel;
-import com.example.keephealth.Model.WorkoutPlanModel;
-import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,13 +15,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.Bloom;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import static com.example.keephealth.Controller.PublicMethod.ReadData;
 
 public class HomeController {
     @FXML
@@ -182,13 +180,13 @@ public class HomeController {
     @FXML
     private Label CalGoalRemainingL;
 
-    private int CheckingDays;
+    private String CheckingDays;
 
-    private int BurningToday;
+    private String BurningToday;
 
-    private int IntakeToday;
+    private String IntakeToday;
 
-    private int CalGoalRemaining;
+    private String CalGoalRemaining;
 
     public HomeModel Model;
 
@@ -201,16 +199,42 @@ public class HomeController {
 
         Model.setId(LoginController.getCurrentId());
 
-        System.out.println(Model.getId());
-
         return Model.getId();
 
     }
 
+    public void ShowBurningToday(){
+
+        BurningToday= PublicMethod.ReadData(getcurrentId(),2,"CalBurned.txt");
+        BurningTodayL.setText(BurningToday+" cal");
+
+    }
+
+    public void ShowIntakeToday(){
+        IntakeToday= PublicMethod.ReadData(getcurrentId(),1,"NutritionData.txt");
+        IntakeTodayL.setText(IntakeToday+" cal");
+    }
+
+   public void ShowCaloriechart(){
+       double userCalburngoal = Double.parseDouble(ReadData(getcurrentId(),1,"Workoutplans.txt"));
+
+       double CurrentCalburnedTotal = Double.parseDouble(ReadData(getcurrentId(),2,"TotalCalBurned.txt"));
+
+       int currentCalgoalremaining = (int) (userCalburngoal  - CurrentCalburnedTotal);
+
+       CalGoalRemaining = String.valueOf(currentCalgoalremaining);
+
+       CalGoalRemainingL.setText(CalGoalRemaining+" cal");
+   }
+
     public void initialize() {
+        ShowBurningToday();
+        ShowIntakeToday();
+        ShowCaloriechart();
 
         showTable();
         showChart();
+
 
     }
 
@@ -254,21 +278,93 @@ public class HomeController {
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
-        series.setName("Calories per Day");
+        getDailyCalBurnedData();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd");
 
 
-        series.getData().add(new XYChart.Data<>("Mon", 1000));
-        series.getData().add(new XYChart.Data<>("Tue", 1200));
-        series.getData().add(new XYChart.Data<>("Wed", 300));
-        series.getData().add(new XYChart.Data<>("Thur", 900));
-        series.getData().add(new XYChart.Data<>("Fri", 1100));
-        series.getData().add(new XYChart.Data<>("Sat", 1400));
-        series.getData().add(new XYChart.Data<>("Sun", 1500));
+
+        LocalDate date5 = LocalDate.now();
+        String dateS5 = date5.format(formatter);
+
+        LocalDate date4 = date5.minusDays(1);
+        String dateS4 = date4.format(formatter);
+
+        LocalDate date3 = date4.minusDays(1);
+        String dateS3 = date3.format(formatter);
+
+        LocalDate date2 = date3.minusDays(1);
+        String dateS2 = date2.format(formatter);
+
+        LocalDate date1 = date2.minusDays(1);
+
+        String dateS1 = date1.format(formatter);
+
+
+
+        series.getData().add(new XYChart.Data<>(dateS1, idata1));
+        series.getData().add(new XYChart.Data<>(dateS2 , idata2));
+        series.getData().add(new XYChart.Data<>(dateS3, idata3));
+        series.getData().add(new XYChart.Data<>(dateS4, idata4));
+        series.getData().add(new XYChart.Data<>(dateS5, idata5));
 
 
 
 
         Caloriechart.getData().add(series);
+
+    }
+
+    String day5,day4,day3,day2,day1;
+
+    String ReadDate;
+
+    String data5,data4,data3,data2,data1;
+
+    int idata5,idata4,idata3,idata2,idata1;
+
+
+    public void getDailyCalBurnedData(){
+
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd");
+
+        day5=today.format(formatter);
+
+        day4=today.minusDays(1).format(formatter);
+
+        day3=today.minusDays(2).format(formatter);
+
+        day2=today.minusDays(3).format(formatter);
+
+        day1=today.minusDays(4).format(formatter);
+
+        ReadDate = day5;
+
+        System.out.println(day1+" "+day2+" "+day3+" "+day4+" "+day5);
+
+
+        data1=PublicMethod.ReadtwoData(getcurrentId(), day1,1, "DailyCalBurned.txt");
+        idata1=Integer.parseInt(data1);
+
+
+        data2=PublicMethod.ReadtwoData(getcurrentId(), day2,1, "DailyCalBurned.txt");
+        idata2=Integer.parseInt(data2);
+
+
+        data3=PublicMethod.ReadtwoData(getcurrentId(), day3,1, "DailyCalBurned.txt");
+        idata3=Integer.parseInt(data3);
+
+
+        data4=PublicMethod.ReadtwoData(getcurrentId(), day4,1, "DailyCalBurned.txt");
+        idata4=Integer.parseInt(data4);
+
+
+        data5=PublicMethod.ReadtwoData(getcurrentId(), day5,1, "DailyCalBurned.txt");
+        idata5=Integer.parseInt(data5);
+        System.out.println(idata1+" "+idata2+" "+idata3+" "+idata4+" "+idata5);
+
+
 
     }
 

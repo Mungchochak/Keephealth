@@ -26,6 +26,28 @@ public class PublicMethod {
         return Data;
     }
 
+    public static String ReadtwoData(int currentId,String data,int position,String fileName){
+        String Data ="0";
+
+        try(BufferedReader reader= new BufferedReader(new FileReader(fileName))){
+            String line;
+
+            while((line = reader.readLine())!= null) {
+                String [] userData = line.split("/");
+                if (userData[0].equals(Integer.toString(currentId)) && userData[2].equals(data)) {
+                    Data = userData[position];
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return Data;
+    }
+
+
 
     public static LocalDate getLastDate(String fileName,int position,LocalDate Lastdate){
 
