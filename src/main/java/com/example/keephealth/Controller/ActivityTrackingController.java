@@ -24,6 +24,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -323,6 +324,7 @@ public class ActivityTrackingController {
                 ATModel.setExerciseDuration(ATModel.getExerciseDuration() + CurrentDuration);
             }
 
+            SaveDailyBurnedCal(ATModel);
             SaveBurnedCal(ATModel);
             SaveTotalBurnedCal(TotalATModel);
 
@@ -451,7 +453,6 @@ public class ActivityTrackingController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -641,6 +642,53 @@ public class ActivityTrackingController {
 
             writer.newLine();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    private void SaveDailyBurnedCal(ActivityTrackingModel CurrentUser) {
+        List<String> lines = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd");
+        String today = LocalDate.now().format(formatter);
+        boolean isUpdated = false;
+
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("DailyCalBurned.txt"))) {
+            String data;
+            while ((data = reader.readLine()) != null) {
+                String[] userData = data.split("/");
+                if (data.trim().isEmpty()) continue;
+
+
+                if (userData[0].equals(Integer.toString(CurrentId)) && userData[2].equals(today)) {
+
+                    lines.add(CurrentUser.DailytoString()+"/"+today);
+                    isUpdated = true;
+                } else {
+
+                    lines.add(data);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        if (!isUpdated) {
+            if (!lines.isEmpty()) lines.add("");
+            lines.add(CurrentUser.DailytoString() + "/" + today);
+        }
+
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("DailyCalBurned.txt", false))) {
+            for (String line : lines) {
+                writer.write(line);
+                writer.newLine();
+            }
+            System.out.println("数据保存成功！");
         } catch (IOException e) {
             e.printStackTrace();
         }

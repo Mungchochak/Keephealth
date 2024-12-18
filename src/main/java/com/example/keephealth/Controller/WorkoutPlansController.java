@@ -602,7 +602,7 @@ public class WorkoutPlansController {
 
         String OldData = "";
 
-        if (CurrentCalburnedTotal< userCalburngoal  ){
+        if (CurrentCalburnedTotal > userCalburngoal  ){
             return;
         }else {
             List<String> lines = new ArrayList<>();
@@ -629,7 +629,7 @@ public class WorkoutPlansController {
                     writer.newLine();
                 }
 
-                writer.write(getcurrentId() + "/" + "0"+"/"+OldData);
+                writer.write(getcurrentId() + "/" + OldData + "/" + "0");
                 writer.newLine();
 
             } catch (IOException e) {
@@ -650,11 +650,11 @@ public class WorkoutPlansController {
 
         double CurrentCalburnedTotal = Double.parseDouble(ReadData(getcurrentId(),2,"TotalCalBurned.txt"));
 
-        double currentHoursgoalremaining = userCalburngoal  - CurrentCalburnedTotal;
+        double currentCalgoalremaining = userCalburngoal  - CurrentCalburnedTotal;
 
-        System.out.println(currentHoursgoalremaining);
+        System.out.println(currentCalgoalremaining);
 
-        double finalcurrentremaining =100-(((double)currentHoursgoalremaining/ userCalburngoal) * 100);
+        double finalcurrentremaining =100-(((double) currentCalgoalremaining / userCalburngoal) * 100);
 
         System.out.println(finalcurrentremaining);
 

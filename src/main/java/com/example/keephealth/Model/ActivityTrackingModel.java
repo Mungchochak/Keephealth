@@ -74,6 +74,10 @@ public class ActivityTrackingModel {
         return currentId + "/" + ExerciseDuration+"/"+CalBurned;
     }
 
+    public String DailytoString() {
+        return currentId + "/" +CalBurned;
+    }
+
 
 
 
