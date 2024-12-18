@@ -404,7 +404,7 @@ public class NutritionPlansController {
 
 
 
-    public void startDailyResetTask() {
+   /* public void startDailyResetTask() {
         // 计算从当前时间到今天 0 点的时间差
         Calendar now = Calendar.getInstance();
         Calendar midnight = Calendar.getInstance();
@@ -440,7 +440,7 @@ public class NutritionPlansController {
     // 在构造器或初始化方法中启动定时任务
     public NutritionPlansController() {
         startDailyResetTask(); // 启动每日 0 点重置卡路里的定时任务
-    }
+    }*/
 
 
 
