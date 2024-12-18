@@ -271,11 +271,12 @@ public class ActivityTrackingController {
     private void clearData(){
         LocalDate CurrentDate = LocalDate.now();
         //CurrentDate.plusDays(3);
-        String Date = String.valueOf(CurrentDate);
+       /* String Date = String.valueOf(CurrentDate);
         System.out.println("|"+Date+"|");
-        System.out.println("|"+ReadRecordDateData()+"|");
-
-        if(!Objects.equals(Date, ReadRecordDateData())){
+        System.out.println("|"+ReadRecordDateData()+"|");*/
+        ReadRecordDateData();
+        LocalDate Lastdate = Lastdays;
+        if(Lastdate.isBefore(CurrentDate)){
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileUser, false))) {
                 writer.write(" ");
 
@@ -372,22 +373,26 @@ public class ActivityTrackingController {
         return Cal;
     }
 
-    private String ReadRecordDateData(){
-        String Date = "";
+    LocalDate Lastdays;
+
+
+
+    private void ReadRecordDateData(){
         try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
             String data;
             while((data = reader.readLine())!= null) {
                 String [] userData = data.split("/");
+                if (userData[3].isEmpty()){
+                    return;
+                }
                 if (userData[0].equals(Integer.toString(CurrentId))) {
-                    Date = (userData[3]);
-
+                    Lastdays = LocalDate.parse(userData[3]);
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Date;
     }
 
     private void SaveBurnedCal(ActivityTrackingModel CurrentUser){
@@ -553,15 +558,18 @@ public class ActivityTrackingController {
         return c ;
     }
 
-    private void checkIn(){
+    private void HandleMarkButton(){
+        MarkButton.setOnAction(event -> {
 
+        });
+    }
+
+
+    private void checkIn(){
         LocalDate currentDate = LocalDate.now();
         ActivityTrackingModel ATModel = new ActivityTrackingModel();
-
-        System.out.println(currentDate);
-        MarkButton.setOnAction(actionEvent -> {
-            SaveCheckInData(ATModel);
-        });
+        ATModel.setLastCheckInDate(currentDate);
+        ATModel.setCheckedInDays(1);
 
     }
 
