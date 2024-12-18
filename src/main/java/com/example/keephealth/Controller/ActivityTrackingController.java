@@ -310,6 +310,8 @@ public class ActivityTrackingController {
             }
             SaveBurnedCal(ATModel);
 
+            DurationInput.setText("");
+
         });
 
     }
