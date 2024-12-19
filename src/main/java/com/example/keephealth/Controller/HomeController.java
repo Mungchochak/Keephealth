@@ -17,7 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -190,6 +190,14 @@ public class HomeController {
 
     public HomeModel Model;
 
+    String day5,day4,day3,day2,day1;
+
+    String ReadDate;
+
+    String data5,data4,data3,data2,data1;
+
+    int idata5,idata4,idata3,idata2,idata1;
+
     private void Model(){
         Model = new HomeModel();
     }
@@ -234,42 +242,97 @@ public class HomeController {
 
         showTable();
         showChart();
+        ShowCheckingDays();
+
+        PublicMethod.ClearCheckingData(getcurrentId(),"CheckInData.txt");
+
+
 
 
     }
 
     private void ShowCheckingDays(){
+        CheckingDays=PublicMethod.ReadData(getcurrentId(),2,"CheckInData.txt");
+        CheckingDaysL.setText(CheckingDays);
 
 
     }
 
 
-
+    int January,February,March,April,May,June,July,August,September,October,November,December;
 
     private void showTable(){
 
 
         monthColumn.setCellValueFactory(new PropertyValueFactory<>("month"));
         daysColumn.setCellValueFactory(new PropertyValueFactory<>("fitnessdays"));
+        ReadMonths();
+        System.out.println("January: "+January+"February: "+February+"March: "+March+"April: "+April+"May: "+May);
 
 
         data = FXCollections.observableArrayList(
-                new FitnessData("January", 10),
-                new FitnessData("February", 15),
-                new FitnessData("March", 20),
-                new FitnessData("April", 30),
-                new FitnessData("May", 25),
-                new FitnessData("June", 18),
-                new FitnessData("July", 22),
-                new FitnessData("August", 28),
-                new FitnessData("September", 19),
-                new FitnessData("October", 26),
-                new FitnessData("November", 24),
-                new FitnessData("December", 31)
+                new FitnessData("January", January),
+                new FitnessData("February", February),
+                new FitnessData("March", March),
+                new FitnessData("April", April),
+                new FitnessData("May", May),
+                new FitnessData("June", June),
+                new FitnessData("July", July),
+                new FitnessData("August", August),
+                new FitnessData("September", September),
+                new FitnessData("October", October),
+                new FitnessData("November", November),
+                new FitnessData("December", December)
         );
 
 
         FitnessdaysTable.setItems(data);
+
+    }
+
+
+
+
+    private void ReadMonths(){
+
+        try(BufferedReader reader = new BufferedReader(new FileReader("MonthsChecking"))){
+            String data;
+            while((data = reader.readLine())!= null){
+                String[] userData = data.split("/");
+                if(userData[0].equals(String.valueOf(getcurrentId()))){
+                    if (userData[1].equals("1")){
+                        January++;
+                    }if(userData[1].equals("2")){
+                        February++;
+                    }if (userData[1].equals("3")){
+                        March++;
+                    }if (userData[1].equals("4")){
+                        April++;
+                    }if (userData[1].equals("5")){
+                        May++;
+                    }if (userData[1].equals("6")){
+                        June++;
+                    }if (userData[1].equals("7")){
+                        July++;
+                    }if (userData[1].equals("8")){
+                        August++;
+                    }if (userData[1].equals("9")){
+                        September++;
+                    }if (userData[1].equals("10")){
+                        October++;
+                    }if (userData[1].equals("11")){
+                        November++;
+                    }if (userData[1].equals("12")){
+                        December++;
+                    }
+
+                }
+
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -315,13 +378,7 @@ public class HomeController {
 
     }
 
-    String day5,day4,day3,day2,day1;
 
-    String ReadDate;
-
-    String data5,data4,data3,data2,data1;
-
-    int idata5,idata4,idata3,idata2,idata1;
 
 
     public void getDailyCalBurnedData(){

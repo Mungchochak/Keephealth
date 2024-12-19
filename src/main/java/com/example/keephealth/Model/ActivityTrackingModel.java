@@ -9,6 +9,17 @@ public class ActivityTrackingModel {
     private int CalBurned ;
     private int currentId;
     private int checkedInDays;
+    private int checkedMonths;
+
+    public int getCheckedMonths() {
+        return checkedMonths;
+    }
+
+    public void setCheckedMonths(int checkedMonths) {
+        this.checkedMonths = checkedMonths;
+    }
+
+
 
     private LocalDate RecordDate;
 
@@ -76,6 +87,10 @@ public class ActivityTrackingModel {
 
     public String DailytoString() {
         return currentId + "/" +CalBurned;
+    }
+
+    public String MonthtoString() {
+        return currentId + "/" +checkedMonths;
     }
 
 

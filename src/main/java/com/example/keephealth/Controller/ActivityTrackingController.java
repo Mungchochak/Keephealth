@@ -1,8 +1,6 @@
 package com.example.keephealth.Controller;
 
 import com.example.keephealth.Model.ActivityTrackingModel;
-import com.example.keephealth.Model.ProfileModel;
-import com.example.keephealth.Model.UserModel;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,13 +19,9 @@ import javafx.util.Duration;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class ActivityTrackingController {
@@ -281,10 +275,6 @@ public class ActivityTrackingController {
                 CheckInOutput.setText("Successful");
             }
         }
-        if(isFileRecorded("CheckInData.txt")){
-            RenewCheckInData(LocalDate.parse(PublicMethod.ReadData(CurrentId,1,"CheckInData.txt")),CurrentDate,"CheckInData.txt");
-        }
-
 
 
     }
@@ -393,6 +383,7 @@ public class ActivityTrackingController {
 
     private void SaveBurnedCal(ActivityTrackingModel CurrentUser){
         List<String> lines = new ArrayList<>();
+        Checkweight();
 
         try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
             String data;
@@ -589,27 +580,38 @@ public class ActivityTrackingController {
         LocalDate currentDate = LocalDate.now();
         ActivityTrackingModel ATModel = new ActivityTrackingModel();
 
+
         MarkButton.setOnAction(event -> {
             CheckInOutput.setText("Successful");
             ATModel.setCurrentId(CurrentId);
             ATModel.setLastCheckInDate(currentDate);
 
-            if(isFileRecorded("CheckInData.txt")){
-                if(isCheckIn()){
+            boolean isRun = true;
+            if (isFileRecorded("CheckInData.txt")) {
+                if (isCheckIn()) {
                     Alert NoticeAlert = new Alert(Alert.AlertType.INFORMATION);
                     NoticeAlert.setTitle("Check-In Notice");
                     NoticeAlert.setHeaderText(null);
                     NoticeAlert.setContentText("You had Checked In for today! Please Check In tomorrow");
                     NoticeAlert.showAndWait();
-                    ATModel.setCheckedInDays(Integer.parseInt(PublicMethod.ReadData(CurrentId,2,"CheckInData.txt")));
-                }else{
-                    int numOfDay = Integer.parseInt(PublicMethod.ReadData(CurrentId,2,"CheckInData.txt"));
-                    ATModel.setCheckedInDays(numOfDay+1);
+                    ATModel.setCheckedInDays(Integer.parseInt(PublicMethod.ReadData(CurrentId, 2, "CheckInData.txt")));
+                    isRun = false;
+                } else {
+                    int numOfDay = Integer.parseInt(PublicMethod.ReadData(CurrentId, 2, "CheckInData.txt"));
+                    ATModel.setCheckedInDays(numOfDay + 1);
+
+
                 }
 
-            }else{
+            } else {
                 ATModel.setCheckedInDays(1);
+
             }
+            if (isRun) {
+                RecordTotalChecking();
+                System.out.println("Run");
+            }
+
             SaveCheckInData(ATModel);
 
         });
@@ -714,20 +716,42 @@ public class ActivityTrackingController {
         return FileExist;
     }
 
-    private void RenewCheckInData(LocalDate Lastdate,LocalDate Currentdate,String fileName){
-        if (Lastdate == null || Currentdate.isEqual(Lastdate.plusDays(2))) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-                writer.write("");
-                writer.newLine();
-                System.out.println("Renewed Check-In Data");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
-        }else {
-            System.out.println("Didn't renew Check-In Data");
+    private void RecordTotalChecking(){
+        ActivityTrackingModel Model = new ActivityTrackingModel();
+        DateTimeFormatter Monthformatter = DateTimeFormatter.ofPattern("MM");
+        String CurrentMonth = LocalDate.now().format(Monthformatter);
+        Model.setCurrentId(CurrentId);
+        Model.setCheckedMonths(Integer.parseInt(CurrentMonth));
+
+
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("MonthsChecking",true))) {
+            writer.write(Model.MonthtoString());
+            writer.newLine();
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+
+        }
+
+    }
+
+    private void Checkweight(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("notify");
+        alert.setHeaderText(null);
+        alert.getDialogPane().setStyle("-fx-font-size: 17px;");
+        alert.setContentText("You have to set your weight in profile so that we can provide you with accurate calorie consumption data.");
+
+
+        if (PublicMethod.CheckWeight(CurrentId)){
+            alert.showAndWait();
+
         }
     }
+
+
     
     
 

@@ -2,6 +2,8 @@ package com.example.keephealth.Controller;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PublicMethod {
 
@@ -55,7 +57,7 @@ public class PublicMethod {
         try(BufferedReader reader= new BufferedReader(new FileReader(fileName))){
             String data;
 
-            data = reader.readLine() ;
+            reader.readLine() ;
             data = reader.readLine() ;
             String [] userData = data.split("/");
             Lastdate = LocalDate.parse(userData[position]);
@@ -84,6 +86,78 @@ public class PublicMethod {
         }else {
             System.out.println("Didn't renew Data");
         }
+    }
+
+
+    public static void ClearCheckingData(int CurrentId,String fileName){
+        List<String> lines = new ArrayList<>();
+        LocalDate LastDate;
+        // 从文件读取日期
+        String ReadLastdate = PublicMethod.ReadData(CurrentId, 1, fileName);
+
+        // 判断 ReadLastdate 是否为有效日期
+        if (ReadLastdate != null && !ReadLastdate.equals("0")) {
+            // 如果不是 "0"，将其解析为 LocalDate
+            LastDate = LocalDate.parse(ReadLastdate);
+        } else {
+            // 如果是 "0" 或者无效日期，设置为当前日期
+            LastDate = LocalDate.now();  // 可以根据需求选择默认日期
+        }
+
+
+
+        try(BufferedReader reader= new BufferedReader(new FileReader(fileName))){
+            String data;
+
+            while((data = reader.readLine())!= null) {
+                String [] userData = data.split("/");
+                if (!userData[0].equals(Integer.toString(CurrentId))) {
+
+                    lines.add(data);
+                } else {
+
+                    if (!LastDate.isBefore(LocalDate.now().minusDays(2))) {
+
+                        lines.add(data);
+                    } else {
+
+                        userData[2] = "0";
+
+
+                        String updatedData = String.join("/", userData);
+
+
+                        lines.add(updatedData);
+                    }
+                }
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false))) {
+            for (String rewriter : lines){
+                writer.write(rewriter);
+                writer.newLine();
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static boolean CheckWeight(int id){
+        boolean weightexist = true;
+        String weight= ReadData(id,5,"Profiledata.txt");
+        if (weight != null && !weight.equals("0")) {
+            weightexist = false;
+        }
+        return weightexist;
+
     }
 
 
