@@ -159,6 +159,30 @@ public class PublicMethod {
 
     }
 
+    public static void initializeFiles(String[] fileNames) {
+        for (String fileName : fileNames) {
+            File file = new File(fileName);
+            try {
+                if (file.exists()) {
+                    System.out.println(fileName + " File already exists");
+                } else {
+                    if (file.createNewFile()) {
+                        System.out.println(fileName + " File created");
+
+                        try (FileWriter writer = new FileWriter(file)) {
+                            writer.write("");
+                        }
+                    } else {
+                        System.out.println("Unable to create file: " + fileName);
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error: " + fileName);
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 
 

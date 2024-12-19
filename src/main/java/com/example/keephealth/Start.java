@@ -1,5 +1,6 @@
 package com.example.keephealth;
 
+import com.example.keephealth.Controller.PublicMethod;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,6 +23,20 @@ public class Start extends Application {
     }
 
     public static void main(String[] args) {
+        String[] fileNames = {
+                "Accounts.txt",
+                "CalBurned.txt",
+                "CheckInData.txt",
+                "DailyCalBurned.txt",
+                "NutritionData.txt",
+                "Profiledata.txt",
+                "TotalCalBurned.txt",
+                "TotalIntakeData.txt",
+                "Workoutplans.txt"
+        };
+        PublicMethod.initializeFiles(fileNames);
+
+
         launch();
     }
 }
