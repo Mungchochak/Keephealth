@@ -131,18 +131,25 @@ public class NutritionPlansController {
 
 
     public LocalDate getLastDate(){
+        Lastdate = null;
 
         try(BufferedReader reader= new BufferedReader(new FileReader("NutritionData.txt"))){
             String data;
 
-            data = reader.readLine() ;
-            data = reader.readLine() ;
-            String [] userData = data.split("/");
-            Lastdate = LocalDate.parse(userData[2]);
+            reader.readLine() ;
+            data = reader.readLine();
+            if (data != null && !data.isEmpty()) {
+                String[] userData = data.split("/");
+                if (userData.length >= 3) {
+                    try {
+                        Lastdate = LocalDate.parse(userData[2]);
+                    } catch (Exception e) {
 
+                    }
+                }
+            }
+        } catch (IOException e) {
 
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         return Lastdate;

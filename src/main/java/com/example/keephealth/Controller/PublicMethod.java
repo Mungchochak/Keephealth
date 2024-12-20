@@ -94,16 +94,16 @@ public class PublicMethod {
     public static void ClearCheckingData(int CurrentId,String fileName){
         List<String> lines = new ArrayList<>();
         LocalDate LastDate;
-        // 从文件读取日期
+
         String ReadLastdate = PublicMethod.ReadData(CurrentId, 1, fileName);
 
-        // 判断 ReadLastdate 是否为有效日期
+
         if (ReadLastdate != null && !ReadLastdate.equals("0")) {
-            // 如果不是 "0"，将其解析为 LocalDate
+
             LastDate = LocalDate.parse(ReadLastdate);
         } else {
-            // 如果是 "0" 或者无效日期，设置为当前日期
-            LastDate = LocalDate.now();  // 可以根据需求选择默认日期
+
+            LastDate = LocalDate.now();
         }
 
 
