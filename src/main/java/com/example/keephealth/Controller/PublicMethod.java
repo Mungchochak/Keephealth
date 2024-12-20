@@ -7,25 +7,28 @@ import java.util.List;
 
 public class PublicMethod {
 
-    public static String ReadData(int currentId,int position,String fileName){
-        String Data ="0";
-        try(BufferedReader reader= new BufferedReader(new FileReader(fileName))){
+    public static String ReadData(int currentId, int position, String fileName) {
+        String data = "0";
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
 
-            while((line = reader.readLine())!= null) {
-                String [] userData = line.split("/");
-                if (userData[0].equals(Integer.toString(currentId))) {
-                    Data = userData[position];
+            while ((line = reader.readLine()) != null) {
 
+                String[] userData = line.split("/");
+
+
+                if (userData.length > position && userData[0].equals(Integer.toString(currentId))) {
+                    data = userData[position];
+                    break;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-        return Data;
+        return data;
     }
+
 
     public static String ReadtwoData(int currentId,String data,int position,String fileName){
         String Data ="0";
