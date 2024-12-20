@@ -596,13 +596,13 @@ public class WorkoutPlansController {
 
 
     public void CheckUserCalComdition(){
-        double CurrentCalburnedTotal = Double.parseDouble(ReadData(getcurrentId(),1,"TotalCalBurned.txt"));
+        double CurrentCalburnedTotal = Double.parseDouble(ReadData(getcurrentId(),2,"TotalCalBurned.txt"));
 
         double userCalburngoal = Double.parseDouble(ReadData(getcurrentId(),1,"Workoutplans.txt"));
 
         String OldData = "";
 
-        if (CurrentCalburnedTotal > userCalburngoal  ){
+        if (CurrentCalburnedTotal < userCalburngoal){
             return;
         }else {
             List<String> lines = new ArrayList<>();
