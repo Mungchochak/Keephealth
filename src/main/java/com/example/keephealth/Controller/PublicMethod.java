@@ -248,7 +248,7 @@ public class PublicMethod {
             }
 
         }else {
-            System.out.println("it is not new year");
+            System.out.println("it is current year");
         }
     }
 
