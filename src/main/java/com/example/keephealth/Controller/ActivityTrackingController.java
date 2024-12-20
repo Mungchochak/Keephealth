@@ -64,9 +64,10 @@ public class ActivityTrackingController {
 
     private int CurrentId = LoginController.getCurrentId();
 
-    public static final String FileUser = "CalBurned.txt";
+    private LocalDate LastDate;
+    private LocalDate nowdate = LocalDate.now();
 
-
+    public String mode;
 
 
 
@@ -252,14 +253,11 @@ public class ActivityTrackingController {
         }
     }
 
-    private LocalDate LastDate;
-    private LocalDate nowdate = LocalDate.now();
 
 
 
     @FXML
     public void initialize() {
-        LocalDate CurrentDate = LocalDate.now();
         ActivityTrackingModel ATModel = new ActivityTrackingModel();
         ATModel.setCurrentId(CurrentId);
         dailyEncouragement();
@@ -280,7 +278,7 @@ public class ActivityTrackingController {
     }
 
 
-
+    //This Method is Use for Showing and Saving he burned calories data
     private void ShowBurnedCal(){
         choiceOfExercise();
         ActivityTrackingModel ATModel = new ActivityTrackingModel();
@@ -324,6 +322,7 @@ public class ActivityTrackingController {
 
     }
 
+    //This Method is used for checking CalBurned.txt file is empty or not
     private boolean checkFile(){
         boolean FileExist = false;
         try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
@@ -344,6 +343,7 @@ public class ActivityTrackingController {
         return FileExist;
     }
 
+    //This Method is use to read the DurationData from the CalBurned.txt file
     private String ReadDurationData(){
         String Dur = " ";
         try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
@@ -361,7 +361,7 @@ public class ActivityTrackingController {
         }
         return Dur;
     }
-
+    //This Method is use to read the Calories Burned data from the CalBurned.txt file
     private String ReadCalData(){
         String Cal = " ";
         try(BufferedReader reader= new BufferedReader(new FileReader("CalBurned.txt"))){
@@ -446,7 +446,7 @@ public class ActivityTrackingController {
         }
     }
 
-
+    //This the Method that shows the daily encouragement quote
     private void dailyEncouragement() {
 
         ArrayList<String> encouragements = new ArrayList<>();
@@ -469,9 +469,8 @@ public class ActivityTrackingController {
         DailyEncouragement.getChildren().add(text1);
     }
 
-    public String mode;
 
-
+    //This Method is used for determine what exercise user have choosen
     private void choiceOfExercise(){
         WalikingButton.setOnAction(event -> {
             RefreshButton(WalikingButton);
@@ -506,8 +505,9 @@ public class ActivityTrackingController {
 
     }
 
-
+    //This is the Calories Calculator Method
     private int calculateCalBurned(String m, Double dur){
+        //Before start calculate, we will need to read the weight data from the Profiledata.txt file for the calories burned formula
         String w ="0";
         try(BufferedReader reader= new BufferedReader(new FileReader("Profiledata.txt"))){
             String data;
@@ -561,7 +561,7 @@ public class ActivityTrackingController {
 
     }
 
-
+    //This method will check the user had check in for the day or not
     private boolean isCheckIn(){
         LocalDate DateNow = LocalDate.now();
         LocalDate LastCheckInDate = LocalDate.parse(PublicMethod.ReadData(CurrentId,1,"CheckInData.txt"));
@@ -575,7 +575,8 @@ public class ActivityTrackingController {
     }
 
 
-
+    //This Method will handle what the Mark Button do and keep track how many days they had continuously check in
+    // And also user will be shown an alert notice that notice user that they had check in for the day
     private void HandleMarkButton(){
         LocalDate currentDate = LocalDate.now();
         ActivityTrackingModel ATModel = new ActivityTrackingModel();
@@ -617,7 +618,7 @@ public class ActivityTrackingController {
         });
     }
 
-
+    //This method is used for saving the check in data for the HandleMarkButton Method
     private void SaveCheckInData(ActivityTrackingModel CurrentUser){
         List<String> lines = new ArrayList<>();
 
@@ -690,12 +691,13 @@ public class ActivityTrackingController {
                 writer.write(line);
                 writer.newLine();
             }
-            System.out.println("数据保存成功！");
+            System.out.println("Data Sucessful Saved！");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //this method is used for checking the file is empty or not
     private Boolean isFileRecorded(String fileName){
         boolean FileExist = false;
         try(BufferedReader reader= new BufferedReader(new FileReader(fileName))){
@@ -736,6 +738,7 @@ public class ActivityTrackingController {
         }
 
     }
+
 
     private void Checkweight(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
