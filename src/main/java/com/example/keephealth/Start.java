@@ -32,9 +32,18 @@ public class Start extends Application {
                 "Profiledata.txt",
                 "TotalCalBurned.txt",
                 "TotalIntakeData.txt",
-                "Workoutplans.txt"
+                "Workoutplans.txt",
+                "CurrentYearDate.txt"
         };
         PublicMethod.initializeFiles(fileNames);
+        if(PublicMethod.isTextFileEmpty("CurrentYearDate.txt")){
+            PublicMethod.CreatYearDate();
+            System.out.println("Current Year Date");
+        }else {
+            PublicMethod.RenewYear();
+            System.out.println("Renew Year");
+        }
+
 
 
         launch();

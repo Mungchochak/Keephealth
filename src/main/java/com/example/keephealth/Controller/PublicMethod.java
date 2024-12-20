@@ -2,6 +2,7 @@ package com.example.keephealth.Controller;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -189,6 +190,84 @@ public class PublicMethod {
             }
         }
     }
+
+    //Create a txt for record current year
+    public static void CreatYearDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
+        String currentYear = LocalDate.now().format(formatter);
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("CurrentYearDate.txt",true))) {
+            writer.write(currentYear);
+            writer.newLine();
+
+        }catch (IOException e){
+            e.printStackTrace();
+
+        }
+    }
+
+    //Check current year
+    public static boolean CheckYear() {
+        String year = "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
+        String currentYear = LocalDate.now().format(formatter);
+        try (BufferedReader reader = new BufferedReader(new FileReader("CurrentYearDate.txt" ))) {
+
+            year = reader.readLine();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (year.equals(currentYear)){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
+    //If it is new year, renew the year and renew user total MonthsChecking.txt
+    public static void RenewYear(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
+        String currentYear = LocalDate.now().format(formatter);
+
+        if (!CheckYear()) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("CurrentYearDate.txt" ))) {
+                writer.write(currentYear);
+                writer.newLine();
+                System.out.println("Renew Year");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("MonthsChecking.txt" ))) {
+                writer.write("");
+                writer.newLine();
+                System.out.println("New Year");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else {
+            System.out.println("it is not new year");
+        }
+    }
+
+    //Check if text file if empty
+    public static boolean isTextFileEmpty(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    return false;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+
 
 
 

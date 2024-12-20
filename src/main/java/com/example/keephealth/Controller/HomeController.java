@@ -309,7 +309,7 @@ public class HomeController {
     //Read user fitness days for each months
     private void ReadMonths(){
 
-        try(BufferedReader reader = new BufferedReader(new FileReader("MonthsChecking"))){
+        try(BufferedReader reader = new BufferedReader(new FileReader("MonthsChecking.txt"))){
             String data;
             while((data = reader.readLine())!= null){
                 String[] userData = data.split("/");

@@ -733,7 +733,7 @@ public class ActivityTrackingController {
         Model.setCheckedMonths(Integer.parseInt(CurrentMonth));
 
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("MonthsChecking",true))) {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("MonthsChecking.txt",true))) {
             writer.write(Model.MonthtoString());
             writer.newLine();
 
