@@ -35,10 +35,7 @@ public class LoginController {
         CurrentId = currentId;
     }
 
-
-
-
-
+    //Click log in button  into home page
     @FXML
     private void handleLoginButtonClick() {
         UserModel CurrentUser = new UserModel();
@@ -62,7 +59,7 @@ public class LoginController {
     }
 
 
-
+    //Click sigh up button into register page
     @FXML
     private void handleSighupButtonClick() {
         try{
@@ -77,8 +74,7 @@ public class LoginController {
     }
 
 
-
-
+    //Check the user account
    private boolean Checkaccount(UserModel CurrentUser) {
 
         Alert alert = new Alert(Alert.AlertType.WARNING);

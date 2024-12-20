@@ -157,6 +157,8 @@ public class WorkoutPlansController {
 
     }
 
+
+    //Click first video to watch video
     @FXML
     private void handleMediaoneButton() {
 
@@ -172,6 +174,7 @@ public class WorkoutPlansController {
 
     }
 
+    //Click second video to watch video
     @FXML
     private void handleMediaTwoButton() {
 
@@ -187,6 +190,7 @@ public class WorkoutPlansController {
 
     }
 
+    //Click third video to watch video
     @FXML
     private void handleMediaThreeButton() {
 
@@ -227,13 +231,11 @@ public class WorkoutPlansController {
 
     @FXML
      private Label Workoutoutput;
-     private  String userCalorieInput;
-     private  String userWorkoutInput;
-     private  String userWeightInput;
-    public static final String Fileuser = "Workoutplans.txt";
+     public static final String Fileuser = "Workoutplans.txt";
      private int Currentid;
 
 
+     //Read current user id
      private int getcurrentId(){
 
 
@@ -247,42 +249,36 @@ public class WorkoutPlansController {
 
 
 
-
-
+     //Click Cal burning goal save button to get user id
     @FXML
     private void handlesetB1Button() {
         WorkoutPlanModel workoutPlanModel = new WorkoutPlanModel();
 
         Currentid = LoginController.getCurrentId();
 
-        System.out.println(Currentid);
-
     }
 
+    //Click Workout hours goal save button to get user id
     @FXML
     private void handlesetB2Button() {
         WorkoutPlanModel workoutPlanModel = new WorkoutPlanModel();
 
         Currentid = LoginController.getCurrentId();
 
-        System.out.println(Currentid);
-
     }
+
+    //Click Intake (cal) goal button to get user id
     @FXML
     private void handlesetB3Button() {
         WorkoutPlanModel workoutPlanModel = new WorkoutPlanModel();
 
         Currentid = LoginController.getCurrentId();
 
-        System.out.println(Currentid);
-
     }
 
 
 
-
-
-
+    //Save user Calories burned goal
     private void SavecalInfo(WorkoutPlanModel model){
         List<String> lines = new ArrayList<>();
 
@@ -319,9 +315,7 @@ public class WorkoutPlansController {
     }
 
 
-
-
-
+    //Save workout hours goal
     private void SavehoursInfo(WorkoutPlanModel model){
         List<String> lines = new ArrayList<>();
 
@@ -358,7 +352,8 @@ public class WorkoutPlansController {
     }
 
 
-    private void SaveWeightInfo(WorkoutPlanModel model){
+    //Save intake calories goal
+    private void SaveIntakeInfo(WorkoutPlanModel model){
         List<String> lines = new ArrayList<>();
 
         try(BufferedReader reader= new BufferedReader(new FileReader(Fileuser))){
@@ -395,6 +390,7 @@ public class WorkoutPlansController {
 
 
 
+    //Show each goal
     private void showinfo(){
 
         try(BufferedReader reader= new BufferedReader(new FileReader(Fileuser))){
@@ -453,6 +449,8 @@ public class WorkoutPlansController {
     private  Arc Calchart;
 
 
+
+    //Check if user intake goal is completed,if is complete, then clear user data, record again
     public void CheckUserIntakeComdition(){
         double CurrentIntakeTotal = Integer.parseInt(ReadData(getcurrentId(),1,"TotalIntakeData.txt"));
 
@@ -493,10 +491,8 @@ public class WorkoutPlansController {
 
     }
 
-
-
-
-    public void Intakeworkoutshow(){
+    //Show intake current condition on chart
+    public void Intakeshow(){
 
         double userintakegoal = Integer.parseInt(ReadData(getcurrentId(),3,"Workoutplans.txt"));
         System.out.println(userintakegoal);
@@ -521,7 +517,7 @@ public class WorkoutPlansController {
     }
 
 
-
+    //Check if user workout hours goal is completed,if is complete, then clear user data, record again
     public void CheckUserHoursComdition(){
         double CurrentHoursTotal = Double.parseDouble(ReadData(getcurrentId(),1,"TotalCalBurned.txt"));
 
@@ -570,6 +566,7 @@ public class WorkoutPlansController {
 
 
 
+    //Show intake current condition on chart
     public void Hoursworkoutshow(){
 
         double userHoursgoal = Double.parseDouble(ReadData(getcurrentId(),2,"Workoutplans.txt"));
@@ -595,6 +592,7 @@ public class WorkoutPlansController {
     }
 
 
+    //Check if user burned calories goal is completed,if is complete, then clear user data, record again
     public void CheckUserCalComdition(){
         double CurrentCalburnedTotal = Double.parseDouble(ReadData(getcurrentId(),2,"TotalCalBurned.txt"));
 
@@ -641,8 +639,7 @@ public class WorkoutPlansController {
     }
 
 
-
-
+    ////Show burned calories  current condition on chart
     public void Calsworkoutshow(){
 
         double userCalburngoal = Double.parseDouble(ReadData(getcurrentId(),1,"Workoutplans.txt"));
@@ -670,6 +667,7 @@ public class WorkoutPlansController {
 
 
 
+    //Convert the data to chart
     public void AdjustchartData(double data,Arc chart){
 
         double angle = (data / 100) * 360;
@@ -678,9 +676,7 @@ public class WorkoutPlansController {
     }
 
 
-
-
-
+    //Preload media player that user can faster load video
     public void preloadmedia(){
         String videoPath = "src/main/resources/Video/video1.MP4";
 
@@ -704,7 +700,7 @@ public class WorkoutPlansController {
         Model.setId(getcurrentId());
         preloadmedia();
         showinfo();
-        Intakeworkoutshow();
+        Intakeshow();
         CheckUserIntakeComdition();
         CheckUserHoursComdition();
         Hoursworkoutshow();
@@ -713,20 +709,7 @@ public class WorkoutPlansController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //Click Cal burning goal save button
         SetButtonOne.setOnAction(event -> {
 
             String inputText = Calorieinput.getText();
@@ -758,6 +741,8 @@ public class WorkoutPlansController {
                 alert.showAndWait();
             }
         });
+
+        //Click Workout hours goal save button
         SetButtonTwo.setOnAction(event -> {
             String inputtext= Workoutinput.getText();
 
@@ -788,6 +773,7 @@ public class WorkoutPlansController {
             }
         });
 
+        //Click Intake goal save button
         SetButtonThree.setOnAction(event -> {
 
             String inputTextTwo = Intaketinput.getText();
@@ -798,8 +784,8 @@ public class WorkoutPlansController {
                     Model.setWeightTarget(Integer.parseInt(inputTextTwo));
                     System.out.println("Weighttarget: " + Model.getWeightTarget());
                     Intaketinput.clear();
-                    SaveWeightInfo(Model);
-                    Intakeworkoutshow();
+                    SaveIntakeInfo(Model);
+                    Intakeshow();
 
 
             }

@@ -172,8 +172,8 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="Calorieinput" promptText="Cal burning goal" style="-fx-border-width: 1; -fx-border-color: black;" />
-                              <Button fx:id="SetButtonOne" mnemonicParsing="false" onAction="#handlesetB1Button" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
+                              <TextField fx:id="Calorieinput" onAction="#handlesetB1Button" promptText="Cal burning goal" style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <Button fx:id="SetButtonOne" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font></Button>
@@ -186,8 +186,8 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="Workoutinput" promptText="Workout hours goal" style="-fx-border-width: 1; -fx-border-color: black;" />
-                              <Button fx:id="SetButtonTwo" mnemonicParsing="false" onAction="#handlesetB2Button" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
+                              <TextField fx:id="Workoutinput" onAction="#handlesetB2Button" promptText="Workout hours goal" style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <Button fx:id="SetButtonTwo" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -201,8 +201,8 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="Intaketinput" promptText="Intake (cal) goal" style="-fx-border-width: 1; -fx-border-color: black;" />
-                              <Button fx:id="SetButtonThree" mnemonicParsing="false" onAction="#handlesetB3Button" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
+                              <TextField fx:id="Intaketinput" onAction="#handlesetB3Button" promptText="Intake (cal) goal" style="-fx-border-width: 1; -fx-border-color: black;" />
+                              <Button fx:id="SetButtonThree" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-background-color: #38B6FF;" text="Set" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>

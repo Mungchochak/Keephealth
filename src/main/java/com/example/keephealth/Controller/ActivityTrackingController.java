@@ -177,6 +177,7 @@ public class ActivityTrackingController {
     }
 
 
+    //The user clicks the button to have a pressing effect
     public void SetButtonStyle(Button button) {
         DropShadow dropShadow = new DropShadow();
         dropShadow.setColor(Color.BLACK);
@@ -197,11 +198,13 @@ public class ActivityTrackingController {
 
     }
 
+    //Cancel button effect
     private void SetEffectNull(Button button ) {
         button.setEffect(null);
 
     }
 
+    //Refresh button effect
     private void RefreshButton(Button button) {
         if (button.equals(WalikingButton)) {
             SetEffectNull(CyclingButton);
@@ -381,6 +384,7 @@ public class ActivityTrackingController {
     }
 
 
+    //Save each user burned Calories
     private void SaveBurnedCal(ActivityTrackingModel CurrentUser){
         List<String> lines = new ArrayList<>();
         Checkweight();
@@ -414,7 +418,7 @@ public class ActivityTrackingController {
     }
 
 
-
+    //Save each user burned Calories for not clear data every day
     private void SaveTotalBurnedCal(ActivityTrackingModel CurrentUser){
         List<String> lines = new ArrayList<>();
 
@@ -652,6 +656,7 @@ public class ActivityTrackingController {
     }
 
 
+    ////Save each user Daily burned Calories for not clear data every day
     private void SaveDailyBurnedCal(ActivityTrackingModel CurrentUser) {
         List<String> lines = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd");
@@ -719,6 +724,7 @@ public class ActivityTrackingController {
     }
 
 
+    //Save each user checking days for each days not delete every day
     private void RecordTotalChecking(){
         ActivityTrackingModel Model = new ActivityTrackingModel();
         DateTimeFormatter Monthformatter = DateTimeFormatter.ofPattern("MM");
@@ -740,6 +746,7 @@ public class ActivityTrackingController {
     }
 
 
+    //Check the user profile if haven't set weight, it will warn the user.
     private void Checkweight(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("notify");

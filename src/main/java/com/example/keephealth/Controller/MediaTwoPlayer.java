@@ -29,6 +29,7 @@ public class MediaTwoPlayer {
 
 
 
+        ////Show fitness third video
         private void showMedia(){
             String videoPath = "src/main/resources/Video/video2.MP4";
 

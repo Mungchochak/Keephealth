@@ -45,7 +45,7 @@ public class HomeController {
     @FXML
     private Button LogoutButton;
 
-
+//Click button into profile page
     @FXML
     private void handleProfileClick() {
 
@@ -62,7 +62,7 @@ public class HomeController {
     }
 
 
-
+//Click button into homepage
     @FXML
     private void handleHomeButtonClick() {
 
@@ -78,6 +78,7 @@ public class HomeController {
 
     }
 
+    //click button into workoutplans page
     @FXML
     private void handleWorkoutPlansButtonClick() {
 
@@ -93,6 +94,8 @@ public class HomeController {
 
     }
 
+
+//Click button into nutritionplans page
     @FXML
     private void handleNutritionPlansButtonClick() {
 
@@ -108,6 +111,7 @@ public class HomeController {
 
     }
 
+    //click button into activity tracking page
     @FXML
     private void handleActivityTrackingButtonClick() {
 
@@ -123,6 +127,7 @@ public class HomeController {
 
     }
 
+//Click button into customer support page
     @FXML
     private void handleCustomerSupportButtonClick() {
 
@@ -140,6 +145,7 @@ public class HomeController {
 
 
 
+    //Click button to log out
     @FXML
     private void handleLogoutButton() {
             try {
@@ -198,10 +204,14 @@ public class HomeController {
 
     int idata5,idata4,idata3,idata2,idata1;
 
+    int January,February,March,April,May,June,July,August,September,October,November,December;
+
+    //Create model
     private void Model(){
         Model = new HomeModel();
     }
 
+    //get current user id
     private int getcurrentId(){
         Model();
 
@@ -211,6 +221,7 @@ public class HomeController {
 
     }
 
+    //show today's burned cal
     public void ShowBurningToday(){
 
         BurningToday= PublicMethod.ReadData(getcurrentId(),2,"CalBurned.txt");
@@ -218,12 +229,14 @@ public class HomeController {
 
     }
 
+    //show today's Intake cal
     public void ShowIntakeToday(){
         IntakeToday= PublicMethod.ReadData(getcurrentId(),1,"NutritionData.txt");
         IntakeTodayL.setText(IntakeToday+" cal");
     }
 
-   public void ShowCaloriechart(){
+    //show today's cal remaining
+   public void ShowCalorieremaining(){
        double userCalburngoal = Double.parseDouble(ReadData(getcurrentId(),1,"Workoutplans.txt"));
 
        double CurrentCalburnedTotal = Double.parseDouble(ReadData(getcurrentId(),2,"TotalCalBurned.txt"));
@@ -238,7 +251,7 @@ public class HomeController {
     public void initialize() {
         ShowBurningToday();
         ShowIntakeToday();
-        ShowCaloriechart();
+        ShowCalorieremaining();
 
         showTable();
         showChart();
@@ -247,10 +260,9 @@ public class HomeController {
         PublicMethod.ClearCheckingData(getcurrentId(),"CheckInData.txt");
 
 
-
-
     }
 
+    //Show checking days
     private void ShowCheckingDays(){
         CheckingDays=PublicMethod.ReadData(getcurrentId(),2,"CheckInData.txt");
         CheckingDaysL.setText(CheckingDays);
@@ -259,8 +271,9 @@ public class HomeController {
     }
 
 
-    int January,February,March,April,May,June,July,August,September,October,November,December;
 
+
+    //Show each month fitness days on table
     private void showTable(){
 
 
@@ -293,6 +306,7 @@ public class HomeController {
 
 
 
+    //Read user fitness days for each months
     private void ReadMonths(){
 
         try(BufferedReader reader = new BufferedReader(new FileReader("MonthsChecking"))){
@@ -337,6 +351,7 @@ public class HomeController {
     }
 
 
+    //Show recent 5days burned cal data
     private void showChart(){
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
@@ -344,8 +359,6 @@ public class HomeController {
         getDailyCalBurnedData();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd");
-
-
 
         LocalDate date5 = LocalDate.now();
         String dateS5 = date5.format(formatter);
@@ -363,24 +376,17 @@ public class HomeController {
 
         String dateS1 = date1.format(formatter);
 
-
-
         series.getData().add(new XYChart.Data<>(dateS1, idata1));
         series.getData().add(new XYChart.Data<>(dateS2 , idata2));
         series.getData().add(new XYChart.Data<>(dateS3, idata3));
         series.getData().add(new XYChart.Data<>(dateS4, idata4));
         series.getData().add(new XYChart.Data<>(dateS5, idata5));
 
-
-
-
         Caloriechart.getData().add(series);
 
     }
 
-
-
-
+    //read recent 5 days burned cal data
     public void getDailyCalBurnedData(){
 
         LocalDate today = LocalDate.now();

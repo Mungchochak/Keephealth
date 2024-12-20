@@ -30,6 +30,7 @@ public class MediaOnePlayer {
 
 
 
+        //Show fitness first video
         private void showMedia(){
             String videoPath = "src/main/resources/Video/video1.mp4";
 

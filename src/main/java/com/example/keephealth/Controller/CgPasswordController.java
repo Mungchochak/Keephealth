@@ -150,6 +150,7 @@ public class CgPasswordController {
 
     }
 
+    //Click the back button back to profile page
     @FXML
     private void handleBackButton() {
         try {
@@ -164,6 +165,8 @@ public class CgPasswordController {
 
 
     }
+
+
 
     @FXML
     private TextField OldPasswrodField;
@@ -182,6 +185,7 @@ public class CgPasswordController {
     private String ComfirmPassword;
 
 
+    //Check old password if is correct
     public boolean CheckOldPassword(int id, String Password) {
         Alert alertnotcorrect = new Alert(Alert.AlertType.WARNING);
         alertnotcorrect.setTitle("Error");
@@ -210,6 +214,7 @@ public class CgPasswordController {
 
 
 
+    //Check new password is same to Confirm new password
     public boolean CheckNewPassword(String NewPassword, String ConfirmPassword) {
         Alert alertnotcorrect = new Alert(Alert.AlertType.WARNING);
         alertnotcorrect.setTitle("Error");
@@ -248,6 +253,7 @@ public class CgPasswordController {
     }
 
 
+    //Save user's new password
     private void SaveNewPassword(int id) {
         UserModel user = new UserModel();
         List<String> lines = new ArrayList<>();
@@ -295,6 +301,7 @@ public class CgPasswordController {
     }
 
 
+    //When the changing password step finished, it will clear all input.
     private void Refresh() {
         OldPasswrodField.clear();
         NewPasswrodField.clear();
@@ -315,6 +322,7 @@ public class CgPasswordController {
     }
 
 
+    //Click confirm then start save new password
     @FXML
     private void handelConfirmButton(){
         OldPassword = OldPasswrodField.getText();

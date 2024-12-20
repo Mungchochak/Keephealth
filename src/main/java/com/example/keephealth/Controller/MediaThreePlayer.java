@@ -31,6 +31,7 @@ public class MediaThreePlayer {
 
 
 
+        //Show fitness second video
         private void showMedia(){
             String videoPath = "src/main/resources/Video/video3.MP4";
 

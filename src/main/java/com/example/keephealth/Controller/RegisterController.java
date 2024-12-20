@@ -23,9 +23,7 @@ public class RegisterController {
     private static int id =1;
 
 
-    
-
-
+    //Generate an ID for new users who are about to register
     private static int getnewId() {
         int lastid = 0;
         try(BufferedReader reader = new BufferedReader(new FileReader(Fileuser))){
@@ -51,8 +49,7 @@ public class RegisterController {
     }
 
 
-
-
+    //Click back button to cancel register back to login page
     @FXML
     private void handleBackButton() {
         try{
@@ -69,7 +66,7 @@ public class RegisterController {
     }
 
 
-
+    //Save user account name and password
     @FXML
     private void handleRegister() {
         Alert alertempty = new Alert(Alert.AlertType.WARNING);
@@ -111,6 +108,7 @@ public class RegisterController {
 
 
 
+    //Save user account name and password into txt file
     private void SaveAccount(int newid,String name, String password,String registerdate){
         Alert SucessRegister = new Alert(Alert.AlertType.INFORMATION);
         SucessRegister.setTitle("Success");
@@ -132,6 +130,7 @@ public class RegisterController {
 
 
 
+    //Check if the account name is exist
     private boolean CheckAccountExist(String name){
         Alert alertExist = new Alert(Alert.AlertType.WARNING);
         alertExist.setTitle("Error");

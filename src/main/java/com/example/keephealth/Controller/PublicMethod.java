@@ -5,8 +5,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+// Easy-to-use methods for frequent use
 public class PublicMethod {
 
+    //Read specified data
     public static String ReadData(int currentId, int position, String fileName) {
         String data = "0";
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -30,6 +32,7 @@ public class PublicMethod {
     }
 
 
+    // Read specified two data
     public static String ReadtwoData(int currentId,String data,int position,String fileName){
         String Data ="0";
 
@@ -53,6 +56,7 @@ public class PublicMethod {
 
 
 
+    //Read date data
     public static LocalDate getLastDate(String fileName,int position,LocalDate Lastdate){
 
 
@@ -74,6 +78,7 @@ public class PublicMethod {
     }
 
 
+    //Clear data
     public static void RenewData(LocalDate Lastdate,LocalDate Currentdate,String fileName){
 
         if (Lastdate == null || Lastdate.isBefore(Currentdate)) {
@@ -91,12 +96,12 @@ public class PublicMethod {
     }
 
 
+    //Clear checking days data, if the user does not check in continuously
     public static void ClearCheckingData(int CurrentId,String fileName){
         List<String> lines = new ArrayList<>();
         LocalDate LastDate;
 
         String ReadLastdate = PublicMethod.ReadData(CurrentId, 1, fileName);
-
 
         if (ReadLastdate != null && !ReadLastdate.equals("0")) {
 
@@ -105,8 +110,6 @@ public class PublicMethod {
 
             LastDate = LocalDate.now();
         }
-
-
 
         try(BufferedReader reader= new BufferedReader(new FileReader(fileName))){
             String data;
@@ -125,9 +128,7 @@ public class PublicMethod {
 
                         userData[2] = "0";
 
-
                         String updatedData = String.join("/", userData);
-
 
                         lines.add(updatedData);
                     }
@@ -152,6 +153,8 @@ public class PublicMethod {
     }
 
 
+
+    //Check if the user has weight information
     public static boolean CheckWeight(int id){
         boolean weightexist = true;
         String weight= ReadData(id,5,"Profiledata.txt");
@@ -162,6 +165,7 @@ public class PublicMethod {
 
     }
 
+    // Create text files required by the software to avoid missing text file bugs
     public static void initializeFiles(String[] fileNames) {
         for (String fileName : fileNames) {
             File file = new File(fileName);

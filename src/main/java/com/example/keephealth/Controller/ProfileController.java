@@ -270,6 +270,7 @@ public class ProfileController {
     }
 
 
+    //Click save button to set each informations to model
     @FXML
     private void handlesavebutton() {
         Alert SucessSave = new Alert(Alert.AlertType.INFORMATION);
@@ -312,6 +313,7 @@ public class ProfileController {
 
     }
 
+    // Save new user's new informations data,if the user's informations data is exist in the txt file
     private void SavenewInfo(ProfileModel Currentuser){
         List<String> lines = new ArrayList<>();
 
@@ -344,11 +346,7 @@ public class ProfileController {
     }
 
 
-
-
-
-
-
+    //Show user's profile data
     private void Showinfo(){
         genderbox.getItems().addAll("Male", "Female");
         DisplayData();
@@ -358,11 +356,13 @@ public class ProfileController {
     }
 
 
+    //Show hoe many days the user already using the app
     private void setShowdateLabel(){
         Totaljoindate = GetJoinDate();
         ShowdateLabel.setText("You have persisted for " + Totaljoindate + " days !");
     }
 
+    //Show welcome text to user
     private void setAccountnameLabel(){
         String username = GetUserName(currentid);
         AccountnameLabel.setText("Welcome " + username + " to Keephealth !");
@@ -371,12 +371,14 @@ public class ProfileController {
 
 
 
+    //Set each data to textfields
     private void DisplayData(){
+        boolean dataFound = false;
         try(BufferedReader reader= new BufferedReader(new FileReader("Profiledata.txt"))){
             String data;
             while((data = reader.readLine())!= null) {
                 String [] userData = data.split("/");
-                if (userData[0].equals(Integer.toString(currentid))) {
+                if (userData.length >= 8 && userData[0].equals(Integer.toString(currentid))) {
                     namefield.setText(userData[1]);
                     genderbox.setValue(userData[2]);
                     emailfield.setText(userData[3]);
@@ -384,9 +386,19 @@ public class ProfileController {
                     weightfield.setText(userData[5]);
                     heightfield.setText(userData[6]);
                     agefield.setText(userData[7]);
-
+                    dataFound = true;
+                    break;
 
                 }
+            }if (!dataFound) {
+                namefield.setText("");
+                genderbox.setValue(null);
+                emailfield.setText("");
+                phonefield.setText("");
+                weightfield.setText("");
+                heightfield.setText("");
+                agefield.setText("");
+                System.out.println("No matching user data found");
             }
 
         } catch (Exception e) {
@@ -395,6 +407,7 @@ public class ProfileController {
 
     }
 
+    //Read user's register date for setShowdateLabel()
     private int GetJoinDate(){
 
         LocalDate Nowdate = LocalDate.now();
@@ -423,12 +436,7 @@ public class ProfileController {
     }
 
 
-
-
-
-
-
-
+    //Check the user's informations data if is in our txt file
     public boolean CheckuserExist(int id){
 
         try(BufferedReader reader = new BufferedReader(new FileReader(Fileuser))){
@@ -450,6 +458,7 @@ public class ProfileController {
     }
 
 
+    //Read user's account name
     private String GetUserName(int id) {
 
         String Accountname = null;

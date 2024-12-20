@@ -85,6 +85,7 @@ public class NutritionPlansController {
 
 
 
+    //Creat a model method, simplify create object of model
     public void ClassModel(){
         UserModel = new NutritionModel();
         UserModel.setUserId(CurrentId);
@@ -118,6 +119,7 @@ public class NutritionPlansController {
 
 
 
+    //Click checking button to save current user intake calories
     public void handleCheckinButton(){
         ReadTodaysTotalIntakeData();
         totalCaloriesLabel.setText(String.valueOf(OldIntakeData+intakeToday));
@@ -130,6 +132,7 @@ public class NutritionPlansController {
 
 
 
+    //Read user's last record date
     public LocalDate getLastDate(){
         Lastdate = null;
 
@@ -157,6 +160,7 @@ public class NutritionPlansController {
     }
 
 
+    //If it is a new day, that will renew user's data
     public void RenewData(){
         Lastdate = getLastDate();
         if (Lastdate == null || Lastdate.isBefore(nowdate)) {
@@ -175,6 +179,7 @@ public class NutritionPlansController {
 
 
 
+    //Save user's intake data
     public void SaveIntakeData(){
 
         List<String> lines = new ArrayList<>();
@@ -213,6 +218,8 @@ public class NutritionPlansController {
 
     }
 
+
+    // Read today's user total intake data,not just for one time
     public void ReadTodaysTotalIntakeData(){
 
         try(BufferedReader reader= new BufferedReader(new FileReader("NutritionData.txt"))){
@@ -236,6 +243,7 @@ public class NutritionPlansController {
 
 
 
+    //Click BMI function confirm button that get result
     public void handleConfirmBasicInfoButton() {
         try {
             double height = Double.parseDouble(heightInput.getText());
@@ -336,6 +344,7 @@ public class NutritionPlansController {
     }
 
 
+    //Click calories record function comfirm button that get this time the food calories
     @FXML
     public void handleComfirmButton() {
         try {
@@ -368,26 +377,6 @@ public class NutritionPlansController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @FXML
     private void handleProfileClick() {
 
@@ -402,9 +391,6 @@ public class NutritionPlansController {
         }
 
     }
-
-
-
 
     @FXML
     private void handleHomeButtonClick() {
@@ -481,8 +467,6 @@ public class NutritionPlansController {
 
     }
 
-
-
     @FXML
     private void handleLogoutButton() {
         try {
@@ -501,6 +485,7 @@ public class NutritionPlansController {
 
 
 
+    //Save user's total intake data for workout plans chart.
     public void SaveTotalIntake(){
         List<String> lines = new ArrayList<>();
         ClassModel();
