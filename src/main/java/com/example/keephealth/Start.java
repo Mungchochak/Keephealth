@@ -33,7 +33,8 @@ public class Start extends Application {
                 "TotalCalBurned.txt",
                 "TotalIntakeData.txt",
                 "Workoutplans.txt",
-                "CurrentYearDate.txt"
+                "CurrentYearDate.txt",
+                "MonthsChecking.txt"
         };
         PublicMethod.initializeFiles(fileNames);
         if(PublicMethod.isTextFileEmpty("CurrentYearDate.txt")){
