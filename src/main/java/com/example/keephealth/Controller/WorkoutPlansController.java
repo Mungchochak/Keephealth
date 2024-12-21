@@ -13,6 +13,7 @@ import javafx.scene.shape.Arc;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -676,19 +677,21 @@ public class WorkoutPlansController {
     }
 
 
-    //Preload media player that user can faster load video
+  /*  //Preload media player that user can faster load video
     public void preloadmedia(){
-        String videoPath = "src/main/resources/Video/video1.MP4";
 
-        File file = new File(videoPath);
+        URL videoURL = getClass().getResource("/Video/video1.mp4");
 
-        String videoURL = file.toURI().toString();
+        if (videoURL == null) {
+            System.out.println("Video file not found, please check if the path is correct!");
+            return;
+        }
 
-        Media media = new Media(videoURL);
+        Media media = new Media(videoURL.toString());
 
         MediaPlayer mediaPlayer = new MediaPlayer (media);
 
-    }
+    }*/
 
 
 
@@ -698,7 +701,7 @@ public class WorkoutPlansController {
     public void initialize() {
         Model = new WorkoutPlanModel();
         Model.setId(getcurrentId());
-        preloadmedia();
+        /*preloadmedia();*/
         showinfo();
         Intakeshow();
         CheckUserIntakeComdition();

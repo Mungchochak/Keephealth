@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class MediaThreePlayer {
 
@@ -33,13 +34,14 @@ public class MediaThreePlayer {
 
         //Show fitness second video
         private void showMedia(){
-            String videoPath = "src/main/resources/Video/video3.MP4";
+            URL videoURL = getClass().getResource("/Video/video3.mp4");
 
-            File file = new File(videoPath);
+            if (videoURL == null) {
+                System.out.println("Video file not found, please check if the path is correct!");
+                return;
+            }
 
-            String videoURL = file.toURI().toString();
-
-            Media media = new Media(videoURL);
+            Media media = new Media(videoURL.toString());
 
             MediaPlayer mediaPlayer = new MediaPlayer (media);
 
