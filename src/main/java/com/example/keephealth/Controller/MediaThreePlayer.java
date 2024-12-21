@@ -36,10 +36,6 @@ public class MediaThreePlayer {
         private void showMedia(){
             URL videoURL = getClass().getResource("/Video/video3.mp4");
 
-            if (videoURL == null) {
-                System.out.println("Video file not found, please check if the path is correct!");
-                return;
-            }
 
             Media media = new Media(videoURL.toString());
 

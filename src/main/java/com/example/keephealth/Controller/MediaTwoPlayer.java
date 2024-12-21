@@ -34,10 +34,6 @@ public class MediaTwoPlayer {
         private void showMedia(){
             URL videoURL = getClass().getResource("/Video/video2.mp4");
 
-            if (videoURL == null) {
-                System.out.println("Video file not found, please check if the path is correct!");
-                return;
-            }
 
             Media media = new Media(videoURL.toString());
 
